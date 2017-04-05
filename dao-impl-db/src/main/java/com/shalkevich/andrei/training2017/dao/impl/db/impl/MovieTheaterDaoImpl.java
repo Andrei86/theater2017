@@ -29,7 +29,7 @@ public class MovieTheaterDaoImpl implements IMovieTheaterDao{
 		try
 		{
 		
-			return jdbcTemplate.queryForObject("select * from movie_theater where id = ?", new Object[]{id}, 
+			return jdbcTemplate.queryForObject("select * from movie_theater m_t where id = ? and m_t.isActive = true", new Object[]{id}, 
 					new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
 		
 		}catch (EmptyResultDataAccessException e) {
@@ -40,7 +40,7 @@ public class MovieTheaterDaoImpl implements IMovieTheaterDao{
 	@Override
 	public MovieTheater insert(MovieTheater entity) {
 
-		final String INSERT_SQL = "insert into movie_theater (name, city, address, isActive) values(?, ?, ?, ?)";
+		final String INSERT_SQL = "insert into movie_theater (name, city, address, is_active) values(?, ?, ?, ?)";
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
@@ -65,7 +65,7 @@ public class MovieTheaterDaoImpl implements IMovieTheaterDao{
 	@Override
 	public void update(MovieTheater entity) {
 		
-		final String UPDATE_SQL = "update movie_theater set name = ?, city= ?, street= ?, house_Number = ? where id = " + entity.getId();
+		final String UPDATE_SQL = "update movie_theater set name = ?, city= ?, address = ?, isActive = ? where id = " + entity.getId();
 		
 		//KeyHolder keyHolder = new GeneratedKeyHolder();
 		

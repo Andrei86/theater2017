@@ -17,8 +17,8 @@ public class ServicesTest {
 		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("web-context.xml");
 		
-		//IMovieTheaterService service = context.getBean(IMovieTheaterService.class);
-		ISeanceService service1 = context.getBean(ISeanceService.class);
+		IMovieTheaterService service = context.getBean(IMovieTheaterService.class);
+		//ISeanceService service1 = context.getBean(ISeanceService.class);
 		//ISeanceDao dao = context.getBean(ISeanceDao.class);
 		//String [] arr = context.getBeanDefinitionNames();
 		
@@ -34,16 +34,22 @@ public class ServicesTest {
 			System.out.println(string);
 		}*/
 		//System.out.println(service1.getAll());
-		Date data = Date.valueOf("2017-03-31");
-		System.out.println(service1.getByParameters(data, null, null));
-		//Seance s = new Seance();
-		//s.setId(1);
-		//s.setMovieTheaterId(2);
-		//s.setMovieId(1);
-		//s.setDate(Date.valueOf("2017-04-02"));
-		//s.setTime(Time.valueOf("16:00:00"));
-		//service1.save(s);
-		//dao.insert(s);
+		//Date data = Date.valueOf("2017-03-31");
+		//System.out.println(service1.getByParameters(data, null, null));
+		MovieTheater mt = new MovieTheater();
+		/*s.setId(1);
+		s.setMovieTheaterId(2);
+		s.setMovieId(1);
+		s.setDate(Date.valueOf("2017-04-02"));
+		s.setTime(Time.valueOf("16:00:00"));
+		service1.save(s);
+		dao.insert(s);*/
+		
+		mt.setCity("Grodno");
+		mt.setName("Mars");
+		mt.setAddress("ul. Gorkogo, 31");
+		mt.setIsActive(true);
+		service.save(mt);
 		
 		//System.out.println(dao.getAll());
 		
