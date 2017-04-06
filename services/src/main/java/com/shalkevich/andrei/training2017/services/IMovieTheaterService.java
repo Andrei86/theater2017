@@ -16,7 +16,7 @@ public interface IMovieTheaterService {
     @Transactional
     void saveMultiple(MovieTheater... theater);
 
-    List<MovieTheater> getAll();
+    List<MovieTheater> getAll(String city);
 
     @Transactional
     void delete(Integer id);

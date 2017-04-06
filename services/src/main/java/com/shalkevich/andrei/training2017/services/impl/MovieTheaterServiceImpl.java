@@ -50,9 +50,9 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 	}
 
 	@Override
-	public List<MovieTheater> getAll() {
+	public List<MovieTheater> getAll(String city) {
 		
-		return movieTheaterDao.getAll();
+		return movieTheaterDao.getAll(city);
 	}
 
 	@Override

@@ -45,13 +45,19 @@ public class ServicesTest {
 		service1.save(s);
 		dao.insert(s);*/
 		
-		mt.setCity("Grodno");
-		mt.setName("Mars");
-		mt.setAddress("ul. Gorkogo, 31");
+		mt.setId(6);
+		mt.setCity("Vitebsk");
+		mt.setName("Gelios");
+		mt.setAddress("ul. Malevicha, 2");
 		mt.setIsActive(true);
 		service.save(mt);
 		
-		//System.out.println(dao.getAll());
+		/*for (MovieTheater theater : service.getAll(mt.getCity())) {
+			
+			theater.toString();
+			
+		}*/
+		//System.out.println(service.getAll());
 		
 		
 	}

@@ -12,7 +12,7 @@ public interface IMovieTheaterDao {
 
     void update(MovieTheater theater);
 
-    List<MovieTheater> getAll();
+    List<MovieTheater> getAll(String city);
 
     void delete(Integer id);
     
