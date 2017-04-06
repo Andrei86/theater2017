@@ -32,7 +32,7 @@ public class SeanceServiceImpl implements ISeanceService{
 	@Override
 	public Seance get(Integer id) {
 		
-		return seanceDao.get(id);
+		return null;//seanceDao.get(id);
 	}
 
 	@Override
@@ -57,12 +57,12 @@ public class SeanceServiceImpl implements ISeanceService{
 		
 	}
 
-	@Override
+	/*@Override
 	public List<Seance> getAll() {
 		
 		
 		return seanceDao.getAll();
-	}
+	}*/
 
 	@Override
 	public void delete(Integer id) {
@@ -75,9 +75,15 @@ public class SeanceServiceImpl implements ISeanceService{
 	public List<Seance> getByParameters(Date date, Integer movieId, Integer movieTheaterId) {
 		
 		List<Seance> list = new ArrayList<>();
-		list = seanceDao.getByDate(date);
+		//list = seanceDao.getByDate(date);
 		
 		return list;
+	}
+
+	@Override
+	public List<Seance> getAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	// метолы с joinами

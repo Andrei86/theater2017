@@ -4,10 +4,11 @@ import java.sql.Date;
 import java.util.List;
 
 import com.shalkevich.andrei.training2017.datamodel.Seance;
+import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 
 public interface ISeanceDao {
 	
-	Seance get(Integer id);
+	SeanceWithAllData get(Integer id);
 	
 	Seance insert(Seance seance);
 	
@@ -15,12 +16,7 @@ public interface ISeanceDao {
 	
 	void delete(Integer id);
 	
-	List<Seance> getAll();
+	List<Seance> getByTheaterAndDate(Integer id ,Date date);
 	
-	List<Seance> getByDate(Date date);
-	
-	List<Seance> getByMovieId(Integer movieId);
-	
-	List<Seance> getByMovieTheaterId(Integer movieTheaterId);
 
 }

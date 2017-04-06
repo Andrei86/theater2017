@@ -17,7 +17,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.mapper.SeanceWithAllDataMapper;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
+import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 
 @Repository
 public class SeanceDaoImpl implements ISeanceDao{
@@ -26,13 +28,14 @@ public class SeanceDaoImpl implements ISeanceDao{
 	public JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public Seance get(Integer id) {
+	public SeanceWithAllData get(Integer id) {
 		
 		try
 		{
 	
-		return jdbcTemplate.queryForObject("select * from seance where id = ?", new Object[]{id}, 
-				new BeanPropertyRowMapper<Seance>(Seance.class));
+		return jdbcTemplate.queryForObject("select * from seance s join movie_theater m_t on s.movie_theater_id = m_t.id"
+				+	" join movie m on s.movie_id = m.id where id = ?", new Object[]{id}, 
+				new SeanceWithAllDataMapper());
 		
 		}
 		catch (EmptyResultDataAccessException e) {
@@ -93,7 +96,7 @@ public class SeanceDaoImpl implements ISeanceDao{
 		
 	}
 
-	@Override
+	/*@Override
 	public List<Seance> getAll() {
 		
 		List<Seance> list = jdbcTemplate.query("select * from seance", 
@@ -101,33 +104,33 @@ public class SeanceDaoImpl implements ISeanceDao{
 	
 		return list;
 		
-	}
+	}*/
 
 	@Override
-	public List<Seance> getByDate(Date date) {
+	public List<Seance> getByTheaterAndDate(Integer id, Date date) {
 		
-		List<Seance> list = jdbcTemplate.query("select * from seance where date = ?", new Object[]{date}, 
+		List<Seance> list = jdbcTemplate.query("select * from seance where id = ? and date = ?", new Object[]{id,date}, 
 				new BeanPropertyRowMapper<Seance>(Seance.class));
 	
 		return list;
 	}
 
-	@Override
+	/*@Override
 	public List<Seance> getByMovieId(Integer movieId) {
 		
 		List<Seance> list = jdbcTemplate.query("select * from seance where movie_id = ?", new Object[]{movieId}, 
 				new BeanPropertyRowMapper<Seance>(Seance.class));
 	
 		return list;
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public List<Seance> getByMovieTheaterId(Integer movieTheaterId) {
 		
 		List<Seance> list = jdbcTemplate.query("select * from seance where movie_theater_id = ?", new Object[]{movieTheaterId}, 
 				new BeanPropertyRowMapper<Seance>(Seance.class));
 	
 		return list;
-	}
+	}*/
 
 }

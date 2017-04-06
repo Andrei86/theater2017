@@ -24,6 +24,23 @@ public class MovieTheaterDaoImpl implements IMovieTheaterDao{
 	@Inject
 	private JdbcTemplate jdbcTemplate;
 
+	
+	@Override
+	public List<MovieTheater> getAllByCity(String city) {
+		List<MovieTheater> list = jdbcTemplate.query("select * from movie_theater where is_active = true "
+				+ "and city = ?", new Object[] {city} ,
+				new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
+		return list;
+	}
+
+	@Override
+	public List<MovieTheater> getAll() {
+		List<MovieTheater> list = jdbcTemplate.query("select * from movie_theater",
+				new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
+		return list;
+	}
+
+
 	@Override
 	public MovieTheater get(Integer id) {
 		try
@@ -87,18 +104,6 @@ public class MovieTheaterDaoImpl implements IMovieTheaterDao{
 		//entity.setId(key.intValue());
 		//return entity;
 		
-	}
-
-	@Override
-	public List<MovieTheater> getAll(String city) {
-		List<MovieTheater> list = jdbcTemplate.query("select * from movie_theater where is_active = true "
-				+ "and city = ?", new Object[] {city} ,
-				new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
-		/*for (MovieTheater movieTheater : list) {
-			
-			System.out.println(movieTheater);
-		}*/
-		return list;
 	}
 
 	@Override

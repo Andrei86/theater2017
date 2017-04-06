@@ -52,7 +52,10 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 	@Override
 	public List<MovieTheater> getAll(String city) {
 		
-		return movieTheaterDao.getAll(city);
+		if (city == null)
+		return movieTheaterDao.getAll();
+		else	
+		return movieTheaterDao.getAllByCity(city);
 	}
 
 	@Override

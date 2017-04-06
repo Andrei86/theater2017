@@ -17,9 +17,9 @@ public class ServicesTest {
 		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("web-context.xml");
 		
-		IMovieTheaterService service = context.getBean(IMovieTheaterService.class);
+		//IMovieTheaterService service = context.getBean(IMovieTheaterService.class);
 		//ISeanceService service1 = context.getBean(ISeanceService.class);
-		//ISeanceDao dao = context.getBean(ISeanceDao.class);
+		ISeanceDao dao = context.getBean(ISeanceDao.class);
 		//String [] arr = context.getBeanDefinitionNames();
 		
 	/*	for (String string : arr) {
@@ -36,7 +36,7 @@ public class ServicesTest {
 		//System.out.println(service1.getAll());
 		//Date data = Date.valueOf("2017-03-31");
 		//System.out.println(service1.getByParameters(data, null, null));
-		MovieTheater mt = new MovieTheater();
+		//MovieTheater mt = new MovieTheater();
 		/*s.setId(1);
 		s.setMovieTheaterId(2);
 		s.setMovieId(1);
@@ -44,13 +44,19 @@ public class ServicesTest {
 		s.setTime(Time.valueOf("16:00:00"));
 		service1.save(s);
 		dao.insert(s);*/
+		System.out.println(dao.get(2));
 		
-		mt.setId(6);
-		mt.setCity("Vitebsk");
+		//String city = "Grodno";
+		
+		//System.out.println(service.getAll(city));
+		
+		
+		/*mt.setId(6);
+		mt.setCity("Mogilev");
 		mt.setName("Gelios");
 		mt.setAddress("ul. Malevicha, 2");
 		mt.setIsActive(true);
-		service.save(mt);
+		service.save(mt);*/
 		
 		/*for (MovieTheater theater : service.getAll(mt.getCity())) {
 			
