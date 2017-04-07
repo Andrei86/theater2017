@@ -15,6 +15,7 @@ import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
+import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 import com.shalkevich.andrei.training2017.services.ISeanceService;
 
 @Service
@@ -32,7 +33,7 @@ public class SeanceServiceImpl implements ISeanceService{
 	@Override
 	public Seance get(Integer id) {
 		
-		return null;//seanceDao.get(id);
+		return seanceDao.get(id);
 	}
 
 	@Override
@@ -57,12 +58,18 @@ public class SeanceServiceImpl implements ISeanceService{
 		
 	}
 
-	/*@Override
-	public List<Seance> getAll() {
+
+	@Override
+	public List<SeanceWithAllData> getByTheaterAndDate(Integer id, Date date) {
 		
+		return seanceDao.getByTheaterIdAndDate(id, date);
+	}
+
+	@Override
+	public List<SeanceWithAllData> getByMovieId(Integer id) {
 		
-		return seanceDao.getAll();
-	}*/
+		return seanceDao.getByMovieId(id);
+	}
 
 	@Override
 	public void delete(Integer id) {
@@ -71,39 +78,4 @@ public class SeanceServiceImpl implements ISeanceService{
 		
 	}
 
-	@Override
-	public List<Seance> getByParameters(Date date, Integer movieId, Integer movieTheaterId) {
-		
-		List<Seance> list = new ArrayList<>();
-		//list = seanceDao.getByDate(date);
-		
-		return list;
-	}
-
-	@Override
-	public List<Seance> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	// метолы с joinами
-	
-	/*public void getSeanceWithTheaterNames() // смотрим все сеансы во всех кинотеатрах по именам кинотеатров
-	{
-		List<Seance> seanceArray = seanceDao.getAll(); // все сеансы
-		List<MovieTheater> theaterArray = movieTheaterDao.getAll(); // все кинотеатры
-		
-		for (MovieTheater movieTheater : theaterArray) {
-			
-			for (Seance seance : seanceArray) {
-				
-				if (movieTheater.getId().equals(seance.getMovieTheaterId())) {
-					
-					System.out.println(movieTheater.getName() + " " + seance.getDate() + " " + seance.getTime());
-				}
-			}
-			
-		}
-	}*/
-	
 }

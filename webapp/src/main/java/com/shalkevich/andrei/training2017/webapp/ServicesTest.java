@@ -44,7 +44,9 @@ public class ServicesTest {
 		s.setTime(Time.valueOf("16:00:00"));
 		service1.save(s);
 		dao.insert(s);*/
-		System.out.println(dao.get(2));
+		//System.out.println(dao.getByTheaterAndDate(1, Date.valueOf("2017-03-31")));
+		
+		System.out.println(dao.getByMovieId(1));
 		
 		//String city = "Grodno";
 		

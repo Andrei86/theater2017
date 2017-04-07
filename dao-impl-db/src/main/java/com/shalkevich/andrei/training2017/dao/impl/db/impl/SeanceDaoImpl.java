@@ -28,14 +28,13 @@ public class SeanceDaoImpl implements ISeanceDao{
 	public JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public SeanceWithAllData get(Integer id) {
+	public Seance get(Integer id) {
 		
 		try
 		{
 	
-		return jdbcTemplate.queryForObject("select * from seance s join movie_theater m_t on s.movie_theater_id = m_t.id"
-				+	" join movie m on s.movie_id = m.id where id = ?", new Object[]{id}, 
-				new SeanceWithAllDataMapper());
+		return jdbcTemplate.queryForObject("select * from seance where id = ?", new Object[]{id}, 
+				new BeanPropertyRowMapper<Seance>(Seance.class));
 		
 		}
 		catch (EmptyResultDataAccessException e) {
@@ -107,12 +106,38 @@ public class SeanceDaoImpl implements ISeanceDao{
 	}*/
 
 	@Override
-	public List<Seance> getByTheaterAndDate(Integer id, Date date) {
+	public List<SeanceWithAllData> getByTheaterIdAndDate(Integer id, Date date) {
 		
-		List<Seance> list = jdbcTemplate.query("select * from seance where id = ? and date = ?", new Object[]{id,date}, 
-				new BeanPropertyRowMapper<Seance>(Seance.class));
+		List<SeanceWithAllData> list = jdbcTemplate.query(
+				
+				/*"select m_t.id, m_t.name, m.title, s.date, s.time from seance s "
+				+ "join movie_theater m_t on s.movie_theater_id = m_t.id "
+			+ "join movie m on s.movie_id = m.id where m_t.id = ? and s.date = ? and m_t.is_active = true"*/
+				"select * from seance s join movie_theater m_t on s.movie_theater_id = m_t.id "
+				+ "join movie m on s.movie_id = m.id where m_t.id = ? and s.date = ? and m_t.is_active = true"
+				, new Object[]{id,date}, 
+				new SeanceWithAllDataMapper());
 	
 		return list;
+	}
+
+	@Override
+	public List<SeanceWithAllData> getByMovieId(Integer id) {
+		
+		try
+		{
+	
+			List<SeanceWithAllData> list = jdbcTemplate.query("select * from seance s join movie_theater m_t on s.movie_theater_id = m_t.id "
+					+ "join movie m on s.movie_id = m.id where m.id = ? and m_t.is_active = true", new Object[]{id}, 
+				new SeanceWithAllDataMapper());
+		
+		return list;
+		
+		}
+		catch (EmptyResultDataAccessException e) {
+			
+			return null;
+		}
 	}
 
 	/*@Override

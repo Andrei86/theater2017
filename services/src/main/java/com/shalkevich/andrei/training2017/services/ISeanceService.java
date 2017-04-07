@@ -6,10 +6,15 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shalkevich.andrei.training2017.datamodel.Seance;
+import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 
 public interface ISeanceService {
 	
 	Seance get(Integer id);
+	
+	List <SeanceWithAllData> getByTheaterAndDate(Integer id, Date date);
+	
+	List <SeanceWithAllData> getByMovieId(Integer id);
 
     @Transactional
     void save(Seance seance);
@@ -17,12 +22,9 @@ public interface ISeanceService {
     @Transactional
     void saveMultiple(Seance... seance);
 
-    List<Seance> getAll();
-
     @Transactional
     void delete(Integer id);
     
-    List<Seance> getByParameters(Date date, Integer movieId, Integer movieTheaterId);
     
     
 }

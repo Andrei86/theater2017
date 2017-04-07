@@ -8,7 +8,7 @@ import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData
 
 public interface ISeanceDao {
 	
-	SeanceWithAllData get(Integer id);
+	Seance get(Integer id);
 	
 	Seance insert(Seance seance);
 	
@@ -16,7 +16,8 @@ public interface ISeanceDao {
 	
 	void delete(Integer id);
 	
-	List<Seance> getByTheaterAndDate(Integer id ,Date date);
+	List<SeanceWithAllData> getByTheaterIdAndDate(Integer id ,Date date);
 	
+	List<SeanceWithAllData> getByMovieId(Integer id);
 
 }
