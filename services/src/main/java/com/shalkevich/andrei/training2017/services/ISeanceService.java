@@ -12,9 +12,9 @@ public interface ISeanceService {
 	
 	Seance get(Integer id);
 	
-	List <SeanceWithAllData> getByTheaterAndDate(Integer id, Date date);
+	List <SeanceWithAllData> getByTheaterIdAndDate(Integer id, Date date);
 	
-	List <SeanceWithAllData> getByMovieId(Integer id);
+	List <SeanceWithAllData> getByMovieIdCityDate(Integer id, String city, Date date);
 
     @Transactional
     void save(Seance seance);

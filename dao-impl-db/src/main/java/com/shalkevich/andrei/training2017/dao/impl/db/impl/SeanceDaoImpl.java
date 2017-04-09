@@ -122,13 +122,14 @@ public class SeanceDaoImpl implements ISeanceDao{
 	}
 
 	@Override
-	public List<SeanceWithAllData> getByMovieId(Integer id) {
+	public List<SeanceWithAllData> getByMovieIdCityDate(Integer id, String city, Date date) {
 		
 		try
 		{
 	
 			List<SeanceWithAllData> list = jdbcTemplate.query("select * from seance s join movie_theater m_t on s.movie_theater_id = m_t.id "
-					+ "join movie m on s.movie_id = m.id where m.id = ? and m_t.is_active = true", new Object[]{id}, 
+					+ "join movie m on s.movie_id = m.id where m.id = ? and"
+					+ " m_t.city = ? and s.date = ? and m_t.is_active = true", new Object[]{id, city, date}, 
 				new SeanceWithAllDataMapper());
 		
 		return list;
@@ -139,23 +140,5 @@ public class SeanceDaoImpl implements ISeanceDao{
 			return null;
 		}
 	}
-
-	/*@Override
-	public List<Seance> getByMovieId(Integer movieId) {
-		
-		List<Seance> list = jdbcTemplate.query("select * from seance where movie_id = ?", new Object[]{movieId}, 
-				new BeanPropertyRowMapper<Seance>(Seance.class));
-	
-		return list;
-	}*/
-
-	/*@Override
-	public List<Seance> getByMovieTheaterId(Integer movieTheaterId) {
-		
-		List<Seance> list = jdbcTemplate.query("select * from seance where movie_theater_id = ?", new Object[]{movieTheaterId}, 
-				new BeanPropertyRowMapper<Seance>(Seance.class));
-	
-		return list;
-	}*/
 
 }

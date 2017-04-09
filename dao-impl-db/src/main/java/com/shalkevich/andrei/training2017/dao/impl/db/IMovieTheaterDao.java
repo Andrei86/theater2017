@@ -14,7 +14,7 @@ public interface IMovieTheaterDao {
 
     List<MovieTheater> getAllByCity(String city);
     
-    List<MovieTheater> getAll();
+    List<MovieTheater> getAll();//этот не нужен
 
     void delete(Integer id);
     

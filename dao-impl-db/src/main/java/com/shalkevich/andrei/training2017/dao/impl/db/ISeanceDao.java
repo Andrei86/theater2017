@@ -18,6 +18,8 @@ public interface ISeanceDao {
 	
 	List<SeanceWithAllData> getByTheaterIdAndDate(Integer id ,Date date);
 	
-	List<SeanceWithAllData> getByMovieId(Integer id);
+	List<SeanceWithAllData> getByMovieIdCityDate(Integer id, String city, Date date);
+	
+	
 
 }

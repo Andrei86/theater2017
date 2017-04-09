@@ -13,15 +13,27 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.mapper.TicketCostSumMapper;
 import com.shalkevich.andrei.training2017.dao.impl.db.mapper.TicketWithAllDataMapper;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Ticket;
+import com.shalkevich.andrei.training2017.datamodel.customData.TicketCostSum;
+import com.shalkevich.andrei.training2017.datamodel.customData.TicketWithAllData;
 
 @Repository
 public class TicketDaoImpl implements ITicketDao{
+
+	@Override
+	public void deleteAll(Integer seanceId) {
+		
+		jdbcTemplate.update("delete from ticket where seance_id=" + seanceId);
+		
+	}
 
 	@Inject
 	JdbcTemplate jdbcTemplate;
@@ -43,12 +55,12 @@ public class TicketDaoImpl implements ITicketDao{
 			final String INSERT_SQL = "insert into movie_theater (seance_id, cost, customer_id, row, place, purchase_date, status)"
 					+ " values(?, ?, ?, ?, ?, ?, ?)";
 		
-		//KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
+		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement ps = connection.prepareStatement(INSERT_SQL/*, new String[] { "id" }*/);
+	                PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
 	                ps.setInt(1, entity.getSeanceId());
 	                ps.setBigDecimal(2, entity.getCost());
 	                ps.setInt(3, entity.getCustomerId());
@@ -58,10 +70,10 @@ public class TicketDaoImpl implements ITicketDao{
 	                ps.setObject(7, entity.getStatus());
 	                return ps;
 	            }
-	        });//, keyHolder);
+	        }, keyHolder);
 		
-		/*Number key = keyHolder.getKey();
-		entity.setId(key.intValue());*/
+		Number key = keyHolder.getKey();
+		entity.setId(key.intValue());
 		
 		
 		return entity;
@@ -104,11 +116,12 @@ public class TicketDaoImpl implements ITicketDao{
 	}
 
 	@Override
-	public List<Ticket> getByCustomerId(Integer id, Date date1, Date date2) {
+	public List<TicketWithAllData> getByCustomerId(Integer id, Date date1, Date date2) {
 		
-		List<Ticket> list = jdbcTemplate.query("select * from ticket t join seance s on t.seance_id = s.id "
-		 + "join movie_theater m_t on s.movie_theater_id = m_t.id join movie m on s.movie_id = m.id " 
-		 + "where t.id = 4" , new Object[] {id, date1, date2} ,
+		List<TicketWithAllData> list = jdbcTemplate.query("select * from ticket t join seance s on t.seance_id = s.id "
+		 + "join movie_theater m_t on s.movie_theater_id = m_t.id join movie m on s.movie_id = m.id "
+		 + "join customer c on t.customer_id = c.id " 
+		 + "where c.id = ? and t.purchase_date >= ? and t.purchase_date <= ?" , new Object[] {id, date1, date2} ,
 				new TicketWithAllDataMapper());
 		
 		return list;
@@ -116,9 +129,23 @@ public class TicketDaoImpl implements ITicketDao{
 	}
 
 	@Override
-	public List<Ticket> getAll(Integer seanceId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TicketWithAllData> getAll(Integer seanceId) {
+		List<TicketWithAllData> list = jdbcTemplate.query("select * from ticket t join seance s on t.seance_id = s.id "
+		+ "join movie_theater m_t on s.movie_theater_id = m_t.id join movie m on s.movie_id = m.id "
+		+ "join customer c on t.customer_id = c.id " 
+		+ "where s.id = ?" , new Object[] {seanceId} ,
+		new TicketWithAllDataMapper());
+				
+		return list;
 	}
 
+	@Override
+	public TicketCostSum getTicketCost(Integer seanceId) {
+		
+		TicketCostSum instance = jdbcTemplate.queryForObject("select SUM(cost) from ticket "
+				+ "where seance_id = ?", new Object[]{seanceId},
+				new TicketCostSumMapper());
+		
+		return instance;
+	}
 }

@@ -6,7 +6,14 @@ public class Movie {
 	private String title;
 	private String ageBracket;
 	private Integer duration;
+	private String description;
 	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -36,7 +43,7 @@ public class Movie {
 	public String toString() {
 		
 		return "Movie [id=" + id + "]" + " title " + title + " age bracket " + ageBracket + 
-				" duration " + duration;
+				" duration " + duration + " description " + description;
 	}
 	
 }

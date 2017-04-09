@@ -59,22 +59,22 @@ public class MovieTheaterDaoImpl implements IMovieTheaterDao{
 
 		final String INSERT_SQL = "insert into movie_theater (name, city, address, is_active) values(?, ?, ?, ?)";
 		
-		//KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
+		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement ps = connection.prepareStatement(INSERT_SQL/*, new String[] { "id" }*/);
+	                PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
 	                ps.setString(1, entity.getName());
 	                ps.setString(2, entity.getCity());
 	                ps.setString(3, entity.getAddress());
 	                ps.setBoolean(4, entity.getIsActive());
 	                return ps;
 	            }
-	        });//, keyHolder);
+	        }, keyHolder);
 		
-		/*Number key = keyHolder.getKey();
-		entity.setId(key.intValue());*/
+		Number key = keyHolder.getKey();
+		entity.setId(key.intValue());
 		
 		
 		return entity;

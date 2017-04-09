@@ -5,7 +5,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.sql.Date;
 import java.sql.Time;
 
+import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
 import com.shalkevich.andrei.training2017.services.IMovieTheaterService;
@@ -17,9 +19,11 @@ public class ServicesTest {
 		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("web-context.xml");
 		
-		//IMovieTheaterService service = context.getBean(IMovieTheaterService.class);
+		//IMovieTheaterService daoTheater = context.getBean(IMovieTheaterService.class);
+		
+		//IMovieTheaterDao dao = context.getBean(IMovieTheaterDao.class);
 		//ISeanceService service1 = context.getBean(ISeanceService.class);
-		ISeanceDao dao = context.getBean(ISeanceDao.class);
+		ITicketDao dao = context.getBean(ITicketDao.class);
 		//String [] arr = context.getBeanDefinitionNames();
 		
 	/*	for (String string : arr) {
@@ -43,30 +47,31 @@ public class ServicesTest {
 		s.setDate(Date.valueOf("2017-04-02"));
 		s.setTime(Time.valueOf("16:00:00"));
 		service1.save(s);
-		dao.insert(s);*/
+		dao.insert(s);
+		*/
 		//System.out.println(dao.getByTheaterAndDate(1, Date.valueOf("2017-03-31")));
 		
-		System.out.println(dao.getByMovieId(1));
+		//System.out.println(dao.getByMovieId(1));
 		
 		//String city = "Grodno";
 		
 		//System.out.println(service.getAll(city));
 		
 		
-		/*mt.setId(6);
-		mt.setCity("Mogilev");
-		mt.setName("Gelios");
-		mt.setAddress("ul. Malevicha, 2");
-		mt.setIsActive(true);
-		service.save(mt);*/
+		//mt.setId(6);
+		/*mt.setCity("Brest");
+		mt.setName("Venera");
+		mt.setAddress("ul. V. Bykava, 7");
+		mt.setIsActive(true);*/
+		//service.save(mt);
 		
 		/*for (MovieTheater theater : service.getAll(mt.getCity())) {
 			
 			theater.toString();
 			
 		}*/
-		//System.out.println(service.getAll());
-		
+		//System.out.println(dao.getByCustomerId(2, Date.valueOf("2017-03-30"), Date.valueOf("2017-04-05")));
+		System.out.println(dao.getTicketCost(1));
 		
 	}
 
