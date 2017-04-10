@@ -31,6 +31,6 @@ public interface ITicketDao {
 	
 	List<TicketWithAllData> getAll(Integer seanceId); // ? все билеты
 	
-	TicketCostSum getTicketCost(Integer seanceId);
+	TicketCostSum getTicketCost(Integer seanceId);// стоимость всех проданных билетов на сеанс
 
 }

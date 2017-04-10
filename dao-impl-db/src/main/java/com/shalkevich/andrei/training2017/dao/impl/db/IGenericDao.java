@@ -1,0 +1,17 @@
+package com.shalkevich.andrei.training2017.dao.impl.db;
+
+import java.util.List;
+
+public interface IGenericDao<T> {
+	
+	T get(Integer id, String tableName);
+	
+	/*T insert(T entity);
+	
+	void update(T entity);
+	
+	void delete(Integer id);
+	
+	List<T> getAll(Integer id);*/
+
+}
