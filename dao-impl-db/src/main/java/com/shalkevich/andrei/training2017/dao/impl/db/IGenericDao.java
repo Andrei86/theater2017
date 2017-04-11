@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IGenericDao<T> {
 	
-	T get(Integer id, String tableName);
+	T get(Integer id);
 	
 	/*T insert(T entity);
 	
