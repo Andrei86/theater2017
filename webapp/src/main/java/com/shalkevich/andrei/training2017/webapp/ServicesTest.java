@@ -3,10 +3,12 @@ package com.shalkevich.andrei.training2017.webapp;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.sql.Date;
 import java.sql.Time;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.IGenericDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.IGenreDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
@@ -28,7 +30,7 @@ public class ServicesTest {
 		//IMovieTheaterDao dao = context.getBean(IMovieTheaterDao.class);
 		//ISeanceService service1 = context.getBean(ISeanceService.class);
 		//ITicketDao dao = context.getBean(ITicketDao.class);
-		IGenericDao dao = context.getBean(IGenericDao.class);
+		IGenreDao dao = context.getBean(IGenreDao.class);
 		//String [] arr = context.getBeanDefinitionNames();
 		
 	/*	for (String string : arr) {
@@ -78,13 +80,16 @@ public class ServicesTest {
 		//System.out.println(dao.getByCustomerId(2, Date.valueOf("2017-03-30"), Date.valueOf("2017-04-05")));
 		//System.out.println(dao.getTicketCost(1));
 		//Ticket t = new Ticket();
-		System.out.println(dao.get(2));
+		//System.out.println(dao.get(2));
 		//Field[] fields = Movie.class.getDeclaredFields();
 		
 		/*for (Field field : fields) {
 			System.out.println(field.getName());
 		}*/
 		//System.out.println(Movie.class.getDeclaredFields());
+		/*String s = "ds";
+		Type t = s.getClass().getGenericSuperclass();*/
+		dao.delete(7);
 		
 	}
 

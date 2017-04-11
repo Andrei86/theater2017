@@ -6,12 +6,12 @@ public interface IGenericDao<T> {
 	
 	T get(Integer id);
 	
-	/*T insert(T entity);
-	
-	void update(T entity);
-	
+	T insert(T entity);
+//	
+//	void update(T entity);
+//	
 	void delete(Integer id);
-	
-	List<T> getAll(Integer id);*/
+//	
+//	List<T> getAll(Integer id);
 
 }
