@@ -12,6 +12,7 @@ import com.shalkevich.andrei.training2017.dao.impl.db.IGenreDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
+import com.shalkevich.andrei.training2017.datamodel.Genre;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
@@ -89,7 +90,11 @@ public class ServicesTest {
 		//System.out.println(Movie.class.getDeclaredFields());
 		/*String s = "ds";
 		Type t = s.getClass().getGenericSuperclass();*/
-		dao.delete(7);
+		Genre g = new Genre();
+		//System.out.println(g.getClass().getEnclosingClass());
+		g.setId(6);
+		g.setName("Mylodramat");
+		dao.update(g);
 		
 	}
 

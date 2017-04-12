@@ -8,7 +8,7 @@ public interface IGenericDao<T> {
 	
 	T insert(T entity);
 //	
-//	void update(T entity);
+	void update(T entity);
 //	
 	void delete(Integer id);
 //	

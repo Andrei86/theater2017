@@ -1,6 +1,7 @@
 package com.shalkevich.andrei.training2017.dao.impl.db.impl;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.sql.Connection;
@@ -64,28 +65,33 @@ public class GenericDaoImpl<T> implements IGenericDao<T> {
 		String INSERT_SQL = "insert into " + type.getSimpleName().toLowerCase() + " (";// + "title, age_bracket, duration) values(?, ?, ?)";
 		
 		StringBuilder strF = new StringBuilder("");
-		StringBuilder strV = new StringBuilder("values(");
+		StringBuilder strV = new StringBuilder("values (");
 
-		Field[] fields = ((Class<T>) entity).getDeclaredFields();
+		Field[] fields = type.getDeclaredFields();
 		int j = fields.length;
 		Object [] values = new Object[j];
 		for(int i = 0; i < j; i++){
 			
-			strF.append(fields[i].toString());
-			strV.append("?, ");
+			strF.append(fields[i].getName());
+			//strV.append("?, ");
 			
 			if(i != (j-1))
+			{
 				strF.append(", ");
+				strV.append("?, ");
+			}
 			else
 			{
 				strF.append(") ");
-				strF.append("?)");
+				strV.append("?);");
 			}
 			
 		}
-		INSERT_SQL += strF.toString() + strV.toString();
+		INSERT_SQL += strF.toString() + strV.toString(); // сбилдили строку
 		
-		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
+		System.out.println(INSERT_SQL);
+		
+		/*KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
@@ -99,9 +105,71 @@ public class GenericDaoImpl<T> implements IGenericDao<T> {
 	        }, keyHolder);
 		
 		Number key = keyHolder.getKey();
-		entity.setId(key.intValue());
+		entity.setId(key.intValue());*/
 		return entity;
 	}
 	
 
+	@Override
+	public void update(T entity) {
+
+		String UPDATE_SQL = "update " + type.getSimpleName().toLowerCase() + " set ";// + " movie_theater_id = ?, movie_id = ?, date = ?, time = ? where id = " + entity.getId();
+		
+		StringBuilder str = new StringBuilder("");
+		
+		Field[] fields = type.getDeclaredFields();
+		int j = fields.length;
+		
+		//Integer value;
+		
+		for(int i = 0; i < j; i++)
+		{
+			Integer value =null;
+			
+			if(fields[i].getName().equals("id"))
+			{
+				try
+				{
+				System.out.println(fields[i].getInt(entity));
+				}
+				catch(Exception e)
+				{e.getMessage();}
+			}
+			if(i != j -1)
+			{
+				str.append(fields[i].getName().toString());// + " = ?, ");
+				str.append(" = ?, ");
+			}
+			else
+				str.append("where id = " + value);// + type.getDeclaredMethods()[0].toString());
+				
+		}
+		
+		UPDATE_SQL += str.toString();
+		System.out.println(UPDATE_SQL);
+		
+		
+		//T obj = (T) entity.getClass().newInstance().
+		
+		/*Method[] methodArray = type.getDeclaredMethods();
+		List<Method> list = methodArray.*/
+		//for(Method m: methodArray)
+			//if(methodArray.equals);
+		
+		//KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+		 /*jdbcTemplate.update(new PreparedStatementCreator() {
+	            @Override
+	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+	                PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);//, new String[] { "id" });
+	                ps.setInt(1, entity.getMovieTheaterId());
+	                ps.setInt(2, entity.getMovieId());
+	                ps.setDate(3, entity.getDate());
+	                ps.setTime(4, entity.getTime());
+	                return ps;
+	            }
+	        });*/
+		
+	}
+	
 }
