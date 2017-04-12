@@ -92,7 +92,7 @@ public class ServicesTest {
 		Type t = s.getClass().getGenericSuperclass();*/
 		Genre g = new Genre();
 		//System.out.println(g.getClass().getEnclosingClass());
-		g.setId(6);
+		g.setId(4);
 		g.setName("Mylodramat");
 		dao.update(g);
 		

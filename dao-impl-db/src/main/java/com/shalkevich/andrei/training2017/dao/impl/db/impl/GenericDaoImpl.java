@@ -29,18 +29,18 @@ public class GenericDaoImpl<T> implements IGenericDao<T> {
 	
 	Class<T> type;
 	
-	@Override
-	public void delete(Integer id) {
-		jdbcTemplate.update("delete from " + type.getSimpleName().toLowerCase() + " where id=" + id);
-		
-	}
-	
 	public GenericDaoImpl() {
 		
 		Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];
 
+	}
+	
+	@Override
+	public void delete(Integer id) {
+		jdbcTemplate.update("delete from " + type.getSimpleName().toLowerCase() + " where id=" + id);
+		
 	}
 	
 	
@@ -69,7 +69,7 @@ public class GenericDaoImpl<T> implements IGenericDao<T> {
 
 		Field[] fields = type.getDeclaredFields();
 		int j = fields.length;
-		Object [] values = new Object[j];
+		//Object [] values = new Object[j];
 		for(int i = 0; i < j; i++){
 			
 			strF.append(fields[i].getName());
@@ -111,37 +111,35 @@ public class GenericDaoImpl<T> implements IGenericDao<T> {
 	
 
 	@Override
-	public void update(T entity) {
+	public void update(T entity)
+	{
 
 		String UPDATE_SQL = "update " + type.getSimpleName().toLowerCase() + " set ";// + " movie_theater_id = ?, movie_id = ?, date = ?, time = ? where id = " + entity.getId();
 		
 		StringBuilder str = new StringBuilder("");
 		
-		Field[] fields = type.getDeclaredFields();
-		int j = fields.length;
+		Class clazz = entity.getClass();
+		Field[] fields = clazz.getDeclaredFields();
 		
-		//Integer value;
+		//Method method =  clazz.getMethod("getId", null);
+		int j = fields.length;
 		
 		for(int i = 0; i < j; i++)
 		{
-			Integer value =null;
-			
-			if(fields[i].getName().equals("id"))
+		
+			if(!fields[i].getName().equals("id"))
 			{
-				try
-				{
-				System.out.println(fields[i].getInt(entity));
-				}
-				catch(Exception e)
-				{e.getMessage();}
-			}
-			if(i != j -1)
-			{
-				str.append(fields[i].getName().toString());// + " = ?, ");
+				str.append(fields[i].getName());// + " = ?, ");
 				str.append(" = ?, ");
 			}
-			else
-				str.append("where id = " + value);// + type.getDeclaredMethods()[0].toString());
+			if(i == (j-1))
+				try
+			{
+				str.append("where id = " + clazz.getMethod("getId", null).invoke(entity, null));// + type.getDeclaredMethods()[0].toString());
+				
+			}
+			catch(Exception e)
+			{e.getMessage();}
 				
 		}
 		
