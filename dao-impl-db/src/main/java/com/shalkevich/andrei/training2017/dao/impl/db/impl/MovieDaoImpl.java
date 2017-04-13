@@ -20,28 +20,19 @@ import com.shalkevich.andrei.training2017.datamodel.Movie;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 
 @Repository
-public class MovieDaoImpl implements IMovieDao{
+public class MovieDaoImpl extends GenericDaoImpl<Movie> implements IMovieDao{
 
 	@Inject
 	public JdbcTemplate jdbcTemplate;
-	
-	@Override
-	public Movie get(Integer id) {
-		try
-		{
-		
-			return jdbcTemplate.queryForObject("select * from movie where id = ?", new Object[]{id}, 
-					new BeanPropertyRowMapper<Movie>(Movie.class));
-		
-		}catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
+
+
 
 	@Override
 	public Movie insert(Movie entity) {
 		
-		final String INSERT_SQL = "insert into movie (title, age_bracket, duration) values(?, ?, ?)";
+		final String INSERT_SQL = getSqlInsertQuery();//"insert into movie (title, age_bracket, duration) values(?, ?, ?)";
+		
+		//System.out.println(getSqlInsertQuery());
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
@@ -52,6 +43,7 @@ public class MovieDaoImpl implements IMovieDao{
 	                ps.setString(1, entity.getTitle());
 	                ps.setString(2, entity.getAgeBracket());
 	                ps.setInt(3, entity.getDuration());
+	                ps.setString(4, entity.getDescription());
 	                return ps;
 	            }
 	        }, keyHolder);
@@ -64,8 +56,7 @@ public class MovieDaoImpl implements IMovieDao{
 	@Override
 	public void update(Movie entity) {
 		
-		final String UPDATE_SQL = "update movie set title = ?, age_bracket= ?, duration = ? where id = " + entity.getId();
-		
+		final String UPDATE_SQL = getSqlUpdateQuery() + entity.getId();//"update movie set title = ?, age_bracket= ?, duration = ? where id = " + entity.getId();
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
@@ -74,26 +65,10 @@ public class MovieDaoImpl implements IMovieDao{
 	                ps.setString(1, entity.getTitle());
 	                ps.setString(2, entity.getAgeBracket());
 	                ps.setInt(3, entity.getDuration());
+	                ps.setString(4, entity.getDescription());
 	                return ps;
 	            }
 	        });
 		
 	}
-
-	@Override
-	public List<Movie> getAll() {
-		
-		List<Movie> list = jdbcTemplate.query("select * from movie", 
-				new BeanPropertyRowMapper<Movie>(Movie.class));
-		
-		return list;
-	}
-
-	@Override
-	public void delete(Integer id) {
-		
-		jdbcTemplate.update("delete from movie where id = " + id);
-		
-	}
-
 }

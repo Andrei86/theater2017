@@ -4,16 +4,12 @@ import java.util.List;
 
 import com.shalkevich.andrei.training2017.datamodel.Movie;
 
-public interface IMovieDao {
+public interface IMovieDao extends IGenericDao<Movie> {
 	
-	Movie get(Integer id);
 
-	Movie insert(Movie movie);
+	Movie insert(Movie movie); // свой
 
-    void update(Movie movie);
+    void update(Movie movie); // свой
 
-    List<Movie> getAll();
-
-    void delete(Integer id);
 
 }

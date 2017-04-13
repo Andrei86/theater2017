@@ -21,7 +21,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import com.shalkevich.andrei.training2017.dao.impl.db.IGenericDao;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
 
-public class GenericDaoImpl<T> implements IGenericDao<T> {
+public abstract class GenericDaoImpl<T> implements IGenericDao<T> {
 
 
 	@Inject
@@ -33,20 +33,88 @@ public class GenericDaoImpl<T> implements IGenericDao<T> {
 		
 		Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
-        type = (Class) pt.getActualTypeArguments()[0];
+        type = (Class<T>) pt.getActualTypeArguments()[0];
 
 	}
 	
 	@Override
-	public void delete(Integer id) {
+	public void delete(Integer id)
+	{
 		jdbcTemplate.update("delete from " + type.getSimpleName().toLowerCase() + " where id=" + id);
 		
 	}
 	
+	public String getSqlInsertQuery()
+	{
+		String INSERT_SQL = "insert into " + type.getSimpleName().toLowerCase() + " (";// + "title, age_bracket, duration) values(?, ?, ?)";
+		
+		StringBuilder strF = new StringBuilder("");
+		StringBuilder strV = new StringBuilder("values (");
+
+		Field[] fields = type.getDeclaredFields();
+		int j = fields.length;
+		//Object [] values = new Object[j];
+		for(int i = 0; i < j; i++){
+			
+			if(!fields[i].getName().equals("id"))
+			{
+			strF.append(fields[i].getName());
+			
+			if(i != (j-1))
+			{
+				strF.append(", ");
+				strV.append("?, ");
+			}
+			else
+			{
+				strF.append(") ");
+				strV.append("?);");
+			}
+			}
+			
+		}
+		INSERT_SQL += strF.toString() + strV.toString();
+		
+		return INSERT_SQL;
+	}
+	
+	
+	public String getSqlUpdateQuery()
+	{
+		String UPDATE_SQL = "update " + type.getSimpleName().toLowerCase() + " set ";// + " movie_theater_id = ?, movie_id = ?, date = ?, time = ? where id = " + entity.getId();
+		
+		StringBuilder str = new StringBuilder("");
+		
+		Field[] fields = type.getDeclaredFields();
+		
+		int j = fields.length;
+		
+		for(int i = 0; i < j; i++)
+		{
+		
+			if(!fields[i].getName().equals("id"))
+			{
+				str.append(fields[i].getName());// + " = ?, ");
+				if(i != (j-1))
+				str.append(" = ?, ");
+				else
+					str.append(" = ? ");
+			}
+			if(i == (j-1))
+			
+				str.append("where id = ");// + type.getDeclaredMethods()[0].toString());
+				
+				
+		}
+		
+		UPDATE_SQL += str.toString();
+		
+		return UPDATE_SQL;
+	}
 	
 	
 	@Override
-	public T get(Integer id) // тут передаем id и DataModelClass.class
+	public T get(Integer id)
 	{
 		try
 		{
@@ -60,38 +128,10 @@ public class GenericDaoImpl<T> implements IGenericDao<T> {
 	}
 	
 	
-	@Override
+	/*@Override
 	public T insert(T entity) {  // по-настоящему билдим строки
-		String INSERT_SQL = "insert into " + type.getSimpleName().toLowerCase() + " (";// + "title, age_bracket, duration) values(?, ?, ?)";
 		
-		StringBuilder strF = new StringBuilder("");
-		StringBuilder strV = new StringBuilder("values (");
-
-		Field[] fields = type.getDeclaredFields();
-		int j = fields.length;
-		//Object [] values = new Object[j];
-		for(int i = 0; i < j; i++){
-			
-			strF.append(fields[i].getName());
-			//strV.append("?, ");
-			
-			if(i != (j-1))
-			{
-				strF.append(", ");
-				strV.append("?, ");
-			}
-			else
-			{
-				strF.append(") ");
-				strV.append("?);");
-			}
-			
-		}
-		INSERT_SQL += strF.toString() + strV.toString(); // сбилдили строку
-		
-		System.out.println(INSERT_SQL);
-		
-		/*KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
+		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
@@ -105,58 +145,25 @@ public class GenericDaoImpl<T> implements IGenericDao<T> {
 	        }, keyHolder);
 		
 		Number key = keyHolder.getKey();
-		entity.setId(key.intValue());*/
+		entity.setId(key.intValue());
 		return entity;
-	}
+	}*/
 	
 
-	@Override
+	/*@Override
 	public void update(T entity)
-	{
-
-		String UPDATE_SQL = "update " + type.getSimpleName().toLowerCase() + " set ";// + " movie_theater_id = ?, movie_id = ?, date = ?, time = ? where id = " + entity.getId();
-		
-		StringBuilder str = new StringBuilder("");
-		
-		Class clazz = entity.getClass();
-		Field[] fields = clazz.getDeclaredFields();
-		
-		//Method method =  clazz.getMethod("getId", null);
-		int j = fields.length;
-		
-		for(int i = 0; i < j; i++)
-		{
-		
-			if(!fields[i].getName().equals("id"))
-			{
-				str.append(fields[i].getName());// + " = ?, ");
-				str.append(" = ?, ");
-			}
-			if(i == (j-1))
-				try
-			{
-				str.append("where id = " + clazz.getMethod("getId", null).invoke(entity, null));// + type.getDeclaredMethods()[0].toString());
-				
-			}
-			catch(Exception e)
-			{e.getMessage();}
-				
-		}
-		
-		UPDATE_SQL += str.toString();
-		System.out.println(UPDATE_SQL);
-		
+	{		
 		
 		//T obj = (T) entity.getClass().newInstance().
 		
-		/*Method[] methodArray = type.getDeclaredMethods();
-		List<Method> list = methodArray.*/
+		Method[] methodArray = type.getDeclaredMethods();
+		List<Method> list = methodArray.
 		//for(Method m: methodArray)
 			//if(methodArray.equals);
 		
 		//KeyHolder keyHolder = new GeneratedKeyHolder();
 		
-		 /*jdbcTemplate.update(new PreparedStatementCreator() {
+		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 	                PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);//, new String[] { "id" });
@@ -166,8 +173,8 @@ public class GenericDaoImpl<T> implements IGenericDao<T> {
 	                ps.setTime(4, entity.getTime());
 	                return ps;
 	            }
-	        });*/
+	        });
 		
 	}
-	
+	*/
 }

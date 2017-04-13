@@ -7,11 +7,14 @@ import java.lang.reflect.Type;
 import java.sql.Date;
 import java.sql.Time;
 
+import com.shalkevich.andrei.training2017.dao.impl.db.ICustomerDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.IGenericDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.IGenreDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.IMovieDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
+import com.shalkevich.andrei.training2017.datamodel.Customer;
 import com.shalkevich.andrei.training2017.datamodel.Genre;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
@@ -31,7 +34,7 @@ public class ServicesTest {
 		//IMovieTheaterDao dao = context.getBean(IMovieTheaterDao.class);
 		//ISeanceService service1 = context.getBean(ISeanceService.class);
 		//ITicketDao dao = context.getBean(ITicketDao.class);
-		IGenreDao dao = context.getBean(IGenreDao.class);
+		ICustomerDao dao = context.getBean(ICustomerDao.class);
 		//String [] arr = context.getBeanDefinitionNames();
 		
 	/*	for (String string : arr) {
@@ -90,11 +93,25 @@ public class ServicesTest {
 		//System.out.println(Movie.class.getDeclaredFields());
 		/*String s = "ds";
 		Type t = s.getClass().getGenericSuperclass();*/
-		Genre g = new Genre();
+		Customer c = new Customer();
 		//System.out.println(g.getClass().getEnclosingClass());
-		g.setId(4);
-		g.setName("Mylodramat");
-		dao.update(g);
+		//m.setId(5);
+		/*m.setTitle("Terminator 4");
+		m.setAgeBracket("18+");
+		m.setDuration(135);
+		m.setDescription("wow 4");
+		dao.insert(m);*/
+		//g.setId(7);
+		//g.setName("fairy-tail");
+		c.setLogin("Andy");
+		c.setPassword("qwery");
+		c.setFirstName("firstName");
+		c.setLastName("lastName");
+		c.seteMail("mail@by");
+		dao.insert(c);
+		//System.out.println(dao.getAll());
+		
+		
 		
 	}
 
