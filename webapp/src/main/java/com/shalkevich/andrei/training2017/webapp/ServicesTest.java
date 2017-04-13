@@ -34,7 +34,7 @@ public class ServicesTest {
 		//IMovieTheaterDao dao = context.getBean(IMovieTheaterDao.class);
 		//ISeanceService service1 = context.getBean(ISeanceService.class);
 		//ITicketDao dao = context.getBean(ITicketDao.class);
-		ICustomerDao dao = context.getBean(ICustomerDao.class);
+		IMovieDao dao = context.getBean(IMovieDao.class);
 		//String [] arr = context.getBeanDefinitionNames();
 		
 	/*	for (String string : arr) {
@@ -93,7 +93,7 @@ public class ServicesTest {
 		//System.out.println(Movie.class.getDeclaredFields());
 		/*String s = "ds";
 		Type t = s.getClass().getGenericSuperclass();*/
-		Customer c = new Customer();
+		//Movie m = new Movie();
 		//System.out.println(g.getClass().getEnclosingClass());
 		//m.setId(5);
 		/*m.setTitle("Terminator 4");
@@ -103,13 +103,13 @@ public class ServicesTest {
 		dao.insert(m);*/
 		//g.setId(7);
 		//g.setName("fairy-tail");
-		c.setLogin("Andy");
+		/*c.setLogin("Andy");
 		c.setPassword("qwery");
 		c.setFirstName("firstName");
 		c.setLastName("lastName");
-		c.seteMail("mail@by");
-		dao.insert(c);
-		//System.out.println(dao.getAll());
+		c.seteMail("mail@by");*/
+		//dao.get(1);
+		System.out.println(dao.getGenresOfMovie(1));
 		
 		
 		

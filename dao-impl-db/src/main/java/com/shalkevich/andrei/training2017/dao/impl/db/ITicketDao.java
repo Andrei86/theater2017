@@ -9,15 +9,14 @@ import com.shalkevich.andrei.training2017.datamodel.Ticket;
 import com.shalkevich.andrei.training2017.datamodel.customData.TicketCostSum;
 import com.shalkevich.andrei.training2017.datamodel.customData.TicketWithAllData;
 
-public interface ITicketDao {
+public interface ITicketDao extends IGenericDao<Ticket>{
 	
-	Ticket get(Integer id); // надо ли использовать маппер для этого запроса
+	 // надо ли использовать маппер для этого запроса
 	
 	Ticket insert(Ticket ticket);
 	
 	void update(Ticket ticket);
 	
-	void delete(Integer id);
 	
 	void deleteAll(Integer seanceId);
 	

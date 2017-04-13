@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -24,9 +25,8 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements ICustom
 	
 	@Override
 	public Customer insert(Customer entity) {
-		final String INSERT_SQL = getSqlInsertQuery();
-		
-		System.out.println(getSqlInsertQuery());
+		final String INSERT_SQL = "insert into customer (login, password, first_name, last_name, e_mail) "
+				+ "values(?, ?, ?, ?, ?)";
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
@@ -50,20 +50,30 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements ICustom
 
 	@Override
 	public void update(Customer entity) {
-		// TODO Auto-generated method stub
+		
+		final String UPDATE_SQL = "update customer set login = ?, first_name = ?, last_name = ?, e_mail = ?"
+				+ "where id = " + entity.getId();
+		
+		 jdbcTemplate.update(new PreparedStatementCreator() {
+	            @Override
+	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+	                PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);
+	                ps.setString(1, entity.getLogin());
+	                ps.setString(2, entity.getFirstName());
+	                ps.setString(3, entity.getLastName());
+	                ps.setString(4, entity.geteMail());
+	                return ps;
+	            }
+	        });
 		
 	}
 
 	@Override
 	public List<Customer> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Customer> list = jdbcTemplate.query("select * from customer", new BeanPropertyRowMapper<Customer>(Customer.class));
+		return list;
 	}
 
-	@Override
-	public Customer getByLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 }

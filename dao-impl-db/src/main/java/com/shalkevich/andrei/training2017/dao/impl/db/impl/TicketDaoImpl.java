@@ -26,8 +26,11 @@ import com.shalkevich.andrei.training2017.datamodel.customData.TicketCostSum;
 import com.shalkevich.andrei.training2017.datamodel.customData.TicketWithAllData;
 
 @Repository
-public class TicketDaoImpl implements ITicketDao{
+public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 
+	@Inject
+	JdbcTemplate jdbcTemplate;
+	
 	@Override
 	public void deleteAll(Integer seanceId) {
 		
@@ -35,24 +38,9 @@ public class TicketDaoImpl implements ITicketDao{
 		
 	}
 
-	@Inject
-	JdbcTemplate jdbcTemplate;
-	
-	@Override
-	public Ticket get(Integer id) {
-		try
-		{
-			return jdbcTemplate.queryForObject("select * from ticket where id = ?", new Object[]{id}, 
-					new BeanPropertyRowMapper<Ticket>(Ticket.class));
-		
-		}catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-
 	@Override
 	public Ticket insert(Ticket entity) {
-			final String INSERT_SQL = "insert into movie_theater (seance_id, cost, customer_id, row, place, purchase_date, status)"
+			final String INSERT_SQL = "insert into ticket (seance_id, cost, customer_id, row, place, purchase_date, status)"
 					+ " values(?, ?, ?, ?, ?, ?, ?)";
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
@@ -105,13 +93,6 @@ public class TicketDaoImpl implements ITicketDao{
 	/*Number key = keyHolder.getKey();
 	entity.setId(key.intValue());*/
 	
-		
-	}
-
-	@Override
-	public void delete(Integer id) {
-		
-		jdbcTemplate.update("delete from ticket where id=" + id);
 		
 	}
 

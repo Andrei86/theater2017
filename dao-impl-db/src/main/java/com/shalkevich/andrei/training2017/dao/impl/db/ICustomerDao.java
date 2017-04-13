@@ -11,8 +11,6 @@ public interface ICustomerDao extends IGenericDao<Customer>{
     void update(Customer genre);
     
     List<Customer> getAll();
-    
-    Customer getByLogin(String login);
 	
 
 }
