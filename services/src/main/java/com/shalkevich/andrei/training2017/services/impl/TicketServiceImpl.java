@@ -25,7 +25,7 @@ public class TicketServiceImpl implements ITicketService{
 	@Override
 	public List<TicketWithAllData> getByCustomerId(Integer id, Date date1, Date date2) {
 		
-		return ticketDao.getByCustomerId(id, date1, date2);
+		return ticketDao.getByCustomerIdWithInterval(id, date1, date2);
 	}
 
 	@Override

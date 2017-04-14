@@ -20,6 +20,7 @@ import com.shalkevich.andrei.training2017.datamodel.Movie;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
 import com.shalkevich.andrei.training2017.datamodel.Ticket;
+import com.shalkevich.andrei.training2017.datamodel.customData.Status;
 import com.shalkevich.andrei.training2017.services.IMovieTheaterService;
 import com.shalkevich.andrei.training2017.services.ISeanceService;
 
@@ -33,8 +34,8 @@ public class ServicesTest {
 		
 		//IMovieTheaterDao dao = context.getBean(IMovieTheaterDao.class);
 		//ISeanceService service1 = context.getBean(ISeanceService.class);
-		//ITicketDao dao = context.getBean(ITicketDao.class);
-		IMovieDao dao = context.getBean(IMovieDao.class);
+		ITicketDao dao = context.getBean(ITicketDao.class);
+		//IMovieDao dao = context.getBean(IMovieDao.class);
 		//String [] arr = context.getBeanDefinitionNames();
 		
 	/*	for (String string : arr) {
@@ -109,7 +110,7 @@ public class ServicesTest {
 		c.setLastName("lastName");
 		c.seteMail("mail@by");*/
 		//dao.get(1);
-		System.out.println(dao.getGenresOfMovie(1));
+		System.out.println(new java.sql.Date(new java.util.Date().getTime()));// !!!! так генерируем дату в сервисах если она нулл
 		
 		
 		

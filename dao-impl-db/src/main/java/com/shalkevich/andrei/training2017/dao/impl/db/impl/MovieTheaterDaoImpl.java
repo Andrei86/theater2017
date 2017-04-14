@@ -19,45 +19,34 @@ import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 
 @Repository
-public class MovieTheaterDaoImpl implements IMovieTheaterDao{
-	
+public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements IMovieTheaterDao{
+
 	@Inject
 	private JdbcTemplate jdbcTemplate;
-
 	
 	@Override
-	public List<MovieTheater> getAllByCity(String city) {
-		List<MovieTheater> list = jdbcTemplate.query("select * from movie_theater where is_active = true "
+	public List<MovieTheater> getAllActiveByCity(String city) {
+		List<MovieTheater> list = jdbcTemplate.query("select * from movietheater where is_active = true "
 				+ "and city = ?", new Object[] {city} ,
 				new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
 		return list;
 	}
 
+	
 	@Override
-	public List<MovieTheater> getAll() {
-		List<MovieTheater> list = jdbcTemplate.query("select * from movie_theater",
-				new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
+	public List<MovieTheater> getAllByCity(String city) {
+		
+		List<MovieTheater> list = jdbcTemplate.query("select * from movietheater where city = ?"
+			, new Object[] {city} , new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
+		
 		return list;
 	}
 
 
 	@Override
-	public MovieTheater get(Integer id) {
-		try
-		{
-		
-			return jdbcTemplate.queryForObject("select * from movie_theater where id = ? and is_active = true", new Object[]{id}, 
-					new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
-		
-		}catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-
-	@Override
 	public MovieTheater insert(MovieTheater entity) {
 
-		final String INSERT_SQL = "insert into movie_theater (name, city, address, is_active) values(?, ?, ?, ?)";
+		final String INSERT_SQL = "insert into movietheater (name, city, address, is_active) values(?, ?, ?, ?)";
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
@@ -84,9 +73,7 @@ public class MovieTheaterDaoImpl implements IMovieTheaterDao{
 	@Override
 	public void update(MovieTheater entity) {
 		
-		final String UPDATE_SQL = "update movie_theater set name = ?, city= ?, address = ?, is_active = ? where id = " + entity.getId();
-		
-		//KeyHolder keyHolder = new GeneratedKeyHolder();
+		final String UPDATE_SQL = "update movietheater set name = ?, city= ?, address = ?, is_active = ? where id = " + entity.getId();
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
@@ -99,17 +86,6 @@ public class MovieTheaterDaoImpl implements IMovieTheaterDao{
 	                return ps;
 	            }
 	        });
-		
-		//Number key = keyHolder.getKey();
-		//entity.setId(key.intValue());
-		//return entity;
-		
-	}
-
-	@Override
-	public void delete(Integer id) {
-		
-		jdbcTemplate.update("delete from movie_theater where id=" + id);
 		
 	}
 	

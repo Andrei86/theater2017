@@ -4,18 +4,14 @@ import java.util.List;
 
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 
-public interface IMovieTheaterDao {
+public interface IMovieTheaterDao extends IGenericDao<MovieTheater>{
 	
-	MovieTheater get(Integer id);
 
 	MovieTheater insert(MovieTheater theater);
 
     void update(MovieTheater theater);
 
-    List<MovieTheater> getAllByCity(String city);
+    List<MovieTheater> getAllByCity(String city);// для администратора
     
-    List<MovieTheater> getAll();//этот не нужен
-
-    void delete(Integer id);
-    
+    List<MovieTheater> getAllActiveByCity(String city);// для пользователя
 }

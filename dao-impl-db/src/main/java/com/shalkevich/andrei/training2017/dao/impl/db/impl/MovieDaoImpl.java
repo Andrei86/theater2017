@@ -1,6 +1,7 @@
 package com.shalkevich.andrei.training2017.dao.impl.db.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -80,4 +81,26 @@ public class MovieDaoImpl extends GenericDaoImpl<Movie> implements IMovieDao{
 	        });
 		
 	}
+	
+	/*@Override
+	public List<Movie> getByDateAndCity(String city, Date date) {
+		
+		List<Movie> list = jdbcTemplate.query("select * from movie m join seance s on m.id = s.movie_id" 
+		+" join movietheater m_t on s.movietheater_id = m_t.id where m_t.city = ? and s.date = ?",
+				new Object[]{city, date}, new BeanPropertyRowMapper<Movie>(Movie.class));
+		
+		return list;
+	}
+
+	@Override
+	public List<Movie> getByDateAndCitySoon(String city, Date date1, Date date2) {
+		
+		List<Movie> list = jdbcTemplate.query("select * from movie m join seance s on m.id = s.movie_id" 
+				+" join movietheater m_t on s.movietheater_id = m_t.id where m_t.city = ? and s.date >= ? and s.date < ?",
+						new Object[]{city, date1, date2}, new BeanPropertyRowMapper<Movie>(Movie.class));
+				
+				return list;
+		
+	}*/
+
 }

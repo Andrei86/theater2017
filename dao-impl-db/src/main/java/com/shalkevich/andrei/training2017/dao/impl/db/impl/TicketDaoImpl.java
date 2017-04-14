@@ -22,6 +22,7 @@ import com.shalkevich.andrei.training2017.dao.impl.db.mapper.TicketCostSumMapper
 import com.shalkevich.andrei.training2017.dao.impl.db.mapper.TicketWithAllDataMapper;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Ticket;
+import com.shalkevich.andrei.training2017.datamodel.customData.Status;
 import com.shalkevich.andrei.training2017.datamodel.customData.TicketCostSum;
 import com.shalkevich.andrei.training2017.datamodel.customData.TicketWithAllData;
 
@@ -72,13 +73,12 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 		
 		final String UPDATE_SQL = "update ticket set seance_id = ?, cost = ?, customer_id = ?, row = ?, place = ?, "
 				+ "purchase_date = ?, status = ? where id =" + entity.getId();
-	
-	//KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
+
 	
 	 jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(UPDATE_SQL/*, new String[] { "id" }*/);
+                PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);
                 ps.setInt(1, entity.getSeanceId());
                 ps.setBigDecimal(2, entity.getCost());
                 ps.setInt(3, entity.getCustomerId());
@@ -88,19 +88,15 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
                 ps.setObject(7, entity.getStatus());
                 return ps;
             }
-        });//, keyHolder);
-	
-	/*Number key = keyHolder.getKey();
-	entity.setId(key.intValue());*/
-	
+        });
 		
 	}
 
 	@Override
-	public List<TicketWithAllData> getByCustomerId(Integer id, Date date1, Date date2) {
+	public List<TicketWithAllData> getByCustomerIdWithInterval(Integer id, Date date1, Date date2) {
 		
 		List<TicketWithAllData> list = jdbcTemplate.query("select * from ticket t join seance s on t.seance_id = s.id "
-		 + "join movie_theater m_t on s.movie_theater_id = m_t.id join movie m on s.movie_id = m.id "
+		 + "join movietheater m_t on s.movietheater_id = m_t.id join movie m on s.movie_id = m.id "
 		 + "join customer c on t.customer_id = c.id " 
 		 + "where c.id = ? and t.purchase_date >= ? and t.purchase_date <= ?" , new Object[] {id, date1, date2} ,
 				new TicketWithAllDataMapper());
@@ -119,14 +115,35 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 				
 		return list;
 	}
-
+	
 	@Override
-	public TicketCostSum getTicketCost(Integer seanceId) {
+	public List<TicketWithAllData> getBySeanceAndStatus(Integer seanceId, Status status) {
+		List<TicketWithAllData> list = jdbcTemplate.query("select * from ticket t join seance s on t.seance_id = s.id "
+				+ "join movietheater m_t on s.movietheater_id = m_t.id join movie m on s.movie_id = m.id "
+				+ "join customer c on t.customer_id = c.id " 
+				+ "where s.id = ? and t.status = ?" , new Object[] {seanceId, status} ,
+				new TicketWithAllDataMapper());
+						
+				return list;
+	}
+	
+	@Override
+	public TicketCostSum getTicketCostSum(Integer seanceId, String status) {
 		
+		TicketCostSum instance = jdbcTemplate.queryForObject("select SUM(cost) from ticket "
+				+ "where seance_id = ? and status = ?", new Object[]{seanceId, status},
+				new TicketCostSumMapper());
+		
+		return instance;
+	}
+	
+	@Override
+	public TicketCostSum getTicketCostSumAll(Integer seanceId) {
 		TicketCostSum instance = jdbcTemplate.queryForObject("select SUM(cost) from ticket "
 				+ "where seance_id = ?", new Object[]{seanceId},
 				new TicketCostSumMapper());
 		
 		return instance;
 	}
+
 }

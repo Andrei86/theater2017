@@ -6,19 +6,19 @@ import java.util.List;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
 import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 
-public interface ISeanceDao {
-	
-	Seance get(Integer id);
+public interface ISeanceDao extends IGenericDao<Seance> {
 	
 	Seance insert(Seance seance);
 	
 	void update(Seance seance);
 	
-	void delete(Integer id);
+	List<SeanceWithAllData> getByTheaterIdAndDate(Integer id ,Date date);// этот мапер мне и нужен для просмотра фильмов
 	
-	List<SeanceWithAllData> getByTheaterIdAndDate(Integer id ,Date date);
+	List<SeanceWithAllData> getByMovieIdCityDate(Integer id, String city, Date date);// 
 	
-	List<SeanceWithAllData> getByMovieIdCityDate(Integer id, String city, Date date);
+	List<SeanceWithAllData> getByCityDate(String city, Date )// для movie сервисов, т.е. получаю объекты и вывожу только те, 
+	//которые подходят под город и дату
+	//т.е. это будет list c фильмами
 	
 	
 
