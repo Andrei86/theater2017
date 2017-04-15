@@ -62,13 +62,13 @@ public class SeanceServiceImpl implements ISeanceService{
 	@Override
 	public List<SeanceWithAllData> getByTheaterIdAndDate(Integer id, Date date) {
 		
-		return seanceDao.getByTheaterIdAndDate(id, date);
+		return seanceDao.getByTheaterAndDate(id, date);
 	}
 
 	@Override
 	public List<SeanceWithAllData> getByMovieIdCityDate(Integer id, String city, Date date) {
 		
-		return seanceDao.getByMovieIdCityDate(id, city, date);
+		return seanceDao.getByMovieCityDate(id, city, date);
 	}
 
 	@Override

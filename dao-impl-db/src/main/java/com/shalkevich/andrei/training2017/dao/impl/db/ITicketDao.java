@@ -22,7 +22,7 @@ public interface ITicketDao extends IGenericDao<Ticket>{
 	
 	void deleteAll(Integer seanceId);
 	
-	List<TicketWithAllData> getByCustomerIdWithInterval(Integer id, Date date1, Date date2); // свои билеты и еще подумать над стоимостью
+	List<TicketWithAllData> getByCustomerIdWithInterval(Integer id, Date date1, Date date2); // свои билеты и еще подумать над стоимостью (для зарегистрированного пользователя)
 	
 	List<TicketWithAllData> getBySeanceAndStatus(Integer seanceId, Status status); // в дао, т.к. в сервисах мы уже будем определять если статус равен нулл то просто getAll()
 	

@@ -17,6 +17,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.SeanceWithAllDataFilter;
 import com.shalkevich.andrei.training2017.dao.impl.db.mapper.SeanceWithAllDataMapper;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
 import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
@@ -72,8 +73,8 @@ public class SeanceDaoImpl extends GenericDaoImpl<Seance> implements ISeanceDao{
 		
 	}
 
-	@Override
-	public List<SeanceWithAllData> getByTheaterIdAndDate(Integer theaterId, Date date) {
+	/*@Override
+	public List<SeanceWithAllData> getByTheaterAndDate(Integer theaterId, Date date) {
 		
 		List<SeanceWithAllData> list = jdbcTemplate.query(
 				
@@ -83,10 +84,10 @@ public class SeanceDaoImpl extends GenericDaoImpl<Seance> implements ISeanceDao{
 				new SeanceWithAllDataMapper());
 	
 		return list;
-	}
+	}*/
 
-	@Override
-	public List<SeanceWithAllData> getByMovieIdCityDate(Integer id, String city, Date date) {
+	/*@Override
+	public List<SeanceWithAllData> getByMovieCityDate(Integer id, String city, Date date) {
 		
 		try
 		{
@@ -103,6 +104,32 @@ public class SeanceDaoImpl extends GenericDaoImpl<Seance> implements ISeanceDao{
 			
 			return null;
 		}
+	}*/
+
+	@Override
+	public List<SeanceWithAllData> search(SeanceWithAllDataFilter filter) {
+		
+		String sql = "select * from seance s join movietheater m_t on s.movietheater_id = m_t.id "
+				+ "join movie m on s.movie_id = m.id where m_t.is_active = true ";
+		
+		if(filter.getCity()!=null)
+		sql += filter.cityFilterResult();
+		
+		if(filter.getMovieTheater()!=null)
+			sql += filter.movieTheaterFilterResult();
+		
+		if(filter.getDate()!=null)
+			sql += filter.dateFilterResult();
+		
+		if(filter.getMovieTitle()!=null)
+			sql += filter.movieFilterResult();
+		
+		System.out.println(sql);
+		
+		List<SeanceWithAllData> list = jdbcTemplate.query(sql, new SeanceWithAllDataMapper());
+		
+		return list;
+	
 	}
 
 }

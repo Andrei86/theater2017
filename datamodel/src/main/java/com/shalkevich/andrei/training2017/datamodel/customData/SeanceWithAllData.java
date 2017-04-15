@@ -31,7 +31,7 @@ public class SeanceWithAllData {
 	@Override
 	public String toString() {
 		
-		return " movie theater " + movieTheater.getName() +
+		return "[id = " + seance.getId() + "]" + " movie theater " + movieTheater.getName() +
 				" movie " + movie.getTitle() + " date " + seance.getDate() + " time " + seance.getTime();
 		
 	}
