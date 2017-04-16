@@ -31,7 +31,7 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 		
 		if(theater.getId()==null)
 		{
-			System.out.println("Insert new MovieTheater");
+			LOGGER.info("Insert new MovieTheater");
 			movieTheaterDao.insert(theater);
 		}
 		else
@@ -50,11 +50,8 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 	}
 
 	@Override
-	public List<MovieTheater> getAll(String city) {
+	public List<MovieTheater> getAllByCity(String city) {
 		
-		if (city == null)
-		return movieTheaterDao.getAll();
-		else	
 		return movieTheaterDao.getAllByCity(city);
 	}
 
