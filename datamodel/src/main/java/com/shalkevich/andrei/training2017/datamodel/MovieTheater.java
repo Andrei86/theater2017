@@ -41,6 +41,33 @@ public class MovieTheater {
 	}
 	
 	
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(this == obj) return true;
+		if(!(obj instanceof MovieTheater)) return false;
+		
+		MovieTheater mt = (MovieTheater) obj;
+		
+		return id.equals(mt.id) && name.equals(mt.name) && city.equals(mt.city) 
+								&& address.equals(mt.address) && isActive.equals(mt.isActive);
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		
+		Integer code = 17;
+        code = 31 * code + id;
+        code = 31 * code + name.hashCode();
+        code = 31 * code + city.hashCode();
+        code = 31 * code + address.hashCode();
+        code = 31 * code + isActive.hashCode();
+ 
+		return code;
+	}
+	
 	@Override
 	public String toString() {
 		

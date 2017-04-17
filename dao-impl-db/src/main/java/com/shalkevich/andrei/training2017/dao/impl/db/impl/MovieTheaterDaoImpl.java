@@ -52,7 +52,7 @@ public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
-	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException { 
 	                PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
 	                ps.setString(1, entity.getName());
 	                ps.setString(2, entity.getCity());
