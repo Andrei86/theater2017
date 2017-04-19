@@ -38,7 +38,7 @@ public abstract class GenericDaoImpl<T> implements IGenericDao<T> {
 	}
 	
 	@Override
-	public void delete(Integer id)
+	public void delete(Integer id) // общий delete метод
 	{
 		jdbcTemplate.update("delete from " + type.getSimpleName().toLowerCase() + " where id=" + id);
 		
@@ -75,6 +75,7 @@ public abstract class GenericDaoImpl<T> implements IGenericDao<T> {
 		}
 		INSERT_SQL += strF.toString() + strV.toString();
 		
+		//INSERT_SQL = INSERT_SQL.replaceAll("_", "");
 		return INSERT_SQL;
 	}
 	
@@ -109,12 +110,14 @@ public abstract class GenericDaoImpl<T> implements IGenericDao<T> {
 		
 		UPDATE_SQL += str.toString();
 		
+		//UPDATE_SQL = UPDATE_SQL.replaceAll("_", "");
+		
 		return UPDATE_SQL;
 	}
 	
 	
 	@Override
-	public T get(Integer id)
+	public T get(Integer id) // общий get метод
 	{
 		try
 		{

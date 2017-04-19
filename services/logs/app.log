@@ -1,54 +1,92 @@
-15:17:14.406 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:17:15.225 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:17:15.445 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:17:15.452 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:17:15.520 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:17:15.528 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:20:22.797 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:20:23.130 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:20:23.162 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:21:38.060 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:22:49.810 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:22:50.164 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:22:50.244 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:23:12.160 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:25:32.219 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:25:32.649 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:25:32.708 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:28:03.730 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:33:32.634 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:33:33.010 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:33:33.043 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:35:33.071 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:35:33.386 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:35:33.425 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:36:28.241 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:36:28.549 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:36:28.582 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:38:59.188 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:38:59.567 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:38:59.599 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:39:33.663 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:52:20.021 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:52:20.331 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:52:20.399 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:52:31.746 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:53:06.407 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:54:35.625 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:54:35.946 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:54:35.979 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:54:35.984 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:54:36.005 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:54:36.017 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:57:56.057 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:57:56.364 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:57:56.401 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:57:56.406 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:57:56.416 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-15:57:56.423 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-16:02:39.899 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-16:02:40.216 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-16:02:40.249 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-16:02:40.254 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-16:02:40.264 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
-16:02:40.269 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new MovieTheater
+14:37:46.117 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=68, theater.name=MozyrKino, theater.city=Mozyr, theater.active=ul. Lenina, 7, theater.isActive=true
+14:37:46.136 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=69, theater.name=OrshaKino, theater.city=Orsha, theater.active=ul. Centralnaya, 8, theater.isActive=true
+14:37:46.137 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Save new movietheaters from array
+14:37:46.137 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 68
+14:37:46.158 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 69
+14:37:46.316 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 68
+14:37:46.332 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 69
+14:37:46.349 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=70, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+14:37:46.349 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 70
+14:37:46.366 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 70
+14:37:46.382 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=71, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+14:37:46.383 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 71
+14:37:46.399 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 71
+14:37:46.416 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 71
+14:37:46.441 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=72, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+14:37:46.441 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 72
+14:37:46.457 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 72
+14:37:46.474 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=73, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+14:37:46.500 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 73
+14:37:46.500 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 73
+15:48:34.937 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=74, theater.name=MozyrKino, theater.city=Mozyr, theater.active=ul. Lenina, 7, theater.isActive=true
+15:48:34.939 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=75, theater.name=OrshaKino, theater.city=Orsha, theater.active=ul. Centralnaya, 8, theater.isActive=true
+15:48:34.941 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Save new movietheaters from array
+15:48:34.941 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 74
+15:48:34.958 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 75
+15:48:34.966 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 74
+15:48:34.968 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 75
+15:48:34.972 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=76, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+15:48:34.973 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 76
+15:48:34.976 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 76
+15:48:34.978 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=77, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+15:48:34.978 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 77
+15:48:34.983 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 77
+15:48:34.986 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 77
+15:48:34.989 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=78, theater.name=GorodTheater1, theater.city=Gorod, theater.active=ul. Lenina, theater.isActive=true
+15:48:34.990 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=79, theater.name=GorodTheater2, theater.city=Gorod, theater.active=ul. kostushko, theater.isActive=true
+15:48:34.992 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=80, theater.name=GorodTheater3, theater.city=Gorod, theater.active=ul. Centralnaya, theater.isActive=true
+15:48:35.033 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=81, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+15:48:35.033 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 81
+15:48:35.036 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 81
+15:48:35.039 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=82, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+15:48:35.040 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 82
+15:48:35.040 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 82
+15:50:07.596 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=83, theater.name=MozyrKino, theater.city=Mozyr, theater.active=ul. Lenina, 7, theater.isActive=true
+15:50:07.598 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=84, theater.name=OrshaKino, theater.city=Orsha, theater.active=ul. Centralnaya, 8, theater.isActive=true
+15:50:07.602 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Save new movietheaters from array
+15:50:07.602 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 83
+15:50:07.619 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 84
+15:50:07.627 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 83
+15:50:07.629 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 84
+15:50:07.634 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=85, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+15:50:07.634 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 85
+15:50:07.637 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 85
+15:50:07.639 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=86, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+15:50:07.640 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 86
+15:50:07.644 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 86
+15:50:07.648 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 86
+15:50:07.650 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=87, theater.name=GorodTheater1, theater.city=Gorod, theater.active=ul. Lenina, theater.isActive=true
+15:50:07.652 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=88, theater.name=GorodTheater2, theater.city=Gorod, theater.active=ul. kostushko, theater.isActive=true
+15:50:07.654 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=89, theater.name=GorodTheater3, theater.city=Gorod, theater.active=ul. Centralnaya, theater.isActive=true
+15:50:07.665 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=90, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+15:50:07.666 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 90
+15:50:07.669 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 90
+15:50:07.677 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=91, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+15:50:07.680 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 91
+15:50:07.681 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 91
+16:04:48.261 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=11, theater.name=MozyrKino, theater.city=Mozyr, theater.active=ul. Lenina, 7, theater.isActive=true
+16:04:48.270 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=12, theater.name=OrshaKino, theater.city=Orsha, theater.active=ul. Centralnaya, 8, theater.isActive=true
+16:04:48.271 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Save new movietheaters from array
+16:04:48.271 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 11
+16:04:48.292 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 12
+16:04:48.308 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 11
+16:04:48.311 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 12
+16:04:48.318 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=13, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+16:04:48.319 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 13
+16:04:48.325 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 13
+16:04:48.328 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=14, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+16:04:48.329 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 14
+16:04:48.336 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 14
+16:04:48.341 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 14
+16:04:48.345 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=15, theater.name=GorodTheater1, theater.city=Gorod, theater.active=ul. Lenina, theater.isActive=true
+16:04:48.348 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=16, theater.name=GorodTheater2, theater.city=Gorod, theater.active=ul. kostushko, theater.isActive=true
+16:04:48.354 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=17, theater.name=GorodTheater3, theater.city=Gorod, theater.active=ul. Centralnaya, theater.isActive=true
+16:04:48.366 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 15
+16:04:48.369 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 16
+16:04:48.372 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 17
+16:04:48.376 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=18, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+16:04:48.376 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 18
+16:04:48.380 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 18
+16:04:48.385 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=19, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+16:04:48.388 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 19
+16:04:48.388 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 19

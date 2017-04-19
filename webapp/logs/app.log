@@ -1,0 +1,10 @@
+10:07:13.992 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=65, theater.name=New, theater.city=City, theater.active=Address, theater.isActive=true
+10:08:02.904 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=66, theater.name=New, theater.city=City, theater.active=Address, theater.isActive=true
+10:08:20.268 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=67, theater.name=New, theater.city=City, theater.active=Address, theater.isActive=true
+10:11:42.303 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 100
+10:26:39.284 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 100
+10:40:51.854 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = null
+10:41:24.081 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 0
+10:45:13.368 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = -1
+13:12:22.326 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = -1
+16:07:36.415 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 345

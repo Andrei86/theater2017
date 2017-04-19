@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
+import com.shalkevich.andrei.training2017.datamodel.customData.Status;
 import com.shalkevich.andrei.training2017.services.IMovieTheaterService;
 
 @Service
@@ -23,7 +24,13 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 	@Override
 	public MovieTheater get(Integer id) {
 		
+		if(id == null)
+		{
+			throw new NullPointerException("You must insert valid value");
+		}
+		LOGGER.info("Get movietheater with {id} = " + id);
 		return movieTheaterDao.get(id);
+		
 	}
 
 	@Override
@@ -31,10 +38,14 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 		
 		if(theater.getId()==null)
 		{
-			LOGGER.info("Insert new MovieTheater");
+			
 			movieTheaterDao.insert(theater);
+			LOGGER.info("Insert new movietheater with theater.id={}, theater.name={}, "
+					+ "theater.city={}, theater.active={}, theater.isActive={}", theater.getId(),
+					theater.getName(), theater.getCity(), theater.getAddress(), theater.getIsActive());
 		}
 		else
+			
 			movieTheaterDao.update(theater);
 		
 	}
@@ -47,18 +58,24 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 			save(movieTheater);
 		}
 		
+		LOGGER.info("Save new movietheaters from array");
 	}
 
+
 	@Override
-	public List<MovieTheater> getAllByCity(String city) {
+	public List<MovieTheater> getAll(String city) {
 		
-		return movieTheaterDao.getAllByCity(city);
+		//if user - usually user
+			//return movieTheaterDao.getAllActiveByCity(city);
+		//else
+			return movieTheaterDao.getAllByCity(city);
 	}
 
 	@Override
 	public void delete(Integer id) {
 		
 		movieTheaterDao.delete(id);
+		LOGGER.info("Delete movietheater with id= "+id);
 		
 	}
 	

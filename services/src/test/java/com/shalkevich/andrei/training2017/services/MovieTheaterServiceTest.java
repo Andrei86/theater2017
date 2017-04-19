@@ -65,8 +65,6 @@ public class MovieTheaterServiceTest extends AbstractTest{
 	public void updateTest()
 	{
 
-		
-		
 		MovieTheater theater1 = new MovieTheater();
 		theater1.setName("GomelKino");
 		theater1.setCity("Gomel");
@@ -74,7 +72,6 @@ public class MovieTheaterServiceTest extends AbstractTest{
 		theater1.setIsActive(false);
 		
 		tService.save(theater1);
-
 		
 		MovieTheater updatedTheater = tService.get(theater1.getId());
 		
@@ -83,8 +80,6 @@ public class MovieTheaterServiceTest extends AbstractTest{
 		updatedTheater.setAddress("NewAddress");
 		updatedTheater.setIsActive(true);
 		tService.save(updatedTheater);
-		
-		//tService.save(theater1);
 		
 		Assert.isTrue(updatedTheater.equals(tService.get(updatedTheater.getId())), "objects must be equal");
 		
@@ -137,14 +132,14 @@ public class MovieTheaterServiceTest extends AbstractTest{
 	public void saveMultipleTest()
 	{
 		MovieTheater theater2 = new MovieTheater();
-		theater2.setName("Mozyr");
-		theater2.setCity("MozyrKino");
+		theater2.setName("MozyrKino");
+		theater2.setCity("Mozyr");
 		theater2.setAddress("ul. Lenina, 7");
 		theater2.setIsActive(true);
 		
 		MovieTheater theater3 = new MovieTheater();
-		theater3.setName("Orsha");
-		theater3.setCity("OrshaKino");
+		theater3.setName("OrshaKino");
+		theater3.setCity("Orsha");
 		theater3.setAddress("ul. Centralnaya, 8");
 		theater3.setIsActive(true);
 		
@@ -157,5 +152,44 @@ public class MovieTheaterServiceTest extends AbstractTest{
 		tService.delete(theater3.getId());
 		
 	}
+	
+	/*@Test
+	public void getAllTest()
+	{
+		MovieTheater theater1 = new MovieTheater();
+		theater1.setName("GorodTheater1");
+		theater1.setCity("Gorod");
+		theater1.setAddress("ul. Lenina");
+		theater1.setIsActive(true);
+		
+		MovieTheater theater2 = new MovieTheater();
+		theater2.setName("GorodTheater2");
+		theater2.setCity("Gorod");
+		theater2.setAddress("ul. kostushko");
+		theater2.setIsActive(true);
+		
+		MovieTheater theater3 = new MovieTheater();
+		theater3.setName("GorodTheater3");
+		theater3.setCity("Gorod");
+		theater3.setAddress("ul. Centralnaya");
+		theater3.setIsActive(true);
+		
+		tService.save(theater1);
+		tService.save(theater2);
+		tService.save(theater3);
+		
+		String gorod = theater1.getCity();
+		Boolean isActive = null;
+		
+		Assert.isTrue(tService.getAll(gorod, isActive).size() == 3, "number of movietheaters must be 3");
+		
+		isActive = false;
+		Assert.isTrue(tService.getAll(gorod, isActive).size() == 0, "number of movietheaters must be 0");
+		
+		tService.delete(theater1.getId());
+		tService.delete(theater2.getId());
+		tService.delete(theater3.getId());
+	}*/
+
 	
 }

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
+import com.shalkevich.andrei.training2017.datamodel.customData.Status;
 
 @Repository
 public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements IMovieTheaterDao{
@@ -25,18 +26,18 @@ public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public List<MovieTheater> getAllActiveByCity(String city) {
-		List<MovieTheater> list = jdbcTemplate.query("select * from movietheater where is_active = true "
-				+ "and city = ?", new Object[] {city} ,
+	public List<MovieTheater> getAllByCity(String city) { // for admin
+		List<MovieTheater> list = jdbcTemplate.query("select * from movietheater where city = ? "
+				, new Object[] {city} ,
 				new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
 		return list;
 	}
 
 	
 	@Override
-	public List<MovieTheater> getAllByCity(String city) {
+	public List<MovieTheater> getAllActiveByCity(String city) { // for user
 		
-		List<MovieTheater> list = jdbcTemplate.query("select * from movietheater where city = ?"
+		List<MovieTheater> list = jdbcTemplate.query("select * from movietheater where is_active = true and city = ?"
 			, new Object[] {city} , new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
 		
 		return list;

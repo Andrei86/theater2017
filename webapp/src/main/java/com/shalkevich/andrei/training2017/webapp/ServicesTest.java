@@ -33,20 +33,29 @@ public class ServicesTest {
 		
 		//IMovieTheaterService daoTheater = context.getBean(IMovieTheaterService.class);
 		
-		//IMovieTheaterDao dao = context.getBean(IMovieTheaterDao.class);
+		IMovieTheaterDao dao = context.getBean(IMovieTheaterDao.class);
 		//ISeanceService service1 = context.getBean(ISeanceService.class);
 		//ITicketDao dao = context.getBean(ITicketDao.class);
 		//IMovieDao dao = context.getBean(IMovieDao.class);
 		//String [] arr = context.getBeanDefinitionNames();
-		ISeanceDao dao = context.getBean(ISeanceDao.class);
+		//ISeanceDao dao = context.getBean(ISeanceDao.class);
 		
-		SeanceWithAllDataFilter f = new SeanceWithAllDataFilter();
+		//SeanceWithAllDataFilter f = new SeanceWithAllDataFilter();
 		
 		//f.setMovieTitle("Gladiator");
+		MovieTheater t = new MovieTheater();
+		
+		/*t.setName("New");
+		t.setCity("City");
+		t.setAddress("Address");
+		t.setIsActive(true)*/;
+		
 		
 		//f.setDate(Date.valueOf("2017-04-01"));
+		//Boolean  isActive = true;
+		//service.get(345);
 		
-		System.out.println(dao.search(f));
+		 dao.insert(t);
 		
 		
 	}
