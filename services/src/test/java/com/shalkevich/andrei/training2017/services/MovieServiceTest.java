@@ -21,7 +21,6 @@ public class MovieServiceTest extends AbstractTest{
 		movie1.setDuration(300);
 		movie1.setDescription("bla bla test");
 		
-		System.out.println(movie1);
 		mService.save(movie1);
 		
 		Integer savedMovieId = movie1.getId();
@@ -35,100 +34,100 @@ public class MovieServiceTest extends AbstractTest{
 		mService.delete(movie1.getId());
 	}
 	
-	/*@Test
+	@Test
 	public void updateTest()
 	{
 
-		MovieTheater theater1 = new MovieTheater();
-		theater1.setName("GomelKino");
-		theater1.setCity("Gomel");
-		theater1.setAddress("ul. Lermontova, 3");
-		theater1.setIsActive(false);
+		Movie movie1 = new Movie();
+		movie1.setTitle("MovieForTest");
+		movie1.setAgeBracket("test+");
+		movie1.setDuration(300);
+		movie1.setDescription("bla bla test");
 		
-		tService.save(theater1);
+		mService.save(movie1);
 		
-		MovieTheater updatedTheater = tService.get(theater1.getId());
+		Movie updatedMovie = mService.get(movie1.getId());
 		
-		updatedTheater.setName("NewName");
-		updatedTheater.setCity("NewCity");
-		updatedTheater.setAddress("NewAddress");
-		updatedTheater.setIsActive(true);
-		tService.save(updatedTheater);
+		updatedMovie.setTitle("New movie");
+		updatedMovie.setAgeBracket("new age bracket");
+		updatedMovie.setDuration(200);
+		updatedMovie.setDescription("new description");
+		mService.save(updatedMovie);
 		
-		Assert.isTrue(updatedTheater.equals(tService.get(updatedTheater.getId())), "objects must be equal");
+		Assert.isTrue(updatedMovie.equals(mService.get(updatedMovie.getId())), "objects must be equal");
 		
-		tService.delete(theater1.getId());
+		mService.delete(updatedMovie.getId());
 		
 	}
 	
 	@Test
 	public void readTest()
 	{
-		MovieTheater theater1 = new MovieTheater();
-		theater1.setName("GomelKino");
-		theater1.setCity("Gomel");
-		theater1.setAddress("ul. Lermontova, 3");
-		theater1.setIsActive(false);
+		Movie movie1 = new Movie();
+		movie1.setTitle("MovieForTest");
+		movie1.setAgeBracket("test+");
+		movie1.setDuration(300);
+		movie1.setDescription("bla bla test");	
 		
-		tService.save(theater1);
+		mService.save(movie1);
 		
-		Integer theaterFromDBId = theater1.getId();
-		MovieTheater theaterFromDB = tService.get(theaterFromDBId);
-		Assert.isTrue(theaterFromDB.equals(theater1), "objects must be equal");
+		Integer movieFromDBId = movie1.getId();
+		Movie movieFromDB = mService.get(movieFromDBId);
+		Assert.isTrue(movieFromDB.equals(movie1), "objects must be equal");
 		
-		tService.delete(theater1.getId());
+		mService.delete(movie1.getId());
 	}
 	
 	@Test
 	public void deleteTest()
 	{
 		
-		MovieTheater theater1 = new MovieTheater();
-		theater1.setName("GomelKino");
-		theater1.setCity("Gomel");
-		theater1.setAddress("ul. Lermontova, 3");
-		theater1.setIsActive(false);
+		Movie movie1 = new Movie();
+		movie1.setTitle("MovieForTest");
+		movie1.setAgeBracket("test+");
+		movie1.setDuration(300);
+		movie1.setDescription("bla bla test");	
 		
-		tService.save(theater1);
+		mService.save(movie1);
 		
-		Integer theaterFromDBId = theater1.getId();
+		Integer movieFromDBId = movie1.getId();
 		
-		tService.delete(theaterFromDBId);
+		mService.delete(movieFromDBId);
 		
-		MovieTheater theaterFromDB = tService.get(theaterFromDBId);
+		Movie movieFromDB = mService.get(movieFromDBId);
 		
 		
-		Assert.isNull(theaterFromDB, "returned after deleting object must be null");
+		Assert.isNull(movieFromDB, "returned after deleting object must be null");
 		
 	}
 	
 	@Test
 	public void saveMultipleTest()
 	{
-		MovieTheater theater2 = new MovieTheater();
-		theater2.setName("MozyrKino");
-		theater2.setCity("Mozyr");
-		theater2.setAddress("ul. Lenina, 7");
-		theater2.setIsActive(true);
+		Movie movie1 = new Movie();
+		movie1.setTitle("MovieForTest1");
+		movie1.setAgeBracket("test1+");
+		movie1.setDuration(300);
+		movie1.setDescription("bla bla test1");
 		
-		MovieTheater theater3 = new MovieTheater();
-		theater3.setName("OrshaKino");
-		theater3.setCity("Orsha");
-		theater3.setAddress("ul. Centralnaya, 8");
-		theater3.setIsActive(true);
+		Movie movie2 = new Movie();
+		movie2.setTitle("MovieForTest2");
+		movie2.setAgeBracket("test2+");
+		movie2.setDuration(301);
+		movie2.setDescription("bla bla test2");
 		
-		tService.saveMultiple(theater2, theater3);
+		mService.saveMultiple(movie1, movie2);
 		
-		Assert.isTrue(tService.get(theater2.getId()).equals(theater2), "objects must be equal");
-		Assert.isTrue(tService.get(theater3.getId()).equals(theater3), "objects must be equal");
+		Assert.isTrue(mService.get(movie1.getId()).equals(movie1), "objects must be equal");
+		Assert.isTrue(mService.get(movie2.getId()).equals(movie2), "objects must be equal");
 		
-		tService.delete(theater2.getId());
-		tService.delete(theater3.getId());
+		mService.delete(movie1.getId());
+		mService.delete(movie2.getId());
 		
 	}
 	
-	@Test
-	public void getAllTest()
+	/*@Test
+	public void searchTest() // а надо ли его тестировать??
 	{
 		String city = null;
 		List<MovieTheater> list = tService.getAll(city);

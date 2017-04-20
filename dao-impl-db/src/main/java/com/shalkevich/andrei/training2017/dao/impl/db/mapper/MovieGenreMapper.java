@@ -9,7 +9,7 @@ import com.shalkevich.andrei.training2017.datamodel.Genre;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
 import com.shalkevich.andrei.training2017.datamodel.customData.MovieGenre;
 
-public class MovieGenreMapper implements RowMapper<MovieGenre>{
+public class MovieGenreMapper implements RowMapper<MovieGenre>{ // не нужен этот мапер
 
 	@Override
 	public MovieGenre mapRow(ResultSet rs, int rowNum) throws SQLException {

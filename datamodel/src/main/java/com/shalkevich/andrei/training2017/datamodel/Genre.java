@@ -17,10 +17,31 @@ public class Genre {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	
+		if(this == obj) return true;
+		if(!(obj instanceof Genre)) return false;
+		
+		Genre g = (Genre) obj;
+		
+		return id.equals(g.id) && name.equals(g.name);
+
+	}
+	@Override
+	public int hashCode() {
+		
+		Integer code = 17;
+        code = 31 * code + id;
+        code = 31 * code + name.hashCode();
+ 
+		return code;
+	}
 	@Override
 	public String toString() {
 		
-		return "Genre [id=" + id + "]" + " name " + name;
+		return /* "Genre [id=" + id + "]" + " name " + */ name;
 	}
 	
 	

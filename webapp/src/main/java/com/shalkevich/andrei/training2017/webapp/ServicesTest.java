@@ -23,6 +23,7 @@ import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
 import com.shalkevich.andrei.training2017.datamodel.Ticket;
 import com.shalkevich.andrei.training2017.datamodel.customData.Status;
+import com.shalkevich.andrei.training2017.services.IGenreService;
 import com.shalkevich.andrei.training2017.services.IMovieService;
 import com.shalkevich.andrei.training2017.services.IMovieTheaterService;
 import com.shalkevich.andrei.training2017.services.ISeanceService;
@@ -35,7 +36,7 @@ public class ServicesTest {
 		
 		//IMovieTheaterService daoTheater = context.getBean(IMovieTheaterService.class);
 		
-		IMovieService service = context.getBean(IMovieService.class);
+		IGenreService service = context.getBean(IGenreService.class);
 		//ISeanceService service1 = context.getBean(ISeanceService.class);
 		//ITicketDao dao = context.getBean(ITicketDao.class);
 		//IMovieDao dao = context.getBean(IMovieDao.class);
@@ -60,7 +61,7 @@ public class ServicesTest {
 		 //System.out.println(dao.getByDateAndCitySoon("Grodno", Date.valueOf("2017-03-30"), Date.valueOf("2017-04-01")));
 		//MovieFilter f = new MovieFilter();
 		//f.setCity("Minsk");
-		System.out.println(service);
+		System.out.println(service.readGenresOfMovie(1));
 	}
 
 }

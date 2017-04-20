@@ -28,7 +28,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(MovieTheaterService
 	public IMovieDao movieDao;
 	
 	@Override
-	public Movie get(Integer id) { // сюда прикрутить жанры
+	public Movie get(Integer id) {
 
 		LOGGER.info("Get movie with {id} = " + id);
 		

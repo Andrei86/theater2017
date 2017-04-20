@@ -23,3 +23,251 @@
 17:21:37.256 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=9, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
 17:21:37.277 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 9
 17:21:37.343 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 9
+20:56:24.066 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=5, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+20:56:24.066 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 5
+20:56:24.087 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 5
+20:56:24.227 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 5
+20:56:24.227 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=6, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+20:56:24.237 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 6
+20:56:24.237 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 6
+21:04:39.145 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=7, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:04:39.145 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 7
+21:04:39.166 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 7
+21:04:39.176 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=8, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:04:39.176 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 8
+21:04:39.176 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 8
+21:04:39.186 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 8
+21:04:39.186 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=9, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:04:39.186 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 9
+21:04:39.186 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 9
+21:12:42.543 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=9, theater.name=MozyrKino, theater.city=Mozyr, theater.active=ul. Lenina, 7, theater.isActive=true
+21:12:42.614 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=10, theater.name=OrshaKino, theater.city=Orsha, theater.active=ul. Centralnaya, 8, theater.isActive=true
+21:12:42.614 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Save new movietheaters from array
+21:12:42.614 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 9
+21:12:42.644 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 10
+21:12:42.644 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 9
+21:12:42.644 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 10
+21:12:42.654 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=11, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:12:42.654 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 11
+21:12:42.664 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 11
+21:12:42.664 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=12, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:12:42.664 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 12
+21:12:42.664 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 12
+21:12:42.674 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 12
+21:12:42.674 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get all movietheaters with city= null
+21:12:42.684 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=13, theater.name=GorodTheater1, theater.city=Gorod, theater.active=ul. Lenina, theater.isActive=true
+21:12:42.684 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get all movietheaters with city= null
+21:12:42.694 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 13
+21:12:42.704 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=14, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:12:42.704 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 14
+21:12:42.704 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 14
+21:12:42.704 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=15, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:12:42.714 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 15
+21:12:42.714 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 15
+21:13:50.982 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=16, theater.name=MozyrKino, theater.city=Mozyr, theater.active=ul. Lenina, 7, theater.isActive=true
+21:13:50.992 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=17, theater.name=OrshaKino, theater.city=Orsha, theater.active=ul. Centralnaya, 8, theater.isActive=true
+21:13:50.992 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Save new movietheaters from array
+21:13:50.992 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 16
+21:13:51.003 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 17
+21:13:51.013 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 16
+21:13:51.013 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 17
+21:13:51.023 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=18, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:13:51.023 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 18
+21:13:51.023 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 18
+21:13:51.033 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=19, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:13:51.033 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 19
+21:13:51.043 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 19
+21:13:51.053 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 19
+21:13:51.053 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get all movietheaters with city= null
+21:13:51.063 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=20, theater.name=GorodTheater1, theater.city=Gorod, theater.active=ul. Lenina, theater.isActive=true
+21:13:51.063 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get all movietheaters with city= null
+21:13:51.073 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 20
+21:13:51.083 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=21, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:13:51.083 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 21
+21:13:51.083 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 21
+21:13:51.083 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=22, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:13:51.093 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 22
+21:13:51.093 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 22
+21:14:31.202 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=23, theater.name=MozyrKino, theater.city=Mozyr, theater.active=ul. Lenina, 7, theater.isActive=true
+21:14:31.202 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=24, theater.name=OrshaKino, theater.city=Orsha, theater.active=ul. Centralnaya, 8, theater.isActive=true
+21:14:31.202 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Save new movietheaters from array
+21:14:31.202 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 23
+21:14:31.222 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 24
+21:14:31.223 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 23
+21:14:31.223 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 24
+21:14:31.223 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=25, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:14:31.233 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 25
+21:14:31.233 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 25
+21:14:31.233 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=26, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:14:31.233 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 26
+21:14:31.243 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 26
+21:14:31.243 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 26
+21:14:31.253 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get all movietheaters with city= null
+21:14:31.263 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=27, theater.name=GorodTheater1, theater.city=Gorod, theater.active=ul. Lenina, theater.isActive=true
+21:14:31.263 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get all movietheaters with city= null
+21:14:31.273 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 27
+21:14:31.273 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=28, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:14:31.273 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 28
+21:14:31.273 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 28
+21:14:31.283 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movietheater with theater.id=29, theater.name=GomelKino, theater.city=Gomel, theater.active=ul. Lermontova, 3, theater.isActive=false
+21:14:31.283 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movietheater with id= 29
+21:14:31.283 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movietheater with {id} = 29
+21:16:47.567 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=10, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:16:47.567 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 10
+21:16:47.588 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 10
+21:16:47.588 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=11, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:16:47.588 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 11
+21:16:47.598 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 11
+21:16:47.608 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 11
+21:16:47.608 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=12, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:16:47.608 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 12
+21:16:47.608 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 12
+21:18:07.766 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=13, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:18:07.766 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 13
+21:18:07.776 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 13
+21:18:07.787 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=14, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:18:07.787 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 14
+21:18:07.787 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 14
+21:18:07.798 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 14
+21:18:07.798 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=15, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:18:07.798 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 15
+21:18:07.808 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 15
+21:18:48.617 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=16, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:18:48.617 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 16
+21:18:48.637 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 16
+21:18:48.637 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=17, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:18:48.637 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 17
+21:18:48.637 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 17
+21:18:48.647 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 17
+21:18:48.647 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=18, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:18:48.647 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 18
+21:18:48.647 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 18
+21:21:33.810 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=19, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:21:33.810 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 19
+21:21:33.831 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 19
+21:21:33.831 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=20, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:21:33.831 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 20
+21:21:33.831 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 20
+21:21:33.841 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 20
+21:21:33.841 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=21, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:21:33.841 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 21
+21:21:33.841 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 21
+21:21:33.851 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=22, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:21:33.851 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 22
+21:21:33.851 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 22
+21:25:39.732 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=23, title=MovieForTest2, age bracket=test2+, duration=301, description=bla bla test2
+21:25:39.742 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=24, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:25:39.742 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 24
+21:25:39.766 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 24
+21:25:39.768 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=25, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:25:39.769 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 25
+21:25:39.772 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 25
+21:25:39.772 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 25
+21:25:39.772 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=26, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:25:39.772 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 26
+21:25:39.792 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 26
+21:25:39.792 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=27, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:25:39.792 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 27
+21:25:39.792 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 27
+21:26:07.356 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=28, title=MovieForTest2, age bracket=test2+, duration=301, description=bla bla test2
+21:26:07.366 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=29, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:26:07.366 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 29
+21:26:07.387 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 29
+21:26:07.387 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=30, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:26:07.387 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 30
+21:26:07.397 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 30
+21:26:07.397 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 30
+21:26:07.407 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=31, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:26:07.407 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 31
+21:26:07.407 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 31
+21:26:07.407 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=32, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:26:07.417 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 32
+21:26:07.417 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 32
+21:32:17.121 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=6, title=MovieForTest2, age bracket=test2+, duration=301, description=bla bla test2
+21:32:17.131 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=7, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:32:17.131 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 7
+21:32:17.152 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 7
+21:32:17.162 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=8, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:32:17.162 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 8
+21:32:17.172 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 8
+21:32:17.182 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 8
+21:32:17.192 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=9, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:32:17.192 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 9
+21:32:17.192 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 9
+21:32:17.192 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=10, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:32:17.192 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 10
+21:32:17.192 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 10
+21:36:55.334 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=11, title=MovieForTest2, age bracket=test2+, duration=301, description=bla bla test2
+21:36:55.344 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=12, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:36:55.344 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 12
+21:36:55.373 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 12
+21:36:55.376 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=13, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:36:55.377 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 13
+21:36:55.398 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 13
+21:36:55.398 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 13
+21:36:55.408 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=14, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:36:55.408 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 14
+21:36:55.408 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 14
+21:36:55.418 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=15, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:36:55.418 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 15
+21:36:55.418 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 15
+21:45:00.019 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=16, title=MovieForTest2, age bracket=test2+, duration=301, description=bla bla test2
+21:47:01.640 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=17, title=MovieForTest1, age bracket=test1+, duration=300, description=bla bla test1
+21:47:01.650 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=18, title=MovieForTest2, age bracket=test2+, duration=301, description=bla bla test2
+21:47:01.650 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Save new movies from array
+21:47:01.650 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 17
+21:47:01.661 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 18
+21:47:01.671 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 17
+21:47:01.671 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 18
+21:47:01.681 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=19, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:47:01.681 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 19
+21:47:01.701 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 19
+21:47:01.701 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=20, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:47:01.701 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 20
+21:47:01.711 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 20
+21:47:01.711 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 20
+21:47:01.721 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=21, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:47:01.721 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 21
+21:47:01.721 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 21
+21:47:01.721 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new movie with id=22, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+21:47:01.731 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete movie with id= 22
+21:47:01.731 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 22
+23:35:39.701 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=8, name=Test1, 
+23:35:39.704 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=9, name=Test2, 
+23:35:39.705 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Save new movies from array
+23:35:39.705 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 8
+23:35:39.716 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 9
+23:35:39.721 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 8
+23:35:39.724 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 9
+23:35:39.727 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=10, name=Test, 
+23:35:39.728 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 10
+23:35:39.731 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 10
+23:35:39.734 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=11, name=Test, 
+23:35:39.734 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 11
+23:35:39.736 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 11
+23:35:39.750 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=12, name=Test, 
+23:35:39.750 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 12
+23:35:39.753 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 12
+23:35:39.756 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=13, name=Test, 
+23:35:39.757 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 13
+23:35:39.758 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 13
+23:45:29.777 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=14, name=Test1, 
+23:45:29.781 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=15, name=Test2, 
+23:45:29.782 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Save new movies from array
+23:45:29.782 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 14
+23:45:29.794 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 15
+23:45:29.804 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 14
+23:45:29.806 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 15
+23:45:29.810 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=16, name=Test, 
+23:45:29.811 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 16
+23:45:29.814 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 16
+23:45:29.817 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=17, name=Test, 
+23:45:29.817 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 17
+23:45:29.822 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 17
+23:45:29.826 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 17
+23:45:29.828 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=18, name=Test, 
+23:45:29.829 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 18
+23:45:29.832 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 18
+23:45:29.835 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=19, name=Test, 
+23:45:29.837 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 19
+23:45:29.838 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 19
