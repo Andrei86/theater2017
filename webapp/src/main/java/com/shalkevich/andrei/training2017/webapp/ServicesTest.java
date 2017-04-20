@@ -14,6 +14,7 @@ import com.shalkevich.andrei.training2017.dao.impl.db.IMovieDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.MovieFilter;
 import com.shalkevich.andrei.training2017.dao.impl.db.filter.SeanceWithAllDataFilter;
 import com.shalkevich.andrei.training2017.datamodel.Customer;
 import com.shalkevich.andrei.training2017.datamodel.Genre;
@@ -22,6 +23,7 @@ import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
 import com.shalkevich.andrei.training2017.datamodel.Ticket;
 import com.shalkevich.andrei.training2017.datamodel.customData.Status;
+import com.shalkevich.andrei.training2017.services.IMovieService;
 import com.shalkevich.andrei.training2017.services.IMovieTheaterService;
 import com.shalkevich.andrei.training2017.services.ISeanceService;
 
@@ -33,7 +35,7 @@ public class ServicesTest {
 		
 		//IMovieTheaterService daoTheater = context.getBean(IMovieTheaterService.class);
 		
-		IMovieTheaterDao dao = context.getBean(IMovieTheaterDao.class);
+		IMovieService service = context.getBean(IMovieService.class);
 		//ISeanceService service1 = context.getBean(ISeanceService.class);
 		//ITicketDao dao = context.getBean(ITicketDao.class);
 		//IMovieDao dao = context.getBean(IMovieDao.class);
@@ -43,7 +45,7 @@ public class ServicesTest {
 		//SeanceWithAllDataFilter f = new SeanceWithAllDataFilter();
 		
 		//f.setMovieTitle("Gladiator");
-		MovieTheater t = new MovieTheater();
+		//MovieTheater t = new MovieTheater();
 		
 		/*t.setName("New");
 		t.setCity("City");
@@ -55,9 +57,10 @@ public class ServicesTest {
 		//Boolean  isActive = true;
 		//service.get(345);
 		
-		 dao.insert(t);
-		
-		
+		 //System.out.println(dao.getByDateAndCitySoon("Grodno", Date.valueOf("2017-03-30"), Date.valueOf("2017-04-01")));
+		//MovieFilter f = new MovieFilter();
+		//f.setCity("Minsk");
+		System.out.println(service);
 	}
 
 }

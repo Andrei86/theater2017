@@ -8,7 +8,7 @@ import org.springframework.util.Assert;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 
-public abstract class CrudTest<T extends IGenericService<T>> extends AbstractTest{
+public abstract class CrudTest<T extends IGenericService<T>> extends AbstractTest{// сделать тесты общими
 	
 	 protected T testObject;
      

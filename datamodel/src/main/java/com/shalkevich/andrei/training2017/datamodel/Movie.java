@@ -45,7 +45,7 @@ public class Movie {
 	public boolean equals(Object obj) {
 		
 		if(this == obj) return true;
-		if(!(obj instanceof MovieTheater)) return false;
+		if(!(obj instanceof Movie)) return false;
 		
 		Movie m = (Movie) obj;
 		

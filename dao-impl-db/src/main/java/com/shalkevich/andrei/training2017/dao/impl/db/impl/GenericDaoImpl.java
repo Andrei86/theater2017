@@ -19,9 +19,9 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.IGenericDao;
-import com.shalkevich.andrei.training2017.datamodel.Movie;
 
 public abstract class GenericDaoImpl<T> implements IGenericDao<T> {
+
 
 
 	@Inject
@@ -38,13 +38,28 @@ public abstract class GenericDaoImpl<T> implements IGenericDao<T> {
 	}
 	
 	@Override
+	public List<T> getAll() {
+		try
+		{
+		
+		List<T> list = jdbcTemplate.query("select * from " + type.getSimpleName().toLowerCase(),
+					new BeanPropertyRowMapper<T>(type));
+		
+		return list;
+		
+		}catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	@Override
 	public void delete(Integer id) // общий delete метод
 	{
 		jdbcTemplate.update("delete from " + type.getSimpleName().toLowerCase() + " where id=" + id);
 		
 	}
 	
-	public String getSqlInsertQuery()
+	public String getSqlInsertQuery()// пока не используется
 	{
 		String INSERT_SQL = "insert into " + type.getSimpleName().toLowerCase() + " (";// + "title, age_bracket, duration) values(?, ?, ?)";
 		
@@ -80,7 +95,7 @@ public abstract class GenericDaoImpl<T> implements IGenericDao<T> {
 	}
 	
 	
-	public String getSqlUpdateQuery()
+	public String getSqlUpdateQuery() // пока не используется
 	{
 		String UPDATE_SQL = "update " + type.getSimpleName().toLowerCase() + " set ";// + " movie_theater_id = ?, movie_id = ?, date = ?, time = ? where id = " + entity.getId();
 		

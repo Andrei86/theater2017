@@ -22,7 +22,8 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 	public IMovieTheaterDao movieTheaterDao;
 	
 	@Override
-	public MovieTheater get(Integer id) {
+	public MovieTheater get(Integer id) throws NullPointerException
+	{
 		
 		if(id == null)
 		{
@@ -65,9 +66,14 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 	@Override
 	public List<MovieTheater> getAll(String city) {
 		
+		LOGGER.info("Get all movietheaters with city= " + city);
+		
 		//if user - usually user
 			//return movieTheaterDao.getAllActiveByCity(city);
 		//else
+		if(city == null)
+			return movieTheaterDao.getAll();
+		
 			return movieTheaterDao.getAllByCity(city);
 	}
 

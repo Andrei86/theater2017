@@ -12,6 +12,6 @@ public interface IGenericDao<T> {
 	
 	void delete(Integer id);
 	
-//	List<T> getAll(Integer id);
+	List<T> getAll();
 
 }

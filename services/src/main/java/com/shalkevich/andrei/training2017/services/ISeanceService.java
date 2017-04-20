@@ -8,22 +8,22 @@ import org.springframework.transaction.annotation.Transactional;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
 import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 
-public interface ISeanceService {
+public interface ISeanceService extends IGenericService<Seance>{
 	
-	Seance get(Integer id);
+	/*Seance get(Integer id);*/
 	
 	List <SeanceWithAllData> getByTheaterIdAndDate(Integer id, Date date);
 	
 	List <SeanceWithAllData> getByMovieIdCityDate(Integer id, String city, Date date);
 
-    @Transactional
+    /*@Transactional
     void save(Seance seance);
 
     @Transactional
     void saveMultiple(Seance... seance);
 
     @Transactional
-    void delete(Integer id);
+    void delete(Integer id);*/
     
     
     

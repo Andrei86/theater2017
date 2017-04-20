@@ -1,69 +1,41 @@
 package com.shalkevich.andrei.training2017.services;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
+import com.shalkevich.andrei.training2017.datamodel.Movie;
 
-
-public class MovieTheaterServiceTest extends AbstractTest{
+public class MovieServiceTest extends AbstractTest{
 	
 	@Inject
-	IMovieTheaterService tService;
-	
-	/*public static MovieTheater theater1, theater2, theater3;
-	
-	@BeforeClass
-	public static void createTheaterObjects()
-	{
-		theater1 = new MovieTheater();
-		theater1.setName("GomelKino");
-		theater1.setCity("Gomel");
-		theater1.setAddress("ul. Lermontova, 3");
-		theater1.setIsActive(false);
-		
-		theater2 = new MovieTheater();
-		theater2.setName("Mozyr");
-		theater2.setCity("MozyrKino");
-		theater2.setAddress("ul. Lenina, 7");
-		theater2.setIsActive(true);
-		
-		theater3 = new MovieTheater();
-		theater3.setName("Orsha");
-		theater3.setCity("OrshaKino");
-		theater3.setAddress("ul. Centralnaya, 8");
-		theater3.setIsActive(true);
-	}*/
+	IMovieService mService;
 	
 	@Test
 	public void createTest()
 	{
-		MovieTheater theater1 = new MovieTheater();
-		theater1.setName("GomelKino");
-		theater1.setCity("Gomel");
-		theater1.setAddress("ul. Lermontova, 3");
-		theater1.setIsActive(false);
+		Movie movie1 = new Movie();
+		movie1.setTitle("MovieForTest");
+		movie1.setAgeBracket("test+");
+		movie1.setDuration(300);
+		movie1.setDescription("bla bla test");
 		
-		tService.save(theater1);
+		System.out.println(movie1);
+		mService.save(movie1);
 		
-		Integer savedTheaterId = theater1.getId();
+		Integer savedMovieId = movie1.getId();
 		
-		MovieTheater theaterFromDB = tService.get(savedTheaterId);
+		Movie movieFromDB = mService.get(savedMovieId);
 		
-		Assert.notNull(theaterFromDB, "movie theater must be saved");
+		//Assert.notNull(theaterFromDB, "movie theater must be saved");
 		
-		Assert.isTrue(theaterFromDB.equals(theater1), "objects must be equal");
+		Assert.isTrue(movieFromDB.equals(movie1), "objects must be equal");
 		
-		tService.delete(theater1.getId());
+		mService.delete(movie1.getId());
 	}
 	
-	@Test
+	/*@Test
 	public void updateTest()
 	{
 
@@ -175,7 +147,7 @@ public class MovieTheaterServiceTest extends AbstractTest{
 		Assert.isTrue(list1.size() == (list.size() + 1), "numbers must be equal");
 		
 		
-		/*MovieTheater theater2 = new MovieTheater();
+		MovieTheater theater2 = new MovieTheater();
 		theater2.setName("GorodTheater2");
 		theater2.setCity("Gorod");
 		theater2.setAddress("ul. kostushko");
@@ -185,13 +157,13 @@ public class MovieTheaterServiceTest extends AbstractTest{
 		theater3.setName("GorodTheater3");
 		theater3.setCity("Gorod");
 		theater3.setAddress("ul. Centralnaya");
-		theater3.setIsActive(true);*/
+		theater3.setIsActive(true);
 		
 		//tService.save(theater1);
-		/*tService.save(theater2);
-		tService.save(theater3);*/
+		tService.save(theater2);
+		tService.save(theater3);
 		
-		/*String gorod = theater1.getCity();
+		String gorod = theater1.getCity();
 		Boolean isActive = null;
 		
 		Assert.isTrue(tService.getAll(gorod, isActive).size() == 3, "number of movietheaters must be 3");
@@ -200,9 +172,9 @@ public class MovieTheaterServiceTest extends AbstractTest{
 		Assert.isTrue(tService.getAll(gorod, isActive).size() == 0, "number of movietheaters must be 0");
 		
 		tService.delete(theater1.getId());
-		tService.delete(theater2.getId());*/
+		tService.delete(theater2.getId());
 		tService.delete(theater1.getId());
 	}
+*/
 
-	
 }
