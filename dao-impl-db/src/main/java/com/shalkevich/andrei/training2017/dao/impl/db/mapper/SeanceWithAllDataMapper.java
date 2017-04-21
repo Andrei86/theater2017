@@ -32,7 +32,7 @@ public final class SeanceWithAllDataMapper implements RowMapper<SeanceWithAllDat
 		Movie movie = new Movie();
 		movie.setId(rs.getInt("id"));
 		movie.setTitle(rs.getString("title"));
-		movie.setAgeBracket(rs.getString("agebracket"));
+		movie.setAgeBracket(rs.getString("age_bracket"));
 		movie.setDuration(rs.getInt("duration"));
 		
 		SeanceWithAllData seanceWithAllData = new SeanceWithAllData();

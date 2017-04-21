@@ -27,6 +27,14 @@ public class SeanceDaoImpl extends GenericDaoImpl<Seance> implements ISeanceDao{
 
 	@Inject
 	public JdbcTemplate jdbcTemplate;
+	
+	
+
+	@Override
+	public List<Seance> getAll() { // запретить это метод для сеансов!!
+		// TODO Auto-generated method stub
+		return super.getAll();
+	}
 
 	@Override
 	public Seance insert(Seance entity) {

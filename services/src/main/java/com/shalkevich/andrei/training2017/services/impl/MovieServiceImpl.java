@@ -15,14 +15,13 @@ import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.exception.DaoException;
 import com.shalkevich.andrei.training2017.dao.impl.db.filter.MovieFilter;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
-import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.services.IMovieService;
 
 
 @Service
 public class MovieServiceImpl implements IMovieService{
 
-private static final Logger LOGGER = LoggerFactory.getLogger(MovieTheaterServiceImpl.class);
+private static final Logger LOGGER = LoggerFactory.getLogger(MovieServiceImpl.class);
 	
 	@Inject
 	public IMovieDao movieDao;

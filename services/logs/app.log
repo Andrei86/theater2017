@@ -271,3 +271,60 @@
 23:45:29.835 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Insert new genre with id=19, name=Test, 
 23:45:29.837 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Delete genre with id= 19
 23:45:29.838 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get genre with {id} = 19
+14:01:00.377 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=5, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:01:00.378 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 5
+14:06:36.737 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=6, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:06:36.738 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 6
+14:07:21.520 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=7, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:07:21.534 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 7
+14:09:28.713 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=8, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:09:28.714 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 8
+14:14:00.196 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Insert new movie with id=10, title=MovieForTest1, age bracket=test1+, duration=300, description=bla bla test1
+14:14:00.210 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Insert new movie with id=11, title=MovieForTest2, age bracket=test2+, duration=301, description=bla bla test2
+14:14:00.213 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Save new movies from array
+14:14:00.214 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Get movie with {id} = 10
+14:14:00.234 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Get movie with {id} = 11
+14:14:00.293 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Delete movie with id= 10
+14:14:00.321 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Delete movie with id= 11
+14:14:00.340 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Insert new movie with id=12, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+14:14:00.340 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Get movie with {id} = 12
+14:14:00.357 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Delete movie with id= 12
+14:14:00.373 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Insert new movie with id=13, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+14:14:00.374 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Get movie with {id} = 13
+14:14:00.407 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Get movie with {id} = 13
+14:14:00.431 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Delete movie with id= 13
+14:14:00.448 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Insert new movie with id=14, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+14:14:00.448 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Get movie with {id} = 14
+14:14:00.466 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Delete movie with id= 14
+14:14:00.483 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Insert new movie with id=15, title=MovieForTest, age bracket=test+, duration=300, description=bla bla test
+14:14:00.523 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Delete movie with id= 15
+14:14:00.523 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieServiceImpl - Get movie with {id} = 15
+14:15:46.988 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=9, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:15:46.989 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 9
+14:20:13.353 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=10, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:20:13.354 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 10
+14:23:32.300 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=11, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:23:32.301 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 11
+14:23:32.382 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 11
+14:23:44.351 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=12, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:23:44.352 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 12
+14:23:44.380 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 12
+14:29:56.733 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=13, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:29:56.735 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 13
+14:29:56.767 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 13
+14:29:56.783 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=14, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:29:56.783 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 14
+14:29:56.797 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 14
+14:36:22.825 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=15, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:36:22.827 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 15
+14:36:22.851 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 15
+14:36:22.862 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=16, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+14:36:22.862 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 16
+14:36:22.873 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 16
+15:05:15.397 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=17, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+15:05:15.398 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 17
+15:05:15.422 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 17
+15:05:15.433 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 17
+15:05:15.437 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=18, login=LoginTest, firstName=fNameTest, lastName=lNameTest, eMail=@mail
+15:05:15.438 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Get customer with {id} = 18
+15:05:15.441 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 18

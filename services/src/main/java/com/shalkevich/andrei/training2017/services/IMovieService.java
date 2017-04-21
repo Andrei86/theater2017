@@ -11,21 +11,6 @@ import com.shalkevich.andrei.training2017.datamodel.Movie;
 
 public interface IMovieService extends IGenericService<Movie>{ // сделал для того чтобы
 	
-	/*Movie get(Integer id);
-
-    @Transactional
-    void save(Movie movie);
-
-    @Transactional
-    void saveMultiple(Movie... movie);
-
-    @Transactional
-    void delete(Integer id);
-    */
-	
-	
-	
 	List<Movie> search(MovieFilter filter);
     
-
 }

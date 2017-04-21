@@ -34,6 +34,12 @@ public class MovieFilter {
 		this.date2 = date2;
 	}
 	
+	public Boolean isEmpty()
+	{
+		return city == null && date1 == null &&
+				date2 == null;
+	}
+	
 	public String cityFilterResult()
 	{
 		

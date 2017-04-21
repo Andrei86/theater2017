@@ -66,7 +66,7 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 	@Override
 	public List<MovieTheater> getAll(String city) {
 		
-		LOGGER.info("Get all movietheaters with city= " + city);
+		LOGGER.info("Get all movietheaters in city= " + city);
 		
 		//if user - usually user
 			//return movieTheaterDao.getAllActiveByCity(city);

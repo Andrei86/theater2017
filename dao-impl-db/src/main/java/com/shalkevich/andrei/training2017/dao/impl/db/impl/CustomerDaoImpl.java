@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -23,6 +24,21 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements ICustom
 	@Inject
 	JdbcTemplate jdbcTemplate;
 	
+	
+	@Override
+	public Customer getByLogin(String login) {// login мб null, невалидное значение (ну это при апдейте)
+		
+		try
+		{
+		return jdbcTemplate.queryForObject("select * from customer where login = ?", new Object[]{login}, 
+				new BeanPropertyRowMapper<Customer>(Customer.class));
+		}
+		catch(EmptyResultDataAccessException e)
+		{
+			return null;
+		}
+	}
+
 	@Override
 	public Customer insert(Customer entity) {
 		final String INSERT_SQL = "insert into customer (login, password, first_name, last_name, e_mail) "
@@ -59,7 +75,7 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements ICustom
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 	                PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);
 	                ps.setString(1, entity.getLogin());
-	                ps.setString(2, entity.getFirstName());
+	                ps.setString(2, entity.getFirstName()); // пароль не обновляем
 	                ps.setString(3, entity.getLastName());
 	                ps.setString(4, entity.geteMail());
 	                return ps;
