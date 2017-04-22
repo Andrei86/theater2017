@@ -13,6 +13,7 @@ public class TicketWithAllData {
 	private Customer customer;
 	private MovieTheater movieTheater;
 	private Movie movie;
+	
 	public Ticket getTicket() {
 		return ticket;
 	}
@@ -43,13 +44,37 @@ public class TicketWithAllData {
 	public void setMovie(Movie movie) {
 		this.movie = movie;
 	}
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj) return true;
+		if(!(obj instanceof TicketWithAllData)) return false;
+		
+		TicketWithAllData tAD = (TicketWithAllData) obj;
+		
+		return ticket.equals(tAD.ticket) && seance.equals(tAD.seance) && customer.equals(tAD.customer)
+				&& movieTheater.equals(tAD.movieTheater) && movie.equals(tAD.movie);
+	}
+	@Override
+	public int hashCode() {
+		
+		Integer code = 17;
+        code = 31 * code + ticket.hashCode();
+        code = 31 * code + seance.hashCode();
+        code = 31 * code + customer.hashCode();
+        code = 31 * code + movieTheater.hashCode();
+        code = 31 * code + movie.hashCode();
+        
+        return code;
+	}
 	@Override
 	public String toString() {
 		
 		return "ID " + ticket.getId() + " cost " + ticket.getCost() + " row " + ticket.getRow() + 
 				" place " + ticket.getPlace() + " customer " + customer.getFirstName() + " "
 				+ customer.getLastName() + " movie_theater " + movieTheater.getName()
-				+ " movie "+ movie.getTitle(); 
+				+ " movie "+ movie.getTitle() + " date: " + seance.getDate() + seance.getTime(); 
 		
 	}
 	

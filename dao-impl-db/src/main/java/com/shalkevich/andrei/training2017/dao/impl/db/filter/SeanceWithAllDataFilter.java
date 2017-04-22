@@ -2,11 +2,11 @@ package com.shalkevich.andrei.training2017.dao.impl.db.filter;
 
 import java.sql.Date;
 
-public class SeanceWithAllDataFilter {
+public class SeanceWithAllDataFilter { // могут быть вопросы
 	
 	private String city;
 	
-	private String movieTheater;
+	private String movieTheaterName;
 	
 	private Date date;
 	
@@ -14,7 +14,7 @@ public class SeanceWithAllDataFilter {
 	
 	public Boolean isEmpty()
 	{
-		return city == null && movieTheater == null &&
+		return city == null && movieTheaterName == null &&
 				date == null && movieTitle == null;
 	}
 
@@ -27,11 +27,11 @@ public class SeanceWithAllDataFilter {
 	}
 
 	public String getMovieTheater() {
-		return movieTheater;
+		return movieTheaterName;
 	}
 
 	public void setMovieTheater(String movieTheater) {
-		this.movieTheater = movieTheater;
+		this.movieTheaterName = movieTheater;
 	}
 
 	public Date getDate() {
@@ -65,7 +65,7 @@ public class SeanceWithAllDataFilter {
 	public String dateFilterResult()
 	{
 		
-			return (getDate()!=null) ? " AND s.date = '" +getDate().toString() + "'": null;
+			return (getDate()!=null) ? " AND s.date = '" + getDate().toString() + "'": null;
 	}
 	
 	public String movieFilterResult()

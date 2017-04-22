@@ -2,55 +2,72 @@ package com.shalkevich.andrei.training2017.services;
 
 import javax.inject.Inject;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
 import com.shalkevich.andrei.training2017.datamodel.Customer;
-import com.shalkevich.andrei.training2017.datamodel.Movie;
 
 public class CustomerServiceTest extends AbstractTest{
 	
 	@Inject
 	ICustomerService cService;
 	
+	public static Customer c1, c2;
+	
+	@BeforeClass
+	public static void createEntities()
+	{
+		
+		c1 = new Customer();
+		c1.setLogin("LoginTest1");
+		c1.setPassword("passTest1");
+		c1.setFirstName("fNameTest1");
+		c1.setLastName("lNameTest1");
+		c1.seteMail("@mail1");
+		
+		c2 = new Customer();
+		c2.setLogin("LoginTest2");
+		c2.setPassword("passTest2");
+		c2.setFirstName("fNameTest2");
+		c2.setLastName("lNameTest2");
+		c2.seteMail("@mail2");
+			
+	}
+	
+	@Before
+	public void idToNull()
+	{
+		c1.setId(null);
+		c2.setId(null);
+	}
+	
 	@Test
 	public void createTest()
 	{
-		Customer customer = new Customer();
-		customer.setLogin("LoginTest");
-		customer.setPassword("passTest");
-		customer.setFirstName("fNameTest");;
-		customer.setLastName("lNameTest");
-		customer.seteMail("@mail");
+		System.out.println(c1.getId());
+		cService.save(c1);
 		
-		cService.save(customer);
-		
-		Integer savedCustomerId = customer.getId();
+		Integer savedCustomerId = c1.getId();
 		
 		Customer customerFromDB = cService.get(savedCustomerId);
 		
-		Assert.isTrue(customerFromDB.equals(customer), "objects must be equal");
+		Assert.isTrue(customerFromDB.equals(c1), "objects must be equal");
 		
-		cService.delete(customer.getId());
+		cService.delete(c1.getId());
 	}
 	
 	@Test
 	public void updateTest()
 	{
-
-		Customer customer = new Customer();
-		customer.setLogin("LoginTest");
-		customer.setPassword("passTest");
-		customer.setFirstName("fNameTest");;
-		customer.setLastName("lNameTest");
-		customer.seteMail("@mail");
 		
-		cService.save(customer);
+		System.out.println(c1.getId());
+		cService.save(c1);
 		
-		Customer updatedCustomer = cService.get(customer.getId());
+		Customer updatedCustomer = cService.get(c1.getId());
 		
 		updatedCustomer.setLogin("LoginTestUpd");
-		/*updatedCustomer.setPassword("passTestUpd");*/
 		updatedCustomer.setFirstName("fNameTestUpd");
 		updatedCustomer.setLastName("lNameTestUpd");
 		updatedCustomer.seteMail("@mailUpd");
@@ -59,74 +76,43 @@ public class CustomerServiceTest extends AbstractTest{
 		
 		Assert.isTrue(updatedCustomer.equals(cService.get(updatedCustomer.getId())), "objects must be equal");
 		
-		cService.delete(updatedCustomer.getId());
+		cService.delete(c1.getId());
 		
 	}
 	
-	/*@Test
+	@Test
 	public void readTest()
 	{
-		Movie movie1 = new Movie();
-		movie1.setTitle("MovieForTest");
-		movie1.setAgeBracket("test+");
-		movie1.setDuration(300);
-		movie1.setDescription("bla bla test");	
 		
-		mService.save(movie1);
+		cService.save(c1);
 		
-		Integer movieFromDBId = movie1.getId();
-		Movie movieFromDB = mService.get(movieFromDBId);
-		Assert.isTrue(movieFromDB.equals(movie1), "objects must be equal");
+		Integer customerFromDBId = c1.getId();
+		Customer customerFromDB = cService.get(customerFromDBId);
+		Assert.isTrue(customerFromDB.equals(c1), "objects must be equal");
 		
-		mService.delete(movie1.getId());
+		cService.delete(c1.getId());
 	}
 	
 	@Test
 	public void deleteTest()
 	{
 		
-		Movie movie1 = new Movie();
-		movie1.setTitle("MovieForTest");
-		movie1.setAgeBracket("test+");
-		movie1.setDuration(300);
-		movie1.setDescription("bla bla test");	
+		cService.save(c1);
 		
-		mService.save(movie1);
+		Integer customerFromDBId = c1.getId();
 		
-		Integer movieFromDBId = movie1.getId();
+		cService.delete(customerFromDBId);
 		
-		mService.delete(movieFromDBId);
-		
-		Movie movieFromDB = mService.get(movieFromDBId);
+		Customer customerFromDB = cService.get(customerFromDBId);
 		
 		
-		Assert.isNull(movieFromDB, "returned after deleting object must be null");
+		Assert.isNull(customerFromDB, "returned after deleting object must be null");
 		
 	}
 	
-	@Test
-	public void saveMultipleTest()
-	{
-		Movie movie1 = new Movie();
-		movie1.setTitle("MovieForTest1");
-		movie1.setAgeBracket("test1+");
-		movie1.setDuration(300);
-		movie1.setDescription("bla bla test1");
-		
-		Movie movie2 = new Movie();
-		movie2.setTitle("MovieForTest2");
-		movie2.setAgeBracket("test2+");
-		movie2.setDuration(301);
-		movie2.setDescription("bla bla test2");
-		
-		mService.saveMultiple(movie1, movie2);
-		
-		Assert.isTrue(mService.get(movie1.getId()).equals(movie1), "objects must be equal");
-		Assert.isTrue(mService.get(movie2.getId()).equals(movie2), "objects must be equal");
-		
-		mService.delete(movie1.getId());
-		mService.delete(movie2.getId());
-		
-	}*/
+	@Test(expected = UnsupportedOperationException.class)
+    public void testUnsupportedMethod() {
+        cService.saveMultiple(c1, c2);
+    }
 
 }

@@ -12,6 +12,6 @@ public interface IGenericDao<T> {
 	
 	void delete(Integer id);
 	
-	List<T> getAll();// запретить для сеанса
+	List<T> getAll();// запретить для сеанса и ввобще не надо такого метода а serch с пагинацией
 
 }

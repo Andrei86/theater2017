@@ -18,10 +18,13 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.TicketWithAllDataFilter;
+import com.shalkevich.andrei.training2017.dao.impl.db.mapper.SeanceWithAllDataMapper;
 import com.shalkevich.andrei.training2017.dao.impl.db.mapper.TicketCostSumMapper;
 import com.shalkevich.andrei.training2017.dao.impl.db.mapper.TicketWithAllDataMapper;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Ticket;
+import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 import com.shalkevich.andrei.training2017.datamodel.customData.Status;
 import com.shalkevich.andrei.training2017.datamodel.customData.TicketCostSum;
 import com.shalkevich.andrei.training2017.datamodel.customData.TicketWithAllData;
@@ -32,6 +35,32 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 	@Inject
 	JdbcTemplate jdbcTemplate;
 	
+	
+	
+	@Override
+	public List<TicketWithAllData> search(TicketWithAllDataFilter filter) {
+		String sql = "select * from seance s join movietheater m_t on s.movietheater_id = m_t.id "
+				+ "join movie m on s.movie_id = m.id where m_t.is_active = true ";
+		
+		if(filter.getCity()!=null)
+		sql += filter.cityFilterResult();
+		
+		if(filter.getMovieTheater()!=null)
+			sql += filter.movieTheaterFilterResult();
+		
+		if(filter.getDate()!=null)
+			sql += filter.dateFilterResult();
+		
+		if(filter.getMovieTitle()!=null)
+			sql += filter.movieFilterResult();
+		
+		//System.out.println(sql);
+		
+		List<TicketWithAllData> list = jdbcTemplate.query(sql, new TicketWithAllDataMapper());
+		
+		return list;
+	}
+
 	@Override
 	public void deleteAll(Integer seanceId) {
 		
@@ -92,7 +121,7 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 		
 	}
 
-	@Override
+	/*@Override
 	public List<TicketWithAllData> getByCustomerIdWithInterval(Integer id, Date date1, Date date2) {
 		
 		List<TicketWithAllData> list = jdbcTemplate.query("select * from ticket t join seance s on t.seance_id = s.id "
@@ -144,6 +173,6 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 				new TicketCostSumMapper());
 		
 		return instance;
-	}
+	}*/
 
 }

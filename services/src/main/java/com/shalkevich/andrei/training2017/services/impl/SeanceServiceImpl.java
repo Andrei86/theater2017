@@ -94,8 +94,8 @@ public class SeanceServiceImpl implements ISeanceService{
 		
 		
 		LOGGER.info("Search seance with all data by filter");
-		if(filter.isEmpty())
-			System.out.println("Please add criteries fo search");
+		/*if(filter.isEmpty())
+			System.out.println("Please add criteries fo search");*/ // сделать в веб-слое
 		
 		List<SeanceWithAllData> list = seanceDao.search(filter);
 		return list;

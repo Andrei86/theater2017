@@ -11,7 +11,7 @@ public interface IGenericService<T> {
     void save(T theater);
 
     @Transactional
-    void saveMultiple(T ... obj); // для юзера не работает
+    void saveMultiple(T ... obj); // не должен работать для юзера, т.к. никто не иожет сохранить пачку юзеров
 
     @Transactional
     void delete(Integer id);

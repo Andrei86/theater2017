@@ -63,18 +63,18 @@ public class CustomerServiceImpl implements ICustomerService{
 	}
 
 	@Override
-	public Customer LogIn(String login, String pass) {
+	public Customer LogIn(String login, String pass) { // ждем авторизацию
 		
 		Customer loggedCustomer = customerDao.getByLogin(login);
 		
 		if(loggedCustomer == null)
 		{
-			System.out.println("You must insert correct login and password or register");
+			LOGGER.info("You are insert incorrect login and password or register");
 		}
 		else
 		{
 			if(!loggedCustomer.getPassword().equals(pass))
-				System.out.println("You insert incorrect password");
+				LOGGER.info("You insert incorrect password");
 			else
 			{
 				LOGGER.info("User logged with login " + loggedCustomer.getLogin());
@@ -87,7 +87,7 @@ public class CustomerServiceImpl implements ICustomerService{
 	}
 
 	@Override
-	public void Registration(Customer customer) {
+	public void Registration(Customer customer) { // ждем регистрацию
 		
 		if(customer.getLogin() != null && customer.getPassword() != null && customer.getFirstName() != null
 				&& customer.getLastName() != null && customer.geteMail() != null)

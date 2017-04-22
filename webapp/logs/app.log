@@ -1,8 +1,0 @@
-12:12:57.261 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Get movie with {id} = 2
-23:04:57.641 [main] INFO  com.shalkevich.andrei.training2017.services.impl.MovieTheaterServiceImpl - Read genres of movie with id= 1
-12:58:06.296 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - User logged with login Chuknorris
-13:01:58.366 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - User logged with login Chuknorris
-13:06:52.943 [main] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Insert new customer with id=4, login=Login, firstName=fName, lastName=lName, eMail=@mail
-16:45:20.324 [main] INFO  com.shalkevich.andrei.training2017.services.impl.SeanceServiceImpl - Search seance with all data by filter
-16:52:57.514 [main] INFO  com.shalkevich.andrei.training2017.services.impl.SeanceServiceImpl - Search seance with all data by filter
-16:54:16.003 [main] INFO  com.shalkevich.andrei.training2017.services.impl.SeanceServiceImpl - Search seance with all data by filter

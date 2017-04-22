@@ -132,7 +132,7 @@ public class SeanceDaoImpl extends GenericDaoImpl<Seance> implements ISeanceDao{
 		if(filter.getMovieTitle()!=null)
 			sql += filter.movieFilterResult();
 		
-		System.out.println(sql);
+		//System.out.println(sql);
 		
 		List<SeanceWithAllData> list = jdbcTemplate.query(sql, new SeanceWithAllDataMapper());
 		

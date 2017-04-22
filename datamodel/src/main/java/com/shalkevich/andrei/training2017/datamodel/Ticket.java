@@ -72,6 +72,35 @@ public class Ticket {
 		this.customerId = customerId;
 	}
 	
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(this == obj) return true;
+		if(!(obj instanceof Ticket)) return false;
+		
+		Ticket t = (Ticket) obj;
+		
+		return id.equals(t.id) && seanceId.equals(t.seanceId) && row.equals(t.row) && place.equals(t.place)
+				&& cost.equals(t.cost) && customerId.equals(t.customerId) 
+				&& purchaseDate.equals(t.purchaseDate) && status.equals(t.status);
+	}
+	@Override
+	public int hashCode() {
+		
+		Integer code = 17;
+        code = 31 * code + id;
+        code = 31 * code + seanceId.hashCode();
+        code = 31 * code + row.hashCode();
+        code = 31 * code + place.hashCode();
+        code = 31 * code + cost.hashCode();
+        code = 31 * code + customerId.hashCode();
+        code = 31 * code + purchaseDate.hashCode();
+        code = 31 * code + status.hashCode();
+        
+        return code;
+	}
 	@Override
 	public String toString() {
 		

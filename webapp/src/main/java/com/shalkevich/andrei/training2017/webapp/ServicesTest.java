@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 
 public class ServicesTest {
@@ -20,8 +21,8 @@ public class ServicesTest {
 		
 		//IMovieTheaterService daoTheater = context.getBean(IMovieTheaterService.class);
 		
-		ISeanceService service = context.getBean(ISeanceService.class);
-		//ISeanceService service1 = context.getBean(ISeanceService.class);
+		//ICustomerService service = context.getBean(ICustomerService.class);
+		ISeanceService service1 = context.getBean(ISeanceService.class);
 		//ITicketDao dao = context.getBean(ITicketDao.class);
 		//IMovieDao dao = context.getBean(IMovieDao.class);
 		//String [] arr = context.getBeanDefinitionNames();
@@ -47,10 +48,14 @@ public class ServicesTest {
 		//f.setCity("Minsk");
 		
 		SeanceWithAllDataFilter f = new SeanceWithAllDataFilter();
-		f.setMovieTitle("Gladiator");
+		f.setDate(Date.valueOf("2017-04-01"));
 		//f.setDate(date);("Gladiator");
-		System.out.println(service.search(f));
 		
+		//System.out.println(Timestamp.valueOf("2017-03-12 18:00:00"));
+		
+		//service.saveMultiple(null, null);
+		
+		System.out.println(service1.search(f));
 		
 	}
 
