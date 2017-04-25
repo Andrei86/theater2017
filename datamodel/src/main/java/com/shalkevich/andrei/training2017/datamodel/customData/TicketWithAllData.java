@@ -6,7 +6,7 @@ import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
 import com.shalkevich.andrei.training2017.datamodel.Ticket;
 
-public class TicketWithAllData {
+public class TicketWithAllData { // нужно
 	
 	private Ticket ticket;
 	private Seance seance;
@@ -72,9 +72,9 @@ public class TicketWithAllData {
 	public String toString() {
 		
 		return "ID " + ticket.getId() + " cost " + ticket.getCost() + " row " + ticket.getRow() + 
-				" place " + ticket.getPlace() + " customer " + customer.getFirstName() + " "
-				+ customer.getLastName() + " movie_theater " + movieTheater.getName()
-				+ " movie "+ movie.getTitle() + " date: " + seance.getDate() + seance.getTime(); 
+				" place " + ticket.getPlace() + " status " + ticket.getStatus() + " purchase date " 
+				+ ticket.getPurchaseDate() +" movietheater " + movieTheater.getName()
+				+ " movie "+ movie.getTitle() + " date: " + seance.getDate() + " time " + seance.getTime(); 
 		
 	}
 	

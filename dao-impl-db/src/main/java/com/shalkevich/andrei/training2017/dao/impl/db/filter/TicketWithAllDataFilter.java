@@ -61,34 +61,34 @@ public class TicketWithAllDataFilter {
 		this.dateTo = dateTo;
 	}
 	
-	public String seanceFilterResult()
+	public String seanceFilterResult() // нужно сделать через StringBuilder, а то опять же говнокод
 	{
 		
-			return (seanceId != null) ? " AND s.seance_id = '" + seanceId + "'": null;
+			return (seanceId != null) ? " seance_id = " + seanceId: "";
 	}
 	
 	public String customerFilterResult()
 	{
 		
-			return (customerId !=null) ? " AND m_t.name = '" + customerId + "'": null;
+			return (customerId !=null) ? " customer_id = " + customerId: "";
 	}
 	
 	public String statusFilterResult()
 	{
 		
-			return (status!=null) ? " AND t.status = '" + status.name() + "'": null;
+			return (status!=null) ? " status = '" + status.name() + "'": "";
 	}
 	
 	public String dateFromFilterResult()
 	{
 		
-			return (dateFrom !=null) ? " AND t.date >= '" + dateFrom.toString() + "'": null;
+			return (dateFrom !=null) ? " date >= '" + dateFrom.toString() + "'": "";
 	}
 	
 	public String dateToFilterResult()
 	{
 		
-			return (dateTo != null) ? " AND t.date <= '" + dateTo.toString() +"'": null;
+			return (dateTo != null) ? " date <= '" + dateTo.toString() +"'": "";
 	}
 	
 }

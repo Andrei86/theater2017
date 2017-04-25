@@ -75,6 +75,4 @@ public class GenreServiceImpl implements IGenreService{
 		return list;
 	}
 	
-	
-
 }

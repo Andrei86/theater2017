@@ -29,12 +29,6 @@ public class SeanceServiceImpl implements ISeanceService{
 	@Inject
 	public ISeanceDao seanceDao;
 	
-	@Inject
-	public IMovieDao movieDao;
-	
-	@Inject
-	public IMovieTheaterDao movieTheaterDao;
-	
 	@Override
 	public Seance get(Integer id) {
 		
@@ -48,9 +42,9 @@ public class SeanceServiceImpl implements ISeanceService{
 		
 		if(seance.getId() == null)
 		{
-			LOGGER.info("Insert new seance with id={}, movietheater_id={}, "
-					+ "movie_id={}, date={}, time={}", seance.getId(),
-					seance.getMovieTheaterId(), seance.getDate(), seance.getTime());
+			LOGGER.info("Insert new seance with movietheater_id={}, "
+					+ "movie_id={}, date={}, time={}",
+					seance.getMovieTheaterId(), seance.getMovieId(),  seance.getDate(), seance.getTime());
 			seanceDao.insert(seance);
 		}
 		else

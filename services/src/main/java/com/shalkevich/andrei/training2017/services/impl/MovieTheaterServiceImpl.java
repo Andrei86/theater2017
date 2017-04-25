@@ -42,7 +42,7 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 			
 			movieTheaterDao.insert(theater);
 			LOGGER.info("Insert new movietheater with theater.id={}, theater.name={}, "
-					+ "theater.city={}, theater.active={}, theater.isActive={}", theater.getId(),
+					+ "theater.city={}, theater.address={}, theater.isActive={}", theater.getId(),
 					theater.getName(), theater.getCity(), theater.getAddress(), theater.getIsActive());
 		}
 		else
@@ -73,7 +73,7 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 		//else
 		if(city == null)
 			return movieTheaterDao.getAll();
-		
+		else
 			return movieTheaterDao.getAllByCity(city);
 	}
 

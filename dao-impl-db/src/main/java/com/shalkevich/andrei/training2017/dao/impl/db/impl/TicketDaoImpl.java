@@ -37,24 +37,39 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 	
 	
 	
+	/*@Override
+	public TicketWithAllData getByTicketId(Integer id) {
+		
+		return jdbcTemplate.queryForObject(" select * from ticket t join seance s on t.seance_id = s.id left join customer c "
+				+ "on t.customer_id = c.id join movietheater m_t on m_t.id = s.movietheater_id "
+				+ "join movie m on s.movie_id = m.id where t.id = " + id, new TicketWithAllDataMapper());
+		
+	}*/
+
 	@Override
-	public List<TicketWithAllData> search(TicketWithAllDataFilter filter) {
-		String sql = "select * from seance s join movietheater m_t on s.movietheater_id = m_t.id "
-				+ "join movie m on s.movie_id = m.id where m_t.is_active = true ";
+	public List<TicketWithAllData> search(TicketWithAllDataFilter filter) { // нужно бросить исключение если фильтр равен null
+		String sql = "select * from ticket t join seance s on t.seance_id = s.id left join customer c "
+				+ "on t.customer_id = c.id join movietheater m_t on m_t.id = s.movietheater_id "
+				+ "join movie m on s.movie_id = m.id ";// пока говнокод
 		
-		if(filter.getCity()!=null)
-		sql += filter.cityFilterResult();
+		/*t.id, t.cost, t.row, t.place, t.status, m_t.name, m.title, s.date, s.time*/
+		String and = " and ";
 		
-		if(filter.getMovieTheater()!=null)
-			sql += filter.movieTheaterFilterResult();
+		String where = " where ";
 		
-		if(filter.getDate()!=null)
-			sql += filter.dateFilterResult();
+		if(filter.getSeanceId()!=null)
+		sql += where + filter.seanceFilterResult();
 		
-		if(filter.getMovieTitle()!=null)
-			sql += filter.movieFilterResult();
+		if(filter.getCustomerId()!=null)
+			sql += ((sql.contains(where)) ? and : where ) + filter.customerFilterResult();
 		
-		//System.out.println(sql);
+		if(filter.getDateFrom()!=null)
+			sql += ((sql.contains(where)) ? and : where ) + filter.dateFromFilterResult();
+		
+		if(filter.getDateTo()!=null)
+			sql += ((sql.contains(where)) ? and : where ) + filter.dateToFilterResult();
+		
+		System.out.println(sql);
 		
 		List<TicketWithAllData> list = jdbcTemplate.query(sql, new TicketWithAllDataMapper());
 		
@@ -85,7 +100,7 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 	                ps.setInt(4, entity.getRow());
 	                ps.setInt(5, entity.getPlace());
 	                ps.setTimestamp(6, entity.getPurchaseDate());
-	                ps.setObject(7, entity.getStatus());
+	                ps.setString(7, entity.getStatus().name());
 	                return ps;
 	            }
 	        }, keyHolder);
@@ -110,11 +125,11 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
                 PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);
                 ps.setInt(1, entity.getSeanceId());
                 ps.setBigDecimal(2, entity.getCost());
-                ps.setInt(3, entity.getCustomerId());
+                ps.setObject(3, entity.getCustomerId());
                 ps.setInt(4, entity.getRow());
                 ps.setInt(5, entity.getPlace());
                 ps.setTimestamp(6, entity.getPurchaseDate());
-                ps.setObject(7, entity.getStatus());
+                ps.setString(7, entity.getStatus().name());
                 return ps;
             }
         });

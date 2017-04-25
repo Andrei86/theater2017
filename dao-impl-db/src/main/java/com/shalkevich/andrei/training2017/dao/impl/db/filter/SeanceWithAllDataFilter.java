@@ -50,27 +50,27 @@ public class SeanceWithAllDataFilter { // могут быть вопросы
 		this.movieTitle = movieTitle;
 	}
 	
-	public String cityFilterResult()
+	public String cityFilterResult() // пока говнокод!
 	{
 		
-			return (getCity()!=null) ? " AND m_t.city = '" + getCity() + "'": null;
+			return (city!=null) ? " AND city = '" + city + "'": "";
 	}
 	
 	public String movieTheaterFilterResult()
 	{
 		
-			return (getMovieTheater()!=null) ? " AND m_t.name = '" + getMovieTheater() + "'": null;
+			return (movieTheaterName!=null) ? " AND name = '" + movieTheaterName + "'": "";
 	}
 	
 	public String dateFilterResult()
 	{
 		
-			return (getDate()!=null) ? " AND s.date = '" + getDate().toString() + "'": null;
+			return (date!=null) ? " AND date = '" + date.toString() + "'": "";
 	}
 	
 	public String movieFilterResult()
 	{
 		
-			return (getMovieTitle()!=null) ? " AND m.title = '" + getMovieTitle() +"'": null;
+			return (movieTitle!=null) ? " AND title = '" + movieTitle +"'": "";
 	}
 }

@@ -19,6 +19,14 @@ public class CustomerServiceImpl implements ICustomerService{
 	ICustomerDao customerDao;
 	
 	@Override
+	public Customer getByLogin(String login) {
+		
+		Customer c = customerDao.getByLogin(login);
+		
+		return c;
+	}
+
+	@Override
 	public Customer get(Integer id) {
 
 		LOGGER.info("Get customer with {id} = " + id);

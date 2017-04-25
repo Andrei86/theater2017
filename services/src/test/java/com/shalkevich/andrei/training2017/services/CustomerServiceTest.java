@@ -44,9 +44,24 @@ public class CustomerServiceTest extends AbstractTest{
 	}
 	
 	@Test
+	public void getByLoginTest()
+	{
+		
+		cService.save(c1);
+		
+		//Integer savedCustomerId = c1.getId();
+		
+		Customer customerFromDB = cService.getByLogin(c1.getLogin());
+		
+		Assert.isTrue(customerFromDB.equals(c1), "objects must be equal");
+		
+		cService.delete(c1.getId());
+	}
+	
+	@Test
 	public void createTest()
 	{
-		System.out.println(c1.getId());
+
 		cService.save(c1);
 		
 		Integer savedCustomerId = c1.getId();

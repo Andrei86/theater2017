@@ -66,9 +66,7 @@ public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements
 		Number key = keyHolder.getKey();
 		entity.setId(key.intValue());
 		
-		
 		return entity;
-		
 	}
 
 	@Override
@@ -89,7 +87,5 @@ public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements
 	        });
 		
 	}
-	
-	
 
 }

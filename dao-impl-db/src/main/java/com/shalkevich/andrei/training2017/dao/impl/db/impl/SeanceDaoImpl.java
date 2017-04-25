@@ -120,19 +120,20 @@ public class SeanceDaoImpl extends GenericDaoImpl<Seance> implements ISeanceDao{
 		String sql = "select * from seance s join movietheater m_t on s.movietheater_id = m_t.id "
 				+ "join movie m on s.movie_id = m.id where m_t.is_active = true ";
 		
-		if(filter.getCity()!=null)
-		sql += filter.cityFilterResult();
+		//if(filter.getCity()!=null)
+		sql += filter.cityFilterResult() + filter.movieTheaterFilterResult() + 
+				filter.dateFilterResult() + filter.movieFilterResult();
 		
-		if(filter.getMovieTheater()!=null)
+		/*if(filter.getMovieTheater()!=null)
 			sql += filter.movieTheaterFilterResult();
 		
 		if(filter.getDate()!=null)
 			sql += filter.dateFilterResult();
 		
 		if(filter.getMovieTitle()!=null)
-			sql += filter.movieFilterResult();
+			sql += filter.movieFilterResult();*/
 		
-		//System.out.println(sql);
+		System.out.println(sql);
 		
 		List<SeanceWithAllData> list = jdbcTemplate.query(sql, new SeanceWithAllDataMapper());
 		

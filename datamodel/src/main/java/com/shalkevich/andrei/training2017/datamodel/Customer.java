@@ -90,7 +90,7 @@ public class Customer {
 	
 	@Override
 	public String toString() {
-		return  "Customer [id= " + id + "]" + " login " + login + " password " + password +
+		return  "Customer [id= " + id + "]" + " login " + login +
 				" first name " + firstName + " last name " + lastName + "Email " + eMail ;
 	}
 	

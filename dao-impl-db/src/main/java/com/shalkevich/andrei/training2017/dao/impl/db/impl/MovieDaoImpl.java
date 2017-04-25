@@ -40,11 +40,11 @@ public class MovieDaoImpl extends GenericDaoImpl<Movie> implements IMovieDao{
 		if(filter.getCity()!=null)
 		sql += filter.cityFilterResult();
 		
-		if(filter.getDate1()!=null)
-			sql += filter.date1FilterResult();
+		if(filter.getDateFrom()!=null)
+			sql += filter.dateFromFilterResult();
 		
-		if(filter.getDate2()!=null)
-			sql += filter.date2FilterResult();
+		if(filter.getDateTo()!=null)
+			sql += filter.dateToFilterResult();
 		
 		
 		//System.out.println(sql);

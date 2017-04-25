@@ -21,7 +21,7 @@ public class TicketWithAllDataMapper implements RowMapper<TicketWithAllData>{
 		
 		Seance seance  = new Seance();
 		seance.setId(rs.getInt("id"));
-		seance.setMovieTheaterId(rs.getInt("movie_theater_id"));
+		seance.setMovieTheaterId(rs.getInt("movietheater_id"));
 		seance.setMovieId(rs.getInt("movie_id"));
 		seance.setDate(rs.getDate("date"));
 		seance.setTime(rs.getTime("time"));
@@ -46,6 +46,7 @@ public class TicketWithAllDataMapper implements RowMapper<TicketWithAllData>{
 		movie.setTitle(rs.getString("title"));
 		movie.setAgeBracket(rs.getString("age_bracket"));
 		movie.setDuration(rs.getInt("duration"));
+		movie.setDescription(rs.getString("description"));
 		
 		Ticket ticket = new Ticket();
 		ticket.setId(rs.getInt("id"));
@@ -59,9 +60,10 @@ public class TicketWithAllDataMapper implements RowMapper<TicketWithAllData>{
 		
 		
 		TicketWithAllData ticketWithAllData = new TicketWithAllData();
+		ticketWithAllData.setSeance(seance);
 		ticketWithAllData.setCustomer(customer);
-		ticketWithAllData.setMovie(movie);
 		ticketWithAllData.setMovieTheater(movieTheater);
+		ticketWithAllData.setMovie(movie);
 		ticketWithAllData.setTicket(ticket);
 		
 		return ticketWithAllData;

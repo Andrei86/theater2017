@@ -1,52 +1,78 @@
 package com.shalkevich.andrei.training2017.services;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.util.List;
+
 import javax.inject.Inject;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.MovieFilter;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
+import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
+import com.shalkevich.andrei.training2017.datamodel.Seance;
 
 public class MovieServiceTest extends AbstractTest{
 	
 	@Inject
 	IMovieService mService;
 	
+	@Inject
+	IMovieTheaterService mtService;
+	
+	@Inject
+	ISeanceService sService;
+	
+	public static Movie m1, m2;
+	
+	@BeforeClass
+	public static void CreateEntities()
+	{
+		m1 = new Movie();
+		m1.setTitle("MovieForTest1");
+		m1.setAgeBracket("test1+");
+		m1.setDuration(300);
+		m1.setDescription("bla bla test1");
+		
+		m2 = new Movie();
+		m2.setTitle("MovieForTest2");
+		m2.setAgeBracket("test2+");
+		m2.setDuration(301);
+		m2.setDescription("bla bla test2");
+	}
+	
+	@Before
+	public void IdToNull()
+	{
+		m1.setId(null);
+		m2.setId(null);
+	}
+	
 	@Test
 	public void createTest()
-	{
-		Movie movie1 = new Movie();
-		movie1.setTitle("MovieForTest");
-		movie1.setAgeBracket("test+");
-		movie1.setDuration(300);
-		movie1.setDescription("bla bla test");
+	{	
+		mService.save(m1);
 		
-		mService.save(movie1);
-		
-		Integer savedMovieId = movie1.getId();
+		Integer savedMovieId = m1.getId();
 		
 		Movie movieFromDB = mService.get(savedMovieId);
 		
-		//Assert.notNull(theaterFromDB, "movie theater must be saved");
+		Assert.isTrue(movieFromDB.equals(m1), "objects must be equal");
 		
-		Assert.isTrue(movieFromDB.equals(movie1), "objects must be equal");
-		
-		mService.delete(movie1.getId());
+		mService.delete(m1.getId());
 	}
 	
 	@Test
 	public void updateTest()
 	{
-
-		Movie movie1 = new Movie();
-		movie1.setTitle("MovieForTest");
-		movie1.setAgeBracket("test+");
-		movie1.setDuration(300);
-		movie1.setDescription("bla bla test");
 		
-		mService.save(movie1);
+		mService.save(m1);
 		
-		Movie updatedMovie = mService.get(movie1.getId());
+		Movie updatedMovie = mService.get(m1.getId());
 		
 		updatedMovie.setTitle("New movie");
 		updatedMovie.setAgeBracket("new age bracket");
@@ -62,40 +88,28 @@ public class MovieServiceTest extends AbstractTest{
 	
 	@Test
 	public void readTest()
-	{
-		Movie movie1 = new Movie();
-		movie1.setTitle("MovieForTest");
-		movie1.setAgeBracket("test+");
-		movie1.setDuration(300);
-		movie1.setDescription("bla bla test");	
+	{	
 		
-		mService.save(movie1);
+		mService.save(m1);
 		
-		Integer movieFromDBId = movie1.getId();
+		Integer movieFromDBId = m1.getId();
 		Movie movieFromDB = mService.get(movieFromDBId);
-		Assert.isTrue(movieFromDB.equals(movie1), "objects must be equal");
+		Assert.isTrue(movieFromDB.equals(m1), "objects must be equal");
 		
-		mService.delete(movie1.getId());
+		mService.delete(m1.getId());
 	}
 	
 	@Test
 	public void deleteTest()
-	{
+	{	
 		
-		Movie movie1 = new Movie();
-		movie1.setTitle("MovieForTest");
-		movie1.setAgeBracket("test+");
-		movie1.setDuration(300);
-		movie1.setDescription("bla bla test");	
+		mService.save(m1);
 		
-		mService.save(movie1);
-		
-		Integer movieFromDBId = movie1.getId();
+		Integer movieFromDBId = m1.getId();
 		
 		mService.delete(movieFromDBId);
 		
 		Movie movieFromDB = mService.get(movieFromDBId);
-		
 		
 		Assert.isNull(movieFromDB, "returned after deleting object must be null");
 		
@@ -104,31 +118,65 @@ public class MovieServiceTest extends AbstractTest{
 	@Test
 	public void saveMultipleTest()
 	{
-		Movie movie1 = new Movie();
-		movie1.setTitle("MovieForTest1");
-		movie1.setAgeBracket("test1+");
-		movie1.setDuration(300);
-		movie1.setDescription("bla bla test1");
 		
-		Movie movie2 = new Movie();
-		movie2.setTitle("MovieForTest2");
-		movie2.setAgeBracket("test2+");
-		movie2.setDuration(301);
-		movie2.setDescription("bla bla test2");
+		mService.saveMultiple(m1, m2);
 		
-		mService.saveMultiple(movie1, movie2);
+		Assert.isTrue(mService.get(m1.getId()).equals(m1), "objects must be equal");
+		Assert.isTrue(mService.get(m2.getId()).equals(m2), "objects must be equal");
 		
-		Assert.isTrue(mService.get(movie1.getId()).equals(movie1), "objects must be equal");
-		Assert.isTrue(mService.get(movie2.getId()).equals(movie2), "objects must be equal");
-		
-		mService.delete(movie1.getId());
-		mService.delete(movie2.getId());
+		mService.delete(m1.getId());
+		mService.delete(m2.getId());
 		
 	}
 	
-	/*@Test
+	@Test
 	public void searchTest() // а надо ли его тестировать??
 	{
+		
+		mService.save(m1); // сохранили фильм
+		
+		MovieTheater mt = new MovieTheater();
+		mt.setName("Cinema2");
+		mt.setCity("City");
+		mt.setAddress("ul. 2, 2");
+		mt.setIsActive(true);
+		
+		mtService.save(mt); // сохранили кинотеатр
+		
+		Seance s = new Seance();
+		s.setMovieTheaterId(mt.getId());
+		s.setMovieId(m1.getId());
+		s.setDate(Date.valueOf("2090-04-02"));
+		s.setTime(Time.valueOf("18:00:00"));
+		
+		sService.save(s); // сохранили сеанс
+		
+		MovieFilter mFilter = new MovieFilter();
+		
+		mFilter.setCity("City");
+		
+		mFilter.setDateFrom(Date.valueOf("2090-04-01"));
+		
+		mFilter.setDateTo(Date.valueOf("2090-04-03"));
+		
+		
+		
+		List<Movie> list = mService.search(mFilter);
+		
+		Assert.isTrue(list.size() == 1, "in DB there are only 1 movie in ciy City");
+		
+		sService.delete(s.getId());
+		
+		mtService.delete(mt.getId());
+		
+		mService.delete(m1.getId());
+		
+		
+		/*Seance sTest = new Seance(); // сначала тест на сеанс сделать
+		
+		
+		MovieTheater MTTest = new MovieTheater();
+		
 		String city = null;
 		List<MovieTheater> list = tService.getAll(city);
 		//Integer numOfEntities = list.size();
@@ -172,8 +220,7 @@ public class MovieServiceTest extends AbstractTest{
 		
 		tService.delete(theater1.getId());
 		tService.delete(theater2.getId());
-		tService.delete(theater1.getId());
+		tService.delete(theater1.getId());*/
 	}
-*/
 
 }

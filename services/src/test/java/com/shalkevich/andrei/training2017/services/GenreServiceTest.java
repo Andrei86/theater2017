@@ -2,6 +2,8 @@ package com.shalkevich.andrei.training2017.services;
 
 import javax.inject.Inject;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
@@ -15,33 +17,45 @@ public class GenreServiceTest extends AbstractTest{
 	@Inject
 	IMovieService mService;
 	
+	public static Genre g1, g2;
+	
+	@BeforeClass
+	public static void CreateGenreObj()
+	{
+		g1 = new Genre();
+		g1.setName("Name1");
+		
+		g2 = new Genre();
+		g2.setName("Name2");
+	}
+	
+	@Before
+	public void idToNull()
+	{
+		g1.setId(null);
+		g2.setId(null);
+	}
 	@Test
 	public void createTest()
 	{
-		Genre genre = new Genre();
-		genre.setName("Test");
+		gService.save(g1);
 		
-		gService.save(genre);
-		
-		Integer savedGenreId = genre.getId();
+		Integer savedGenreId = g1.getId();
 		
 		Genre genreFromDB = gService.get(savedGenreId);
 		
-		Assert.isTrue(genreFromDB.equals(genre), "objects must be equal");
+		Assert.isTrue(genreFromDB.equals(g1), "objects must be equal");
 		
-		gService.delete(genre.getId());
+		gService.delete(g1.getId());
 	}
 	
 	@Test
 	public void updateTest()
 	{
-
-		Genre genre = new Genre();
-		genre.setName("Test");
 		
-		gService.save(genre);
+		gService.save(g1);
 		
-		Genre updatedGenre = gService.get(genre.getId());
+		Genre updatedGenre = gService.get(g1.getId());
 		
 		updatedGenre.setName("newTest");
 		
@@ -49,37 +63,32 @@ public class GenreServiceTest extends AbstractTest{
 		
 		Assert.isTrue(updatedGenre.equals(gService.get(updatedGenre.getId())), "objects must be equal");
 		
-		gService.delete(updatedGenre.getId());
+		gService.delete(g1.getId());
 		
 	}
 	
 	@Test
 	public void readTest()
 	{
-		Genre genre = new Genre();
-		genre.setName("Test");	
+			
+		gService.save(g1);
 		
-		gService.save(genre);
-		
-		Integer genreFromDBId = genre.getId();
+		Integer genreFromDBId = g1.getId();
 		
 		Genre genreFromDB = gService.get(genreFromDBId);
 		
-		Assert.isTrue(genreFromDB.equals(genre), "objects must be equal");
+		Assert.isTrue(genreFromDB.equals(g1), "objects must be equal");
 		
-		gService.delete(genre.getId());
+		gService.delete(g1.getId());
 	}
 	
 	@Test
 	public void deleteTest()
 	{
+	
+		gService.save(g1);
 		
-		Genre genre = new Genre();
-		genre.setName("Test");		
-		
-		gService.save(genre);
-		
-		Integer genreFromDBId = genre.getId();
+		Integer genreFromDBId = g1.getId();
 		
 		gService.delete(genreFromDBId);
 		
@@ -93,19 +102,14 @@ public class GenreServiceTest extends AbstractTest{
 	@Test
 	public void saveMultipleTest()
 	{
-		Genre genre1 = new Genre();
-		genre1.setName("Test1");	
 		
-		Genre genre2 = new Genre();
-		genre2.setName("Test2");
+		gService.saveMultiple(g1, g2);
 		
-		gService.saveMultiple(genre1, genre2);
+		Assert.isTrue(gService.get(g1.getId()).equals(g1), "objects must be equal");
+		Assert.isTrue(gService.get(g2.getId()).equals(g2), "objects must be equal");
 		
-		Assert.isTrue(gService.get(genre1.getId()).equals(genre1), "objects must be equal");
-		Assert.isTrue(gService.get(genre2.getId()).equals(genre2), "objects must be equal");
-		
-		gService.delete(genre1.getId());
-		gService.delete(genre2.getId());
+		gService.delete(g1.getId());
+		gService.delete(g2.getId());
 		
 	}
 	

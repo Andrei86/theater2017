@@ -21,6 +21,8 @@ public interface ITicketDao extends IGenericDao<Ticket>{
 	
 	List<TicketWithAllData> search(TicketWithAllDataFilter filter);
 	
+	//TicketWithAllData getByTicketId(Integer id);
+	
 	void deleteAll(Integer seanceId);
 	
 	//List<TicketWithAllData> getByCustomerIdWithInterval(Integer id, Date date1, Date date2); // свои билеты и еще подумать над стоимостью (для зарегистрированного пользователя)

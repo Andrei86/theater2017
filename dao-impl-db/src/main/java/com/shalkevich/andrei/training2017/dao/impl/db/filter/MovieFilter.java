@@ -6,9 +6,9 @@ public class MovieFilter {
 	
 	private String city;
 	
-	private Date date1;
+	private Date dateFrom;
 	
-	private Date date2;
+	private Date dateTo;
 
 	public String getCity() {
 		return city;
@@ -18,28 +18,29 @@ public class MovieFilter {
 		this.city = city;
 	}
 
-	public Date getDate1() {
-		return date1;
-	}
-
-	public void setDate1(Date date1) {
-		this.date1 = date1;
-	}
-
-	public Date getDate2() {
-		return date2;
-	}
-
-	public void setDate2(Date date2) {
-		this.date2 = date2;
-	}
 	
 	public Boolean isEmpty()
 	{
-		return city == null && date1 == null &&
-				date2 == null;
+		return city == null && dateTo == null &&
+				dateFrom == null;
 	}
 	
+	public Date getDateFrom() {
+		return dateFrom;
+	}
+
+	public void setDateFrom(Date dateFrom) {
+		this.dateFrom = dateFrom;
+	}
+
+	public Date getDateTo() {
+		return dateTo;
+	}
+
+	public void setDateTo(Date dateTo) {
+		this.dateTo = dateTo;
+	}
+
 	public String cityFilterResult()
 	{
 		
@@ -47,20 +48,20 @@ public class MovieFilter {
 	}
 	
 	
-	public String date1FilterResult()
+	public String dateFromFilterResult()
 	{
 		
-		if(getDate2()!=null)	
-		return (getDate1()!=null) ? " AND s.date >= '" + getDate1().toString() + "'": null;
+		if(dateTo!=null)	
+		return (dateFrom!=null) ? " AND s.date >= '" + dateFrom.toString() + "'": null;
 		else
-			return (getDate1()!=null) ? " AND s.date = '" + getDate1().toString() + "'": null;
+			return (dateFrom!=null) ? " AND s.date = '" + dateFrom.toString() + "'": null;
 	}
 	
 	
-	public String date2FilterResult()
+	public String dateToFilterResult()
 	{
 		
-			return (getDate2()!=null) ? " AND s.date = '" + getDate2().toString() + "'": null;
+			return (dateTo!=null) ? " AND s.date <= '" + dateTo.toString() + "'": null;
 	}
 	
 }
