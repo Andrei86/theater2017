@@ -24,19 +24,19 @@ public class MovieTheaterServiceTest extends AbstractTest{
 	{
 		mt1 = new MovieTheater();
 		mt1.setName("Cinema1");
-		mt1.setCity("City");
+		mt1.setCity("City1");
 		mt1.setAddress("ul. 1, 1");
 		mt1.setIsActive(false);
 		
 		mt2 = new MovieTheater();
 		mt2.setName("Cinema2");
-		mt2.setCity("City");
+		mt2.setCity("City2");
 		mt2.setAddress("ul. 2, 2");
 		mt2.setIsActive(true);
 		
 		mt3 = new MovieTheater();
-		mt3.setName("Cinema2");
-		mt3.setCity("City2");
+		mt3.setName("Cinema3");
+		mt3.setCity("City3");
 		mt3.setAddress("ul. 3, 3");
 		mt3.setIsActive(true);
 	}
@@ -139,7 +139,7 @@ public class MovieTheaterServiceTest extends AbstractTest{
 		String city = mt1.getCity();
 		List<MovieTheater> list = tService.getAll(city);
 		
-		Assert.isTrue(list.size() == 2, "numbers must be equal");
+		Assert.isTrue(list.size() == 1, "numbers must be equal");
 		
 		tService.delete(mt1.getId());
 		tService.delete(mt2.getId());

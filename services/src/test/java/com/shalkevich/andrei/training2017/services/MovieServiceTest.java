@@ -145,6 +145,7 @@ public class MovieServiceTest extends AbstractTest{
 		
 		Seance s = new Seance();
 		s.setMovieTheaterId(mt.getId());
+		System.out.println(mt.getId());
 		s.setMovieId(m1.getId());
 		s.setDate(Date.valueOf("2090-04-02"));
 		s.setTime(Time.valueOf("18:00:00"));
@@ -153,9 +154,9 @@ public class MovieServiceTest extends AbstractTest{
 		
 		MovieFilter mFilter = new MovieFilter();
 		
-		mFilter.setCity("City");
+		mFilter.setCity("City"); // настроили фильтр на город и даты
 		
-		mFilter.setDateFrom(Date.valueOf("2090-04-01"));
+		mFilter.setDateFrom(Date.valueOf("2090-04-01")); 
 		
 		mFilter.setDateTo(Date.valueOf("2090-04-03"));
 		

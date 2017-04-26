@@ -100,10 +100,16 @@ public class SeanceServiceTest extends AbstractTest{
 		
 		mtService.save(mt1);//объекты в базу
 		
-		s1.setMovieTheaterId(mt1.getId());
+		System.out.println(mt1.getId());
+		
 		s1.setMovieId(m1.getId());
 		
+		s1.setMovieTheaterId(mt1.getId());
+	
+		
 		sService.save(s1); // сохраняем объект который содержит id-шки объектов, сохраненных выше
+		
+		System.out.println(s1);
 		
 		Integer savedSeanceId = s1.getId();
 		

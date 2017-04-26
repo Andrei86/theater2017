@@ -72,7 +72,7 @@ public class ServicesTest {
 		//Customer c = new Customer();
 		//c.setId(3);
 		/*t.setStatus(Status.valueOf("processing"));*/
-		//System.out.println(service.PurchasingATicket(t));
+		System.out.println(service1.get(6));
 		
 	/*	Seance s = new Seance();
 		s.setMovieTheaterId(1);
