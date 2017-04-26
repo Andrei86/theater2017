@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
-import com.shalkevich.andrei.training2017.dao.impl.db.exception.DaoException;
+import com.shalkevich.andrei.training2017.dao.impl.db.exception.DaoTheaterIncorrectCityException;
 import com.shalkevich.andrei.training2017.dao.impl.db.filter.MovieFilter;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
 import com.shalkevich.andrei.training2017.services.IMovieService;

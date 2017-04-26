@@ -64,7 +64,7 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 
 
 	@Override
-	public List<MovieTheater> getAll(String city) {
+	public List<MovieTheater> getAll(String city) { // выкидывает ошибку неправильного города
 		
 		LOGGER.info("Get all movietheaters in city= " + city);
 		

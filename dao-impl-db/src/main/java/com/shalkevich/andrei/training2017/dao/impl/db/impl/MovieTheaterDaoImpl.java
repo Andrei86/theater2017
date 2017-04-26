@@ -26,7 +26,7 @@ public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public List<MovieTheater> getAllByCity(String city) { // for admin
+	public List<MovieTheater> getAllByCity(String city) {  // for admin
 		List<MovieTheater> list = jdbcTemplate.query("select * from movietheater where city = ? "
 				, new Object[] {city} ,
 				new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
