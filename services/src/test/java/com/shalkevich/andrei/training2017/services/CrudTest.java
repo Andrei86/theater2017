@@ -10,11 +10,11 @@ import org.springframework.util.Assert;
 
 public abstract class CrudTest<T extends IGenericService<T>> extends AbstractTest{// сделать тесты общими
 	
-	 protected T testObject;
+	/* protected T testObject;
      
-     /**
+     *//**
       * Tests the CRUD(create, read, update, delete) operations.First, i
-      */
+      *//*
      @Test
      public void testCRUD() {
          insert(testObject);
@@ -57,6 +57,6 @@ public abstract class CrudTest<T extends IGenericService<T>> extends AbstractTes
   
      public void setTestObject(T testObject) {
          this.testObject = testObject;
-     }
+     }*/
 
 }

@@ -35,7 +35,7 @@ public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements
 
 	
 	@Override
-	public List<MovieTheater> getAllActiveByCity(String city) { // for user
+	public List<MovieTheater> getAllActiveByCity(String city) { // for user gjrf 
 		
 		List<MovieTheater> list = jdbcTemplate.query("select * from movietheater where is_active = true and city = ?"
 			, new Object[] {city} , new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
@@ -70,7 +70,8 @@ public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements
 	}
 
 	@Override
-	public void update(MovieTheater entity) {
+	public void update(MovieTheater entity) throws NullPointerException
+	{
 		
 		final String UPDATE_SQL = "update movietheater set name = ?, city= ?, address = ?, is_active = ? where id = " + entity.getId();
 		

@@ -1,4 +1,4 @@
-package models;
+package com.shalkevich.andrei.training2017.webapp.models;
 
 public class MovieTheaterModel {
 	
@@ -7,6 +7,18 @@ public class MovieTheaterModel {
 	private String city;
 	
 	private String address;
+	
+	private Boolean isActive;
+	
+	
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
 
 	public String getName() {
 		return name;

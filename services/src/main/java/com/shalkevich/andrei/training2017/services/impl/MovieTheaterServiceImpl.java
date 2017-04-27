@@ -35,7 +35,8 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 	}
 
 	@Override
-	public void save(MovieTheater theater) {
+	public void save(MovieTheater theater) 
+	{
 		
 		if(theater.getId()==null)
 		{

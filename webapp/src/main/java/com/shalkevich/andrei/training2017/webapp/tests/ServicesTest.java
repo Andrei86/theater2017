@@ -1,4 +1,4 @@
-package com.shalkevich.andrei.training2017.webapp;
+package com.shalkevich.andrei.training2017.webapp.tests;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
