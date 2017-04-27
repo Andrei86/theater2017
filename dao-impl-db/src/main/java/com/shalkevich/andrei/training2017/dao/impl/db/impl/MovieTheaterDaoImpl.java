@@ -45,7 +45,8 @@ public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements
 
 
 	@Override
-	public MovieTheater insert(MovieTheater entity) {
+	public MovieTheater insert(MovieTheater entity) throws NullPointerException
+	{
 
 		final String INSERT_SQL = "insert into movietheater (name, city, address, is_active) values(?, ?, ?, ?)";
 		

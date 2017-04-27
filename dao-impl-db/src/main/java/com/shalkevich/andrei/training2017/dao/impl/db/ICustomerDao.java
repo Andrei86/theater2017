@@ -6,7 +6,7 @@ import com.shalkevich.andrei.training2017.datamodel.Customer;
 
 public interface ICustomerDao extends IGenericDao<Customer>{
 	
-	Customer insert(Customer customerS); // свой
+	Customer insert(Customer customer); // свой
 
     void update(Customer genre);
     

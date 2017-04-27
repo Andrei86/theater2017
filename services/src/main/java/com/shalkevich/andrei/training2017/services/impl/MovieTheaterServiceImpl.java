@@ -25,11 +25,11 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 	public MovieTheater get(Integer id) throws NullPointerException
 	{
 		
-		if(id == null)
+		/*if(id == null)
 		{
 			throw new NullPointerException("You must insert valid value");
 		}
-		LOGGER.info("Get movietheater with {id} = " + id);
+*/		LOGGER.info("Get movietheater with {id} = " + id);
 		return movieTheaterDao.get(id);
 		
 	}

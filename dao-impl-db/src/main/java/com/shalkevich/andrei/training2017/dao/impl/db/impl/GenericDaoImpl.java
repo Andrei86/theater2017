@@ -132,7 +132,7 @@ public abstract class GenericDaoImpl<T> implements IGenericDao<T> {
 	
 	
 	@Override
-	public T get(Integer id) // общий get метод
+	public T get(Integer id) throws NullPointerException// общий get метод
 	{
 		try
 		{

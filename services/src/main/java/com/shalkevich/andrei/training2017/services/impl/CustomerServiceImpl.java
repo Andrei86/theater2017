@@ -1,5 +1,7 @@
 package com.shalkevich.andrei.training2017.services.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -18,9 +20,19 @@ public class CustomerServiceImpl implements ICustomerService{
 	@Inject
 	ICustomerDao customerDao;
 	
+	
+	
+	@Override
+	public List<Customer> getAll() {
+		LOGGER.info("Get all customers");
+		
+		return customerDao.getAll();
+	}
+
 	@Override
 	public Customer getByLogin(String login) {
 		
+		LOGGER.info("Get customer by login = " + login);
 		Customer c = customerDao.getByLogin(login);
 		
 		return c;
@@ -70,7 +82,7 @@ public class CustomerServiceImpl implements ICustomerService{
 		
 	}
 
-	@Override
+	/*@Override
 	public Customer LogIn(String login, String pass) { // ждем авторизацию
 		
 		Customer loggedCustomer = customerDao.getByLogin(login);
@@ -106,6 +118,6 @@ public class CustomerServiceImpl implements ICustomerService{
 				save(customer);
 		}
 		
-	}
+	}*/
 	
 }

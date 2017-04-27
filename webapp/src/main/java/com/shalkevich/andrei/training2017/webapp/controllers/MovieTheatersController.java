@@ -45,9 +45,18 @@ public class MovieTheatersController {
 	
 	 @RequestMapping(value = "/{id}", method = RequestMethod.GET) // 
 	    public ResponseEntity<?> getById(@PathVariable(value = "id") Integer theaterIdParam) {
+		 try
+		 {
 	        MovieTheater theater = theaterService.get(theaterIdParam);
 	        MovieTheaterModel theaterModel = entity2model(theater);
 	        return new ResponseEntity<MovieTheaterModel>(theaterModel, HttpStatus.OK);
+		 }
+		 catch (NullPointerException e)
+		 {
+			 String msg = "There is no object with such id. Please, insert correct id.";
+			 return new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST);
+		 }
+		 
 	    }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
