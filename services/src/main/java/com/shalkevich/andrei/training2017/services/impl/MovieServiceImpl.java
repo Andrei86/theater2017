@@ -33,6 +33,16 @@ private static final Logger LOGGER = LoggerFactory.getLogger(MovieServiceImpl.cl
 		
 		return movieDao.get(id);
 	}
+	
+	@Override
+	public List<Movie> getAll() {
+
+		LOGGER.info("Get all movies");
+		
+		return movieDao.getAll();
+	}
+
+
 
 	@Override
 	public void save(Movie movie) {
@@ -75,7 +85,8 @@ private static final Logger LOGGER = LoggerFactory.getLogger(MovieServiceImpl.cl
 	@Override
 	public List<Movie> search(MovieFilter filter) {
 		
-		LOGGER.info("Search book by MovieFilter");
+		LOGGER.info("Search movie by MovieFilter");
+		
 		List<Movie> listNonRepeat = new ArrayList<>();
 		List<Movie> listRepeat = movieDao.search(filter);
 		for(Movie m: listRepeat)

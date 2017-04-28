@@ -12,5 +12,7 @@ import com.shalkevich.andrei.training2017.datamodel.Movie;
 public interface IMovieService extends IGenericService<Movie>{ // сделал для того чтобы
 	
 	List<Movie> search(MovieFilter filter);
+	
+	List<Movie> getAll();
     
 }

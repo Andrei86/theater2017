@@ -12,7 +12,7 @@
 >
 
 
-	<!-- <import resource="classpath:services-context.xml" /> для тестов из ServicesTest  -->
+	<import resource="classpath:services-context.xml" />
 
 	
 	 <mvc:annotation-driven />

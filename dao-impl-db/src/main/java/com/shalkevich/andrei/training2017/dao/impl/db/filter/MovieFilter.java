@@ -44,7 +44,7 @@ public class MovieFilter {
 	public String cityFilterResult()
 	{
 		
-			return (getCity()!=null) ? " AND m_t.city = '" + getCity() + "'": null;
+			return (getCity()!=null) ? " AND m_t.city = '" + city + "'": "";
 	}
 	
 	
@@ -52,16 +52,17 @@ public class MovieFilter {
 	{
 		
 		if(dateTo!=null)	
-		return (dateFrom!=null) ? " AND s.date >= '" + dateFrom.toString() + "'": null;
+		return (dateFrom!=null) ? " AND s.date >= '" + dateFrom + "'": "";
 		else
-			return (dateFrom!=null) ? " AND s.date = '" + dateFrom.toString() + "'": null;
+			return (dateFrom!=null) ? " AND s.date >= '" + dateFrom + "' AND s.date <= ' "
+					+ new Date(new java.util.Date().getTime()) + "'": "";
 	}
 	
 	
 	public String dateToFilterResult()
 	{
 		
-			return (dateTo!=null) ? " AND s.date <= '" + dateTo.toString() + "'": null;
+			return (dateTo!=null) ? " AND s.date <= '" + dateTo + "' ": "";
 	}
 	
 }
