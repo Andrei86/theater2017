@@ -38,13 +38,13 @@ public class MovieDaoImpl extends GenericDaoImpl<Movie> implements IMovieDao{
 				+ "join movie m on s.movie_id = m.id where m_t.is_active = true ";
 		
 		if(filter.getCity()!=null)
-		sql += filter.cityFilterResult();
-		
+		sql += filter.cityFilterResult() + filter.dateFilterResult();
+		/*
 		if(filter.getDateFrom()!=null)
 			sql += filter.dateFromFilterResult();
 		
 		if(filter.getDateTo()!=null)
-			sql += filter.dateToFilterResult();
+			sql += filter.dateToFilterResult();*/
 		
 		
 		//System.out.println(sql);

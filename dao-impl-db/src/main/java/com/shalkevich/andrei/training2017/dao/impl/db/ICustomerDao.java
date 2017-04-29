@@ -8,7 +8,7 @@ public interface ICustomerDao extends IGenericDao<Customer>{
 	
 	Customer insert(Customer customer); // свой
 
-    void update(Customer genre);
+    void update(Customer customer);
     
     List<Customer> getAll();
     

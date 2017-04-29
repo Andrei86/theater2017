@@ -47,7 +47,7 @@ public class SeanceDaoImpl extends GenericDaoImpl<Seance> implements ISeanceDao{
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 	                PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
-	                ps.setInt(1, entity.getMovieTheaterId());
+	                ps.setInt(1, entity.getMovietheaterId());
 	                ps.setInt(2, entity.getMovieId());
 	                ps.setDate(3, entity.getDate());
 	                ps.setTime(4, entity.getTime());
@@ -71,7 +71,7 @@ public class SeanceDaoImpl extends GenericDaoImpl<Seance> implements ISeanceDao{
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 	                PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);//, new String[] { "id" });
-	                ps.setInt(1, entity.getMovieTheaterId());
+	                ps.setInt(1, entity.getMovietheaterId());
 	                ps.setInt(2, entity.getMovieId());
 	                ps.setDate(3, entity.getDate());
 	                ps.setTime(4, entity.getTime());

@@ -69,7 +69,7 @@ public class Customer {
 		
 		return id.equals(c.id) && login.equals(c.login) && password.equals(c.password) 
 				&& firstName.equals(c.firstName) && lastName.equals(c.lastName) 
-				&& eMail.equals(c.eMail);
+				&& eMail.equals(c.eMail) && role.equals(c.role);
 	}
 	
 	@Override
@@ -82,7 +82,7 @@ public class Customer {
         code = 31 * code + firstName.hashCode();
         code = 31 * code + lastName.hashCode();
         code = 31 * code + eMail.hashCode();
-        //code = 31 * code + role.hashCode();
+        code = 31 * code + role.hashCode();
         
         return code;
 	}

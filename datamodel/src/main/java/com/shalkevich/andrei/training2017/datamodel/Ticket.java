@@ -13,8 +13,6 @@ public class Ticket {
 	private Integer row;
 	private Integer place;
 	private BigDecimal cost;
-	private Integer customerId;
-	private Timestamp purchaseDate;
 	private Status status;
 	
 	public Status getStatus() {
@@ -22,12 +20,6 @@ public class Ticket {
 	}
 	public void setStatus(Status status) {
 		this.status = status;
-	}
-	public Timestamp getPurchaseDate() {
-		return purchaseDate;
-	}
-	public void setPurchaseDate(Timestamp purchaseDate) {
-		this.purchaseDate = purchaseDate;
 	}
 	
 	public Integer getId() {
@@ -65,15 +57,6 @@ public class Ticket {
 		this.cost = cost;
 	}
 	
-	public Integer getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
-	
-	
-	
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -83,8 +66,7 @@ public class Ticket {
 		Ticket t = (Ticket) obj;
 		
 		return id.equals(t.id) && seanceId.equals(t.seanceId) && row.equals(t.row) && place.equals(t.place)
-				&& cost.equals(t.cost) && customerId.equals(t.customerId) 
-				&& purchaseDate.equals(t.purchaseDate) && status.equals(t.status);
+				&& cost.equals(t.cost) && status.equals(t.status);
 	}
 	@Override
 	public int hashCode() {
@@ -95,8 +77,6 @@ public class Ticket {
         code = 31 * code + row.hashCode();
         code = 31 * code + place.hashCode();
         code = 31 * code + cost.hashCode();
-        code = 31 * code + customerId.hashCode();
-        code = 31 * code + purchaseDate.hashCode();
         code = 31 * code + status.hashCode();
         
         return code;
@@ -105,8 +85,7 @@ public class Ticket {
 	public String toString() {
 		
 		return  "Ticket [id= " + id + "]" + " seance " + seanceId + " row " + row +
-				" place " + place + " customer " + customerId + " cost " + cost + " purchase date " + purchaseDate
-				+ " status " + status;
+				" place " + place + " cost " + cost + " status " + status;
 	}
 	
 	

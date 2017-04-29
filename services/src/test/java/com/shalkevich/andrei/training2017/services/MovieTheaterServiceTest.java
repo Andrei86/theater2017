@@ -7,12 +7,16 @@ import javax.inject.Inject;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 
 
 public class MovieTheaterServiceTest extends AbstractTest{
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(MovieTheaterServiceTest.class);
 	
 	@Inject
 	IMovieTheaterService tService;
@@ -44,6 +48,7 @@ public class MovieTheaterServiceTest extends AbstractTest{
 	@Before
 	public void idToNull()
 	{
+		LOGGER.info("Set id of created entities to null");
 		mt1.setId(null);
 		mt2.setId(null);
 		mt3.setId(null);
@@ -52,6 +57,7 @@ public class MovieTheaterServiceTest extends AbstractTest{
 	@Test
 	public void createTest()
 	{
+		LOGGER.info("Create test for movietheater");
 		
 		tService.save(mt1);
 		
@@ -60,13 +66,13 @@ public class MovieTheaterServiceTest extends AbstractTest{
 		MovieTheater theaterFromDB = tService.get(savedTheaterId);
 		
 		Assert.isTrue(theaterFromDB.equals(mt1), "objects must be equal");
-		
-		tService.delete(mt1.getId());
+
 	}
 	
 	@Test
 	public void updateTest()
 	{
+		LOGGER.info("Update test for movietheater");
 		
 		tService.save(mt1);
 		
@@ -81,26 +87,25 @@ public class MovieTheaterServiceTest extends AbstractTest{
 		
 		Assert.isTrue(updatedTheater.equals(tService.get(updatedTheater.getId())), "objects must be equal");
 		
-		tService.delete(mt1.getId());
-		
 	}
 	
 	@Test
 	public void readTest()
 	{
+		LOGGER.info("Read test for movietheater");
 		
 		tService.save(mt1);
 		
 		Integer theaterFromDBId = mt1.getId();
 		MovieTheater theaterFromDB = tService.get(theaterFromDBId);
 		Assert.isTrue(theaterFromDB.equals(mt1), "objects must be equal");
-		
-		tService.delete(mt1.getId());
+
 	}
 	
 	@Test
 	public void deleteTest()
 	{		
+		LOGGER.info("Delete test for movietheater");
 		
 		tService.save(mt1);
 		
@@ -118,6 +123,7 @@ public class MovieTheaterServiceTest extends AbstractTest{
 	@Test
 	public void saveMultipleTest()
 	{
+		LOGGER.info("Save multiple test for movietheater");
 		
 		tService.saveMultiple(mt1, mt2, mt3);
 		
@@ -125,24 +131,20 @@ public class MovieTheaterServiceTest extends AbstractTest{
 		Assert.isTrue(tService.get(mt2.getId()).equals(mt2), "objects must be equal");
 		Assert.isTrue(tService.get(mt3.getId()).equals(mt3), "objects must be equal");
 		
-		tService.delete(mt1.getId());
-		tService.delete(mt2.getId());
-		tService.delete(mt3.getId());
-		
 	}
 	
 	@Test
 	public void getAllByCityTest()
 	{
+		LOGGER.info("Get all movietheaters by city test");
+		
 		tService.saveMultiple(mt1, mt2);
 		
 		String city = mt1.getCity();
 		List<MovieTheater> list = tService.getAll(city);
 		
 		Assert.isTrue(list.size() == 1, "numbers must be equal");
-		
-		tService.delete(mt1.getId());
-		tService.delete(mt2.getId());
+
 	}
 
 	

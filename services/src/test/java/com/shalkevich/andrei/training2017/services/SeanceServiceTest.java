@@ -38,7 +38,7 @@ public class SeanceServiceTest extends AbstractTest{
 
 	
 	@BeforeClass
-	public static void CreateEntities() // главное убирать из базы
+	public static void CreateEntities()
 	{
 		LOGGER.info("create entities BeforeClass movie, movietheater, seance");
 		
@@ -104,7 +104,7 @@ public class SeanceServiceTest extends AbstractTest{
 		
 		s1.setMovieId(m1.getId());
 		
-		s1.setMovieTheaterId(mt1.getId());
+		s1.setMovietheaterId(mt1.getId());
 	
 		
 		sService.save(s1); // сохраняем объект который содержит id-шки объектов, сохраненных выше
@@ -120,23 +120,20 @@ public class SeanceServiceTest extends AbstractTest{
 		Assert.isTrue(seanceFromDB.equals(s1), "objects must be equal");
 		
 		System.out.println("After assert");
-		
-		sService.delete(s1.getId());
-		
-		mService.delete(m1.getId());
-		
-		mtService.delete(mt1.getId());
+
 	}
 	
-	/*@Test
+	@Test
 	public void updateTest()
 	{
+		
+		LOGGER.info("update seance test");
 		
 		mService.save(m1);
 		
 		mtService.save(mt1);
 		
-		s1.setMovieTheaterId(mt1.getId());
+		s1.setMovietheaterId(mt1.getId());
 		s1.setMovieId(m1.getId());
 		
 		sService.save(s1);
@@ -146,7 +143,7 @@ public class SeanceServiceTest extends AbstractTest{
 		
 		Seance updatedSeance = sService.get(s1.getId());
 		
-		updatedSeance.setMovieTheaterId(mt2.getId());
+		updatedSeance.setMovietheaterId(mt2.getId());
 		updatedSeance.setMovieId(m2.getId());
 		updatedSeance.setDate(Date.valueOf("2091-04-02"));
 		updatedSeance.setTime(Time.valueOf("19:00:00"));
@@ -154,25 +151,18 @@ public class SeanceServiceTest extends AbstractTest{
 		
 		Assert.isTrue(updatedSeance.equals(sService.get(updatedSeance.getId())), "objects must be equal");
 		
-		sService.delete(updatedSeance.getId());
-		
-		mService.delete(m1.getId());
-		mService.delete(m2.getId());
-		
-		mtService.delete(mt1.getId());
-		mtService.delete(mt2.getId());
-		
 	}
 
 	@Test
 	public void readTest()
 	{	
+		LOGGER.info("read seance test");
 		
 		mService.save(m1);
 		
 		mtService.save(mt1);
 		
-		s1.setMovieTheaterId(mt1.getId());
+		s1.setMovietheaterId(mt1.getId());
 		s1.setMovieId(m1.getId());
 		
 		sService.save(s1);
@@ -180,21 +170,20 @@ public class SeanceServiceTest extends AbstractTest{
 		Integer seanceFromDBId = s1.getId();
 		Seance seanceFromDB = sService.get(seanceFromDBId);
 		Assert.isTrue(seanceFromDB.equals(s1), "objects must be equal");
-		
-		sService.delete(s1.getId());
-		mService.delete(m1.getId());
-		mtService.delete(mt1.getId());
+
 	}
 	
 	@Test
 	public void deleteTest()
 	{	
 		
+		LOGGER.info("delete seance test");
+		
 		mService.save(m1);
 		
 		mtService.save(mt1);
 		
-		s1.setMovieTheaterId(mt1.getId());
+		s1.setMovietheaterId(mt1.getId());
 		s1.setMovieId(m1.getId());
 		
 		sService.save(s1);
@@ -206,9 +195,11 @@ public class SeanceServiceTest extends AbstractTest{
 		Seance seanceFromDB = sService.get(seanceFromDBId);
 		
 		Assert.isNull(seanceFromDB, "returned after deleting object must be null");
-		
-		mService.delete(m1.getId());
-		mtService.delete(mt1.getId());
-	}*/
 
+	}
+
+	@Test
+	public void searchSeanceWithAllData()
+	{}
+	
 }

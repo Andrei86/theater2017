@@ -41,8 +41,8 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements ICustom
 
 	@Override
 	public Customer insert(Customer entity) {
-		final String INSERT_SQL = "insert into customer (login, password, first_name, last_name, e_mail) "
-				+ "values(?, ?, ?, ?, ?)";
+		final String INSERT_SQL = "insert into customer (login, password, first_name, last_name, e_mail, role) "
+				+ "values(?, ?, ?, ?, ?, ?)";
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
@@ -55,6 +55,7 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements ICustom
 	                ps.setString(3, entity.getFirstName());
 	                ps.setString(4, entity.getLastName());
 	                ps.setString(5, entity.geteMail());
+	                ps.setString(6, entity.getRole().name());
 	                return ps;
 	            }
 	        }, keyHolder);

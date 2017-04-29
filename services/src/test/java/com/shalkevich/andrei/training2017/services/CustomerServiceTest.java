@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 import com.shalkevich.andrei.training2017.datamodel.Customer;
+import com.shalkevich.andrei.training2017.datamodel.customData.Role;
 
 public class CustomerServiceTest extends AbstractTest{
 	
@@ -26,6 +27,7 @@ public class CustomerServiceTest extends AbstractTest{
 		c1.setFirstName("fNameTest1");
 		c1.setLastName("lNameTest1");
 		c1.seteMail("@mail1");
+		c1.setRole(Role.valueOf("user"));
 		
 		c2 = new Customer();
 		c2.setLogin("LoginTest2");
@@ -33,6 +35,7 @@ public class CustomerServiceTest extends AbstractTest{
 		c2.setFirstName("fNameTest2");
 		c2.setLastName("lNameTest2");
 		c2.seteMail("@mail2");
+		c2.setRole(Role.valueOf("user"));
 			
 	}
 	

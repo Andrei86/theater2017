@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.filter.MovieFilter;
@@ -17,6 +19,8 @@ import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
 
 public class MovieServiceTest extends AbstractTest{
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(MovieServiceTest.class);
 	
 	@Inject
 	IMovieService mService;
@@ -32,6 +36,8 @@ public class MovieServiceTest extends AbstractTest{
 	@BeforeClass
 	public static void CreateEntities()
 	{
+		LOGGER.info("create entities Movie BeforeClass");
+		
 		m1 = new Movie();
 		m1.setTitle("MovieForTest1");
 		m1.setAgeBracket("test1+");
@@ -48,6 +54,8 @@ public class MovieServiceTest extends AbstractTest{
 	@Before
 	public void IdToNull()
 	{
+		LOGGER.info("Set id of movies to null before every @Test");
+		
 		m1.setId(null);
 		m2.setId(null);
 	}
@@ -55,6 +63,8 @@ public class MovieServiceTest extends AbstractTest{
 	@Test
 	public void createTest()
 	{	
+		LOGGER.info("Create test for seance");
+		
 		mService.save(m1);
 		
 		Integer savedMovieId = m1.getId();
@@ -62,13 +72,14 @@ public class MovieServiceTest extends AbstractTest{
 		Movie movieFromDB = mService.get(savedMovieId);
 		
 		Assert.isTrue(movieFromDB.equals(m1), "objects must be equal");
-		
-		mService.delete(m1.getId());
+
 	}
 	
 	@Test
 	public void updateTest()
 	{
+		
+		LOGGER.info("Update test for seance");
 		
 		mService.save(m1);
 		
@@ -81,27 +92,27 @@ public class MovieServiceTest extends AbstractTest{
 		mService.save(updatedMovie);
 		
 		Assert.isTrue(updatedMovie.equals(mService.get(updatedMovie.getId())), "objects must be equal");
-		
-		mService.delete(updatedMovie.getId());
+
 		
 	}
 	
 	@Test
 	public void readTest()
 	{	
+		LOGGER.info("Read test for seance");
 		
 		mService.save(m1);
 		
 		Integer movieFromDBId = m1.getId();
 		Movie movieFromDB = mService.get(movieFromDBId);
 		Assert.isTrue(movieFromDB.equals(m1), "objects must be equal");
-		
-		mService.delete(m1.getId());
+
 	}
 	
 	@Test
 	public void deleteTest()
 	{	
+		LOGGER.info("Read test for seance");
 		
 		mService.save(m1);
 		
@@ -118,22 +129,21 @@ public class MovieServiceTest extends AbstractTest{
 	@Test
 	public void saveMultipleTest()
 	{
+		LOGGER.info("Save miltiple test for seance");
 		
 		mService.saveMultiple(m1, m2);
 		
 		Assert.isTrue(mService.get(m1.getId()).equals(m1), "objects must be equal");
 		Assert.isTrue(mService.get(m2.getId()).equals(m2), "objects must be equal");
 		
-		mService.delete(m1.getId());
-		mService.delete(m2.getId());
-		
 	}
 	
 	@Test
-	public void searchTest() // а надо ли его тестировать??
+	public void searchTest()
 	{
+		LOGGER.info("Search test for seance");
 		
-		mService.save(m1); // сохранили фильм
+		mService.save(m1);
 		
 		MovieTheater mt = new MovieTheater();
 		mt.setName("Cinema2");
@@ -141,87 +151,27 @@ public class MovieServiceTest extends AbstractTest{
 		mt.setAddress("ul. 2, 2");
 		mt.setIsActive(true);
 		
-		mtService.save(mt); // сохранили кинотеатр
+		mtService.save(mt);
 		
 		Seance s = new Seance();
-		s.setMovieTheaterId(mt.getId());
+		s.setMovietheaterId(mt.getId());
 		System.out.println(mt.getId());
 		s.setMovieId(m1.getId());
 		s.setDate(Date.valueOf("2090-04-02"));
 		s.setTime(Time.valueOf("18:00:00"));
 		
-		sService.save(s); // сохранили сеанс
+		sService.save(s);
 		
 		MovieFilter mFilter = new MovieFilter();
 		
-		mFilter.setCity("City"); // настроили фильтр на город и даты
+		mFilter.setCity("City");
 		
-		mFilter.setDateFrom(Date.valueOf("2090-04-01")); 
-		
-		mFilter.setDateTo(Date.valueOf("2090-04-03"));
-		
-		
+		mFilter.setDate(Date.valueOf("2090-04-02")); 
 		
 		List<Movie> list = mService.search(mFilter);
 		
 		Assert.isTrue(list.size() == 1, "in DB there are only 1 movie in ciy City");
 		
-		sService.delete(s.getId());
-		
-		mtService.delete(mt.getId());
-		
-		mService.delete(m1.getId());
-		
-		
-		/*Seance sTest = new Seance(); // сначала тест на сеанс сделать
-		
-		
-		MovieTheater MTTest = new MovieTheater();
-		
-		String city = null;
-		List<MovieTheater> list = tService.getAll(city);
-		//Integer numOfEntities = list.size();
-		
-		MovieTheater theater1 = new MovieTheater();
-		theater1.setName("GorodTheater1");
-		theater1.setCity("Gorod");
-		theater1.setAddress("ul. Lenina");
-		theater1.setIsActive(true);
-		
-		tService.save(theater1);
-		
-		List<MovieTheater> list1 = tService.getAll(city);
-		
-		Assert.isTrue(list1.size() == (list.size() + 1), "numbers must be equal");
-		
-		
-		MovieTheater theater2 = new MovieTheater();
-		theater2.setName("GorodTheater2");
-		theater2.setCity("Gorod");
-		theater2.setAddress("ul. kostushko");
-		theater2.setIsActive(true);
-		
-		MovieTheater theater3 = new MovieTheater();
-		theater3.setName("GorodTheater3");
-		theater3.setCity("Gorod");
-		theater3.setAddress("ul. Centralnaya");
-		theater3.setIsActive(true);
-		
-		//tService.save(theater1);
-		tService.save(theater2);
-		tService.save(theater3);
-		
-		String gorod = theater1.getCity();
-		Boolean isActive = null;
-		
-		Assert.isTrue(tService.getAll(gorod, isActive).size() == 3, "number of movietheaters must be 3");
-		
-		isActive = false;
-		Assert.isTrue(tService.getAll(gorod, isActive).size() == 0, "number of movietheaters must be 0");
-		
-		tService.delete(theater1.getId());
-		tService.delete(theater2.getId());
-		tService.delete(theater1.getId());*/
 	}
 
 }

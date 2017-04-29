@@ -43,7 +43,7 @@ public abstract class GenericDaoImpl<T> implements IGenericDao<T> {
 		{
 		
 		List<T> list = jdbcTemplate.query("select * from " + type.getSimpleName().toLowerCase(),
-					new BeanPropertyRowMapper<T>(type));
+					new BeanPropertyRowMapper<T>(type)); // а если свой мапер??
 		
 		return list;
 		

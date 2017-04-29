@@ -30,17 +30,16 @@ public class MoviesController {
 	
 		
 	@RequestMapping(method = RequestMethod.GET) // throw IlleagalArgumentException
-    public ResponseEntity<?> getAll(@RequestParam(required = false) String city, String dateFrom, String dateTo) {
+    public ResponseEntity<?> getAll(@RequestParam(required = false) String city, String date) {
     
     	List<Movie> allMovies;
     	
     	MovieFilter movieFilter = new MovieFilter();
     	if(city != null)
     		movieFilter.setCity(city);
-    	if(dateFrom != null)
-    		movieFilter.setDateFrom(Date.valueOf(dateFrom));
-    	if(dateTo != null)
-    		movieFilter.setDateTo(Date.valueOf(dateTo));
+    
+    	if(date != null)
+    		movieFilter.setDate(Date.valueOf(date));
     	
     	if(movieFilter.isEmpty())
     		allMovies = movieService.getAll();
@@ -52,9 +51,6 @@ public class MoviesController {
     		movieModelsList.add(entity2model(movie));
         	
         return new ResponseEntity<List<MovieModel>>(movieModelsList, HttpStatus.OK);
-	
-		/* String msg = "There is no object with such id. Please, insert correct id.";
-		 return new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST);*/
 	 
     }
 	

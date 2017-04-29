@@ -6,7 +6,7 @@ import java.sql.Date;
 public class Seance {
 	
 	private Integer id;
-	private Integer movieTheaterId;
+	private Integer movietheaterId;
 	private Integer movieId;
 	private Date date;
 	private Time time;
@@ -23,11 +23,12 @@ public class Seance {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getMovieTheaterId() {
-		return movieTheaterId;
+	
+	public Integer getMovietheaterId() {
+		return movietheaterId;
 	}
-	public void setMovieTheaterId(Integer movieTheaterId) {
-		this.movieTheaterId = movieTheaterId;
+	public void setMovietheaterId(Integer movietheaterId) {
+		this.movietheaterId = movietheaterId;
 	}
 	public Integer getMovieId() {
 		return movieId;
@@ -51,7 +52,7 @@ public class Seance {
 		
 		Seance s = (Seance) obj;
 		
-		return id.equals(s.id) && movieTheaterId.equals(s.movieTheaterId) && movieId.equals(s.movieId) 
+		return id.equals(s.id) && movietheaterId.equals(s.movietheaterId) && movieId.equals(s.movieId) 
 				&& date.equals(s.date) && time.equals(s.time);
 	}
 	@Override
@@ -59,7 +60,7 @@ public class Seance {
 		
 		Integer code = 17;
         code = 31 * code + id;
-        code = 31 * code + movieTheaterId.hashCode();
+        code = 31 * code + movietheaterId.hashCode();
         code = 31 * code + movieId.hashCode();
         code = 31 * code + date.hashCode();
         code = 31 * code + time.hashCode();
@@ -69,7 +70,7 @@ public class Seance {
 	@Override
 	public String toString() {
 		
-		return "Seance [id= " + id + "]" + " movie theater " + movieTheaterId + " movie " + movieId +
+		return "Seance [id= " + id + "]" + " movie theater " + movietheaterId + " movie " + movieId +
 				" seance date " + date + " seance time " + time;
 	}
 	

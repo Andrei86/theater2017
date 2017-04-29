@@ -7,7 +7,7 @@ import com.shalkevich.andrei.training2017.datamodel.Seance;
 import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 import com.shalkevich.andrei.training2017.datamodel.customData.Status;
 
-public class TicketWithAllDataFilter {
+public class TicketWithAllDataFilter { // не нужен
 	
 	private Integer seanceId;
 	private Integer customerId;

@@ -47,8 +47,24 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 	}*/
 
 	@Override
+	public List<TicketWithAllData> getBySeanceAndStatus(Integer seanceId, Status status) {
+		String sqlBySeanceAndStatus = sqlBySeance + " AND t.status = ' " + status.name() + "'";
+		return null;
+	}
+
+	@Override
+	public List<TicketWithAllData> getBySeance(Integer seanceId) {
+		
+		String sqlBySeance = "select * from ticket t join seance s on t.seance_id = s.id left join customer c "
+				+ "on t.customer_id = c.id join movietheater m_t on m_t.id = s.movietheater_id "
+				+ "join movie m on s.movie_id = m.id where t.seance_id = " + seanceId;
+		
+		return jdbcTemplate.query(sqlBySeance, new TicketWithAllDataMapper());
+	}
+
+	@Override
 	public List<TicketWithAllData> search(TicketWithAllDataFilter filter) { // нужно бросить исключение если фильтр равен null
-		String sql = "select * from ticket t join seance s on t.seance_id = s.id left join customer c "
+		 String sql = "select * from ticket t join seance s on t.seance_id = s.id left join customer c "
 				+ "on t.customer_id = c.id join movietheater m_t on m_t.id = s.movietheater_id "
 				+ "join movie m on s.movie_id = m.id ";// пока говнокод
 		
@@ -85,8 +101,8 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 
 	@Override
 	public Ticket insert(Ticket entity) {
-			final String INSERT_SQL = "insert into ticket (seance_id, cost, customer_id, row, place, purchase_date, status)"
-					+ " values(?, ?, ?, ?, ?, ?, ?)";
+			final String INSERT_SQL = "insert into ticket (seance_id, cost, row, place, status)"
+					+ " values(?, ?, ?, ?, ?)";
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
@@ -96,11 +112,9 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 	                PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
 	                ps.setInt(1, entity.getSeanceId());
 	                ps.setBigDecimal(2, entity.getCost());
-	                ps.setInt(3, entity.getCustomerId());
-	                ps.setInt(4, entity.getRow());
-	                ps.setInt(5, entity.getPlace());
-	                ps.setTimestamp(6, entity.getPurchaseDate());
-	                ps.setString(7, entity.getStatus().name());
+	                ps.setInt(3, entity.getRow());
+	                ps.setInt(4, entity.getPlace());
+	                ps.setString(5, entity.getStatus().name());
 	                return ps;
 	            }
 	        }, keyHolder);
@@ -115,8 +129,8 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 	@Override
 	public void update(Ticket entity) {
 		
-		final String UPDATE_SQL = "update ticket set seance_id = ?, cost = ?, customer_id = ?, row = ?, place = ?, "
-				+ "purchase_date = ?, status = ? where id =" + entity.getId();
+		final String UPDATE_SQL = "update ticket set seance_id = ?, cost = ?, row = ?, place = ?, "
+				+ "status = ? where id =" + entity.getId();
 
 	
 	 jdbcTemplate.update(new PreparedStatementCreator() {
@@ -125,11 +139,9 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
                 PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);
                 ps.setInt(1, entity.getSeanceId());
                 ps.setBigDecimal(2, entity.getCost());
-                ps.setObject(3, entity.getCustomerId());
-                ps.setInt(4, entity.getRow());
-                ps.setInt(5, entity.getPlace());
-                ps.setTimestamp(6, entity.getPurchaseDate());
-                ps.setString(7, entity.getStatus().name());
+                ps.setInt(3, entity.getRow());
+                ps.setInt(4, entity.getPlace());
+                ps.setString(5, entity.getStatus().name());
                 return ps;
             }
         });

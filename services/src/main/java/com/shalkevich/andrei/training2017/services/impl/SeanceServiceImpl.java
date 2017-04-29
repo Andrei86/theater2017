@@ -44,7 +44,7 @@ public class SeanceServiceImpl implements ISeanceService{
 		{
 			LOGGER.info("Insert new seance with movietheater_id={}, "
 					+ "movie_id={}, date={}, time={}",
-					seance.getMovieTheaterId(), seance.getMovieId(),  seance.getDate(), seance.getTime());
+					seance.getMovietheaterId(), seance.getMovieId(),  seance.getDate(), seance.getTime());
 			seanceDao.insert(seance);
 		}
 		else
@@ -60,19 +60,6 @@ public class SeanceServiceImpl implements ISeanceService{
 		}
 		LOGGER.info("Save new seances from array");
 	}
-
-
-	/*@Override
-	public List<SeanceWithAllData> getByTheaterIdAndDate(Integer id, Date date) {
-		
-		return seanceDao.getByTheaterAndDate(id, date);
-	}
-
-	@Override
-	public List<SeanceWithAllData> getByMovieIdCityDate(Integer id, String city, Date date) {
-		
-		return seanceDao.getByMovieCityDate(id, city, date);
-	}*/
 
 	@Override
 	public void delete(Integer id) {
