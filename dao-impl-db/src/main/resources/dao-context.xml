@@ -30,7 +30,7 @@
 		<constructor-arg ref="dataSource" />
 	</bean>
 	
-	<tx:annotation-driven />
+	<!--<tx:annotation-driven /> -->
 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

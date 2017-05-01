@@ -66,7 +66,7 @@ public class Ticket {
 		Ticket t = (Ticket) obj;
 		
 		return id.equals(t.id) && seanceId.equals(t.seanceId) && row.equals(t.row) && place.equals(t.place)
-				&& cost.equals(t.cost) && status.equals(t.status);
+				&& cost.compareTo(t.cost)==0 && status.equals(t.status);
 	}
 	@Override
 	public int hashCode() {

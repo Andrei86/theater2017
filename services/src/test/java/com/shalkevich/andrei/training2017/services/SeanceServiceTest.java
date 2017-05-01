@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.SeanceWithAllDataFilter;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
@@ -20,6 +21,8 @@ import com.shalkevich.andrei.training2017.services.impl.SeanceServiceImpl;
 public class SeanceServiceTest extends AbstractTest{
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SeanceServiceTest.class);
+	
+	//Чуть еще отрефакторил
 	
 	@Inject
 	ISeanceService sService;
@@ -89,6 +92,20 @@ public class SeanceServiceTest extends AbstractTest{
 		
 		mt1.setId(null);
 		mt2.setId(null);
+		
+		//------------------------
+		mService.save(m1); 
+		
+		mtService.save(mt1);
+		
+		s1.setMovieId(m1.getId());
+		s1.setMovietheaterId(mt1.getId());
+		
+		sService.save(s1);
+		
+		//-----------------------
+		
+		
 	}
 	
 	@Test
@@ -96,26 +113,10 @@ public class SeanceServiceTest extends AbstractTest{
 	{	
 		
 		LOGGER.info("create seance test");
-		mService.save(m1); // сохраняет созданные в @BeforeClass 
-		
-		mtService.save(mt1);//объекты в базу
-		
-		System.out.println(mt1.getId());
-		
-		s1.setMovieId(m1.getId());
-		
-		s1.setMovietheaterId(mt1.getId());
-	
-		
-		sService.save(s1); // сохраняем объект который содержит id-шки объектов, сохраненных выше
-		
-		System.out.println(s1);
 		
 		Integer savedSeanceId = s1.getId();
 		
 		Seance seanceFromDB = sService.get(savedSeanceId);
-		
-		System.out.println(seanceFromDB); // ВОТ ТУТ ПОКАЗЫВАЕТ ЧТО mt1.id = null и хоть ты убей
 		
 		Assert.isTrue(seanceFromDB.equals(s1), "objects must be equal");
 		
@@ -128,15 +129,6 @@ public class SeanceServiceTest extends AbstractTest{
 	{
 		
 		LOGGER.info("update seance test");
-		
-		mService.save(m1);
-		
-		mtService.save(mt1);
-		
-		s1.setMovietheaterId(mt1.getId());
-		s1.setMovieId(m1.getId());
-		
-		sService.save(s1);
 		
 		mService.save(m2); // сохраняем еще по одному фильму
 		mtService.save(mt2);// и кинотеатру
@@ -158,15 +150,6 @@ public class SeanceServiceTest extends AbstractTest{
 	{	
 		LOGGER.info("read seance test");
 		
-		mService.save(m1);
-		
-		mtService.save(mt1);
-		
-		s1.setMovietheaterId(mt1.getId());
-		s1.setMovieId(m1.getId());
-		
-		sService.save(s1);
-		
 		Integer seanceFromDBId = s1.getId();
 		Seance seanceFromDB = sService.get(seanceFromDBId);
 		Assert.isTrue(seanceFromDB.equals(s1), "objects must be equal");
@@ -179,15 +162,6 @@ public class SeanceServiceTest extends AbstractTest{
 		
 		LOGGER.info("delete seance test");
 		
-		mService.save(m1);
-		
-		mtService.save(mt1);
-		
-		s1.setMovietheaterId(mt1.getId());
-		s1.setMovieId(m1.getId());
-		
-		sService.save(s1);
-		
 		Integer seanceFromDBId = m1.getId();
 		
 		sService.delete(seanceFromDBId);
@@ -199,7 +173,28 @@ public class SeanceServiceTest extends AbstractTest{
 	}
 
 	@Test
-	public void searchSeanceWithAllData()
-	{}
+	public void searchSeanceWithAllDataTest()
+	{
+		
+		LOGGER.info("Search test for seance");
+		
+		mService.save(m2); 
+		
+		mtService.save(mt2);
+		
+		s2.setMovieId(m2.getId());
+		s2.setMovietheaterId(mt2.getId());
+		
+		sService.save(s2);
+		
+		SeanceWithAllDataFilter filter = new SeanceWithAllDataFilter();
+		
+		filter.setCity(mt1.getCity());
+		filter.setDate(s1.getDate());
+		filter.setMovieTitle(m2.getTitle());
+		
+		Assert.isTrue(sService.search(filter).size() == 1, "objects must be equal");
+		
+	}
 	
 }

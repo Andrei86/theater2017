@@ -2,6 +2,6 @@ package com.shalkevich.andrei.training2017.datamodel.customData;
 
 public enum Status {
 	
-	free, booked, processing// вопрос с processed
+	free, busy, booking// вопрос с processed
 
 }

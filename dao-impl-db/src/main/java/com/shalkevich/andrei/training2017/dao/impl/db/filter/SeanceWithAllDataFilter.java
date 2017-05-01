@@ -50,7 +50,8 @@ public class SeanceWithAllDataFilter { // могут быть вопросы
 		this.movieTitle = movieTitle;
 	}
 	
-	public String cityFilterResult() // пока говнокод!
+	public String cityFilterResult() // пока говнокод, потому что надо использовать stringBuilder
+										//чтобы не плодить strings
 	{
 		
 			return (city!=null) ? " AND city = '" + city + "'": "";

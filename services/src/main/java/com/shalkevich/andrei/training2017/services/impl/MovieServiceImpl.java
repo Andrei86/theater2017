@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
-import com.shalkevich.andrei.training2017.dao.impl.db.exception.DaoTheaterIncorrectCityException;
 import com.shalkevich.andrei.training2017.dao.impl.db.filter.MovieFilter;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
 import com.shalkevich.andrei.training2017.services.IMovieService;
@@ -64,13 +63,12 @@ private static final Logger LOGGER = LoggerFactory.getLogger(MovieServiceImpl.cl
 	@Override
 	public void saveMultiple(Movie... movieArray) {
 		
+		LOGGER.info("Save new movies from array");
+		
 		for (Movie movie : movieArray) {
 			
 			save(movie);
 		}
-		
-		LOGGER.info("Save new movies from array");
-		
 	}
 
 	@Override
@@ -83,7 +81,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(MovieServiceImpl.cl
 	}
 
 	@Override
-	public List<Movie> search(MovieFilter filter) {
+	public List<Movie> search(MovieFilter filter) { // хороший пример нагрузки на сам сервер, а не гнать все данные юзеру
 		
 		LOGGER.info("Search movie by MovieFilter");
 		

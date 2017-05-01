@@ -40,7 +40,7 @@ public class MovieFilter {
 		this.date = date;
 	}
 
-	public String cityFilterResult()
+	public String cityFilterResult() // говнокод
 	{
 		
 		return (city!=null) ? " AND m_t.city = '" + city + "'" : "";

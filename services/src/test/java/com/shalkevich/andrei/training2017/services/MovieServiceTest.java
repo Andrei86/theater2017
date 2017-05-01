@@ -58,14 +58,14 @@ public class MovieServiceTest extends AbstractTest{
 		
 		m1.setId(null);
 		m2.setId(null);
+		
+		mService.save(m1);
 	}
 	
 	@Test
 	public void createTest()
 	{	
-		LOGGER.info("Create test for seance");
-		
-		mService.save(m1);
+		LOGGER.info("Create test for movie");
 		
 		Integer savedMovieId = m1.getId();
 		
@@ -79,9 +79,7 @@ public class MovieServiceTest extends AbstractTest{
 	public void updateTest()
 	{
 		
-		LOGGER.info("Update test for seance");
-		
-		mService.save(m1);
+		LOGGER.info("Update test for movie");
 		
 		Movie updatedMovie = mService.get(m1.getId());
 		
@@ -92,16 +90,12 @@ public class MovieServiceTest extends AbstractTest{
 		mService.save(updatedMovie);
 		
 		Assert.isTrue(updatedMovie.equals(mService.get(updatedMovie.getId())), "objects must be equal");
-
-		
 	}
 	
 	@Test
 	public void readTest()
 	{	
-		LOGGER.info("Read test for seance");
-		
-		mService.save(m1);
+		LOGGER.info("Read test for movie");
 		
 		Integer movieFromDBId = m1.getId();
 		Movie movieFromDB = mService.get(movieFromDBId);
@@ -112,9 +106,7 @@ public class MovieServiceTest extends AbstractTest{
 	@Test
 	public void deleteTest()
 	{	
-		LOGGER.info("Read test for seance");
-		
-		mService.save(m1);
+		LOGGER.info("Read test for movie");
 		
 		Integer movieFromDBId = m1.getId();
 		
@@ -129,7 +121,7 @@ public class MovieServiceTest extends AbstractTest{
 	@Test
 	public void saveMultipleTest()
 	{
-		LOGGER.info("Save miltiple test for seance");
+		LOGGER.info("Save multiple test for movie");
 		
 		mService.saveMultiple(m1, m2);
 		
@@ -141,7 +133,7 @@ public class MovieServiceTest extends AbstractTest{
 	@Test
 	public void searchTest()
 	{
-		LOGGER.info("Search test for seance");
+		LOGGER.info("Search test for movie");
 		
 		mService.save(m1);
 		

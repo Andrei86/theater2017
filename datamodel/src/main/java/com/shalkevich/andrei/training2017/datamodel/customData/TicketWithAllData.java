@@ -10,7 +10,6 @@ public class TicketWithAllData { // нужно
 	
 	private Ticket ticket;
 	private Seance seance;
-	private Customer customer;
 	private MovieTheater movieTheater;
 	private Movie movie;
 	
@@ -25,12 +24,6 @@ public class TicketWithAllData { // нужно
 	}
 	public void setSeance(Seance seance) {
 		this.seance = seance;
-	}
-	public Customer getCustomer() {
-		return customer;
-	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
 	}
 	public MovieTheater getMovieTheater() {
 		return movieTheater;
@@ -53,7 +46,7 @@ public class TicketWithAllData { // нужно
 		
 		TicketWithAllData tAD = (TicketWithAllData) obj;
 		
-		return ticket.equals(tAD.ticket) && seance.equals(tAD.seance) && customer.equals(tAD.customer)
+		return ticket.equals(tAD.ticket) && seance.equals(tAD.seance)
 				&& movieTheater.equals(tAD.movieTheater) && movie.equals(tAD.movie);
 	}
 	@Override
@@ -62,7 +55,6 @@ public class TicketWithAllData { // нужно
 		Integer code = 17;
         code = 31 * code + ticket.hashCode();
         code = 31 * code + seance.hashCode();
-        code = 31 * code + customer.hashCode();
         code = 31 * code + movieTheater.hashCode();
         code = 31 * code + movie.hashCode();
         
@@ -72,9 +64,8 @@ public class TicketWithAllData { // нужно
 	public String toString() {
 		
 		return "ID " + ticket.getId() + " cost " + ticket.getCost() + " row " + ticket.getRow() + 
-				" place " + ticket.getPlace() + " status " + ticket.getStatus() + " purchase date " 
-				+ ticket.getPurchaseDate() +" movietheater " + movieTheater.getName()
-				+ " movie "+ movie.getTitle() + " date: " + seance.getDate() + " time " + seance.getTime(); 
+				" place " + ticket.getPlace() + " status " + ticket.getStatus() +" movietheater " +
+				movieTheater.getName() + " movie "+ movie.getTitle() + " date: " + seance.getDate() + " time " + seance.getTime(); 
 		
 	}
 	

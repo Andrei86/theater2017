@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.shalkevich.andrei.training2017.datamodel.Customer;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
@@ -21,18 +20,10 @@ public class TicketWithAllDataMapper implements RowMapper<TicketWithAllData>{
 		
 		Seance seance  = new Seance();
 		seance.setId(rs.getInt("id"));
-		seance.setMovieTheaterId(rs.getInt("movietheater_id"));
+		seance.setMovietheaterId(rs.getInt("movietheater_id"));
 		seance.setMovieId(rs.getInt("movie_id"));
 		seance.setDate(rs.getDate("date"));
 		seance.setTime(rs.getTime("time"));
-		
-		Customer customer  = new Customer();
-		customer.setId(rs.getInt("id"));
-		customer.setLogin(rs.getString("login"));
-		customer.setPassword(rs.getString("password"));
-		customer.setFirstName(rs.getString("first_name"));
-		customer.setLastName(rs.getString("last_name"));
-		customer.seteMail(rs.getString("e_mail"));
 		
 		MovieTheater movieTheater  = new MovieTheater();
 		movieTheater.setId(rs.getInt("id"));
@@ -52,16 +43,13 @@ public class TicketWithAllDataMapper implements RowMapper<TicketWithAllData>{
 		ticket.setId(rs.getInt("id"));
 		ticket.setSeanceId(rs.getInt("seance_id"));
 		ticket.setCost(rs.getBigDecimal("cost"));
-		ticket.setCustomerId(rs.getInt("customer_id"));
 		ticket.setRow(rs.getInt("row"));
-		ticket.setPlace(rs.getInt("place"));
-		ticket.setPurchaseDate(rs.getTimestamp("purchase_date"));
+		ticket.setPlace(rs.getInt("place"));;
 		ticket.setStatus(Status.valueOf(rs.getString("status")));
 		
 		
 		TicketWithAllData ticketWithAllData = new TicketWithAllData();
 		ticketWithAllData.setSeance(seance);
-		ticketWithAllData.setCustomer(customer);
 		ticketWithAllData.setMovieTheater(movieTheater);
 		ticketWithAllData.setMovie(movie);
 		ticketWithAllData.setTicket(ticket);

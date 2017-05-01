@@ -1,11 +1,7 @@
 package com.shalkevich.andrei.training2017.dao.impl.db;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
 
-import com.shalkevich.andrei.training2017.dao.impl.db.filter.TicketWithAllDataFilter;
-import com.shalkevich.andrei.training2017.dao.impl.db.mapper.TicketWithAllDataMapper;
 import com.shalkevich.andrei.training2017.datamodel.Ticket;
 import com.shalkevich.andrei.training2017.datamodel.customData.Status;
 import com.shalkevich.andrei.training2017.datamodel.customData.TicketCostSum;
@@ -19,13 +15,15 @@ public interface ITicketDao extends IGenericDao<Ticket>{
 	
 	void update(Ticket ticket);
 	
-	List<TicketWithAllData> search(TicketWithAllDataFilter filter);
+	//List<TicketWithAllData> search(TicketWithAllDataFilter filter);
 	
 	void deleteAll(Integer seanceId);
 	
 	List<TicketWithAllData> getBySeanceAndStatus(Integer seanceId, Status status);
 	
-	List<TicketWithAllData> getBySeance(Integer seanceId); // используем 1 sql-запрос
+	TicketWithAllData getByTicketId(Integer ticketId);
 	
+	List<TicketWithAllData> getBySeance(Integer seanceId); // используем 1 sql-запрос
+	// здесь не должно быть метода для суммы билетов!
 
 }

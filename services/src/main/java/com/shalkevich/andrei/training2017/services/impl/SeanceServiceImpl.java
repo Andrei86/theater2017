@@ -1,22 +1,15 @@
 package com.shalkevich.andrei.training2017.services.impl;
 
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.shalkevich.andrei.training2017.dao.impl.db.IMovieDao;
-import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.filter.SeanceWithAllDataFilter;
-import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
 import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 import com.shalkevich.andrei.training2017.services.ISeanceService;

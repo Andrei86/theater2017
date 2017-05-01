@@ -28,6 +28,8 @@ public class TicketServiceImpl implements ITicketService{
 	
 	@Inject
 	ITicketDao ticketDao;
+	
+	
 
 	/*@Override
 	public TicketWithAllData BookingATicket(TicketWithAllData t, Customer c) {
@@ -47,7 +49,7 @@ public class TicketServiceImpl implements ITicketService{
 	
 	
 	
-	@Override
+	/*@Override
 	public Ticket PurchasingATicket(Ticket ticket) { // покупка билета
 		
 		LOGGER.info("Purchasing ticket with status={} and customerId={}", ticket.getStatus().name(), 
@@ -96,10 +98,34 @@ public class TicketServiceImpl implements ITicketService{
 		return ticket;
 
 	}
-	
+	*/
 	
 
 	@Override
+	public List<TicketWithAllData> search(Integer seanceId, Status status) {
+		
+		List<TicketWithAllData> list;
+		if(status == null)
+			list = ticketDao.getBySeance(seanceId);
+		else
+			list = ticketDao.getBySeanceAndStatus(seanceId, status);
+		return list;
+	}
+
+
+
+	@Override
+	public void ChangeStatusOfATicketWithAllData(Integer ticketId, Status status) { // может не void?? представить себе как в веб это будет
+		TicketWithAllData ticketWithAllData = ticketDao.getByTicketId(ticketId);
+		Ticket ticket = ticketWithAllData.getTicket();
+		ticket.setStatus(status);
+		ticketDao.update(ticket);
+		//return ;
+	}
+
+
+
+	/*@Override
 	public BigDecimal getTicketsCostSum(TicketWithAllDataFilter filter) { // продумать это
 		
 		LOGGER.debug("Get summary cost of ticket searched by parameters");
@@ -118,23 +144,31 @@ public class TicketServiceImpl implements ITicketService{
 		}
 		
 		return costSum;
-	}
+	}*/
 	
 	
 
 	@Override
+	public TicketWithAllData getByTicketId(Integer ticketId) {
+		
+		return ticketDao.getByTicketId(ticketId);
+	}
+
+
+
+	/*@Override
 	public List<TicketWithAllData> search(TicketWithAllDataFilter filter) {
 		
 		LOGGER.info("Search ticket with all data by filter with customerId ={}, senceId = {}, "
 				+ "status={}, dateFrom ={}, dateTo ={}", filter.getCustomerId(), filter.getSeanceId(),
 				 filter.getStatus(), filter.getDateFrom(), filter.getDateTo());
-		/*if(filter.isEmpty())
-			System.out.println("Please add criteries fo search");*/ // сделать в веб-слое
+		if(filter.isEmpty())
+			System.out.println("Please add criteries fo search"); // сделать в веб-слое
 		
 		List<TicketWithAllData> list = ticketDao.search(filter);
 		return list;
 	}
-
+*/
 	@Override
 	public Ticket get(Integer id) {
 		
@@ -179,7 +213,7 @@ public class TicketServiceImpl implements ITicketService{
 		
 		LOGGER.info("Delete all tickets of seance with id = " + seanceId);
 		
-		ticketDao.delete(seanceId);
+		ticketDao.deleteAll(seanceId);
 		
 	}
 

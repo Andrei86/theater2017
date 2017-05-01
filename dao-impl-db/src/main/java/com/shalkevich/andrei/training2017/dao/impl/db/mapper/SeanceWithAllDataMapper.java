@@ -18,7 +18,7 @@ public final class SeanceWithAllDataMapper implements RowMapper<SeanceWithAllDat
 		
 		Seance seance = new Seance();
 		seance.setId(rs.getInt("id"));
-		seance.setMovieTheaterId(rs.getInt("movietheater_id"));
+		seance.setMovietheaterId(rs.getInt("movietheater_id"));
 		seance.setMovieId(rs.getInt("movie_id"));
 		seance.setDate(rs.getDate("date"));
 		seance.setTime(rs.getTime("time"));

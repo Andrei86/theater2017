@@ -1,16 +1,12 @@
 package com.shalkevich.andrei.training2017.dao.impl.db.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -19,14 +15,9 @@ import org.springframework.stereotype.Repository;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.filter.TicketWithAllDataFilter;
-import com.shalkevich.andrei.training2017.dao.impl.db.mapper.SeanceWithAllDataMapper;
-import com.shalkevich.andrei.training2017.dao.impl.db.mapper.TicketCostSumMapper;
 import com.shalkevich.andrei.training2017.dao.impl.db.mapper.TicketWithAllDataMapper;
-import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Ticket;
-import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 import com.shalkevich.andrei.training2017.datamodel.customData.Status;
-import com.shalkevich.andrei.training2017.datamodel.customData.TicketCostSum;
 import com.shalkevich.andrei.training2017.datamodel.customData.TicketWithAllData;
 
 @Repository
@@ -35,40 +26,46 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 	@Inject
 	JdbcTemplate jdbcTemplate;
 	
+	/*НАДО ВСЕ-ТАКИ ФИЛЬТР НАПИСАТЬ НА TicketWithAllData ПОТОМУ ЧТО МНОГО ГОВНОКОДА!!*/
 	
-	
-	/*@Override
-	public TicketWithAllData getByTicketId(Integer id) {
+	@Override
+	public TicketWithAllData getByTicketId(Integer ticketId) {
 		
-		return jdbcTemplate.queryForObject(" select * from ticket t join seance s on t.seance_id = s.id left join customer c "
-				+ "on t.customer_id = c.id join movietheater m_t on m_t.id = s.movietheater_id "
-				+ "join movie m on s.movie_id = m.id where t.id = " + id, new TicketWithAllDataMapper());
+		return jdbcTemplate.queryForObject(" select * from ticket t join seance s on t.seance_id = s.id "
+				+ "join movietheater m_t on m_t.id = s.movietheater_id "
+				+ "join movie m on s.movie_id = m.id where t.id = " + ticketId, new TicketWithAllDataMapper());
 		
-	}*/
+	}
 
 	@Override
-	public List<TicketWithAllData> getBySeanceAndStatus(Integer seanceId, Status status) {
-		String sqlBySeanceAndStatus = sqlBySeance + " AND t.status = ' " + status.name() + "'";
-		return null;
+	public List<TicketWithAllData> getBySeanceAndStatus(Integer seanceId, Status status) { // рефакторить, а то плодим кучу strings
+		
+		String sqlBySeanceAndStatus = "select * from ticket t join seance s on t.seance_id = s.id "
+				+ "join movietheater m_t on m_t.id = s.movietheater_id "
+				+ "join movie m on s.movie_id = m.id where t.seance_id = " + seanceId + " AND t.status = '" + status.name() + "'";
+		
+		System.out.println(sqlBySeanceAndStatus);
+		
+		return jdbcTemplate.query(sqlBySeanceAndStatus, new TicketWithAllDataMapper());
 	}
 
 	@Override
 	public List<TicketWithAllData> getBySeance(Integer seanceId) {
 		
-		String sqlBySeance = "select * from ticket t join seance s on t.seance_id = s.id left join customer c "
-				+ "on t.customer_id = c.id join movietheater m_t on m_t.id = s.movietheater_id "
+		String sqlBySeance = "select * from ticket t join seance s on t.seance_id = s.id "
+				+ "join movietheater m_t on m_t.id = s.movietheater_id "
 				+ "join movie m on s.movie_id = m.id where t.seance_id = " + seanceId;
 		
 		return jdbcTemplate.query(sqlBySeance, new TicketWithAllDataMapper());
 	}
 
-	@Override
+	/*@Override
 	public List<TicketWithAllData> search(TicketWithAllDataFilter filter) { // нужно бросить исключение если фильтр равен null
 		 String sql = "select * from ticket t join seance s on t.seance_id = s.id left join customer c "
 				+ "on t.customer_id = c.id join movietheater m_t on m_t.id = s.movietheater_id "
 				+ "join movie m on s.movie_id = m.id ";// пока говнокод
 		
-		/*t.id, t.cost, t.row, t.place, t.status, m_t.name, m.title, s.date, s.time*/
+		t.id, t.cost, t.row, t.place, t.status, m_t.name, m.title, s.date, s.time
 		String and = " and ";
 		
 		String where = " where ";
@@ -90,7 +87,7 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 		List<TicketWithAllData> list = jdbcTemplate.query(sql, new TicketWithAllDataMapper());
 		
 		return list;
-	}
+	}*/
 
 	@Override
 	public void deleteAll(Integer seanceId) {

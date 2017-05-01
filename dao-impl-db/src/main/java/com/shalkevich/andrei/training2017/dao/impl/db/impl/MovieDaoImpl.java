@@ -1,15 +1,12 @@
 package com.shalkevich.andrei.training2017.dao.impl.db.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -19,12 +16,8 @@ import org.springframework.stereotype.Repository;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.filter.MovieFilter;
-import com.shalkevich.andrei.training2017.dao.impl.db.mapper.MovieGenreMapper;
-import com.shalkevich.andrei.training2017.dao.impl.db.mapper.SeanceWithAllDataMapper;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
-import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
-import com.shalkevich.andrei.training2017.datamodel.customData.MovieGenre;
-import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
+
 
 @Repository
 public class MovieDaoImpl extends GenericDaoImpl<Movie> implements IMovieDao{

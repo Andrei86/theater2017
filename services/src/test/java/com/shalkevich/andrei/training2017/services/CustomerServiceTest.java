@@ -5,12 +5,16 @@ import javax.inject.Inject;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 import com.shalkevich.andrei.training2017.datamodel.Customer;
 import com.shalkevich.andrei.training2017.datamodel.customData.Role;
 
 public class CustomerServiceTest extends AbstractTest{
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceTest.class);
 	
 	@Inject
 	ICustomerService cService;
@@ -20,6 +24,7 @@ public class CustomerServiceTest extends AbstractTest{
 	@BeforeClass
 	public static void createEntities()
 	{
+		LOGGER.info("Create Customer entities BeforeClass");
 		
 		c1 = new Customer();
 		c1.setLogin("LoginTest1");
@@ -42,47 +47,44 @@ public class CustomerServiceTest extends AbstractTest{
 	@Before
 	public void idToNull()
 	{
+		
+		LOGGER.info("Set id to null and save Customer entity @Before");
+		
 		c1.setId(null);
 		c2.setId(null);
+		
+		cService.save(c1);
 	}
 	
 	@Test
 	public void getByLoginTest()
 	{
 		
-		cService.save(c1);
-		
-		//Integer savedCustomerId = c1.getId();
+		LOGGER.info("Get customer by login test");
 		
 		Customer customerFromDB = cService.getByLogin(c1.getLogin());
 		
 		Assert.isTrue(customerFromDB.equals(c1), "objects must be equal");
-		
-		cService.delete(c1.getId());
+
 	}
 	
 	@Test
 	public void createTest()
 	{
-
-		cService.save(c1);
+		LOGGER.info("Create customer test");
 		
 		Integer savedCustomerId = c1.getId();
 		
 		Customer customerFromDB = cService.get(savedCustomerId);
 		
 		Assert.isTrue(customerFromDB.equals(c1), "objects must be equal");
-		
-		cService.delete(c1.getId());
+
 	}
 	
 	@Test
 	public void updateTest()
 	{
-		
-		System.out.println(c1.getId());
-		cService.save(c1);
-		
+		LOGGER.info("Update customer test");
 		Customer updatedCustomer = cService.get(c1.getId());
 		
 		updatedCustomer.setLogin("LoginTestUpd");
@@ -94,28 +96,23 @@ public class CustomerServiceTest extends AbstractTest{
 		
 		Assert.isTrue(updatedCustomer.equals(cService.get(updatedCustomer.getId())), "objects must be equal");
 		
-		cService.delete(c1.getId());
-		
 	}
 	
 	@Test
 	public void readTest()
 	{
-		
-		cService.save(c1);
+		LOGGER.info("Read customer test");
 		
 		Integer customerFromDBId = c1.getId();
 		Customer customerFromDB = cService.get(customerFromDBId);
 		Assert.isTrue(customerFromDB.equals(c1), "objects must be equal");
-		
-		cService.delete(c1.getId());
+
 	}
 	
 	@Test
 	public void deleteTest()
 	{
-		
-		cService.save(c1);
+		LOGGER.info("Delete customer test");
 		
 		Integer customerFromDBId = c1.getId();
 		
@@ -130,6 +127,8 @@ public class CustomerServiceTest extends AbstractTest{
 	
 	@Test(expected = UnsupportedOperationException.class)
     public void testUnsupportedMethod() {
+		LOGGER.info("Unsupported save Multiple test for customer");
+		
         cService.saveMultiple(c1, c2);
     }
 

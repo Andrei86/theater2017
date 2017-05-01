@@ -41,13 +41,13 @@ public class GenreServiceTest extends AbstractTest{
 		LOGGER.info("Set id of created genres to null");
 		g1.setId(null);
 		g2.setId(null);
+		
+		gService.save(g1);
 	}
 	@Test
 	public void createTest()
 	{
 		LOGGER.info("Create test for Genre");
-		
-		gService.save(g1);
 		
 		Integer savedGenreId = g1.getId();
 		
@@ -61,8 +61,6 @@ public class GenreServiceTest extends AbstractTest{
 	public void updateTest()
 	{
 		LOGGER.info("Update test for Genre");
-		
-		gService.save(g1);
 		
 		Genre updatedGenre = gService.get(g1.getId());
 		
@@ -79,8 +77,6 @@ public class GenreServiceTest extends AbstractTest{
 	{
 		LOGGER.info("Update test for Genre");
 		
-		gService.save(g1);
-		
 		Integer genreFromDBId = g1.getId();
 		
 		Genre genreFromDB = gService.get(genreFromDBId);
@@ -95,14 +91,11 @@ public class GenreServiceTest extends AbstractTest{
 
 		LOGGER.info("Delete test for Genre");
 		
-		gService.save(g1);
-		
 		Integer genreFromDBId = g1.getId();
 		
 		gService.delete(genreFromDBId);
 		
 		Genre genreFromDB = gService.get(genreFromDBId);
-		
 		
 		Assert.isNull(genreFromDB, "returned after deleting object must be null");
 		
