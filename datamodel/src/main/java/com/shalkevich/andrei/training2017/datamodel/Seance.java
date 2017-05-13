@@ -6,11 +6,23 @@ import java.sql.Date;
 public class Seance {
 	
 	private Integer id;
-	private Integer movietheaterId;
-	private Integer movieId;
+	private MovieTheater movietheater;
+	private Movie movie;
 	private Date date;
 	private Time time;
 	
+	public MovieTheater getMovieTheater() {
+		return movietheater;
+	}
+	public void setMovieTheater(MovieTheater movieTheater) {
+		this.movietheater = movieTheater;
+	}
+	public Movie getMovie() {
+		return movie;
+	}
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
 	public Time getTime() {
 		return time;
 	}
@@ -23,19 +35,7 @@ public class Seance {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public Integer getMovietheaterId() {
-		return movietheaterId;
-	}
-	public void setMovietheaterId(Integer movietheaterId) {
-		this.movietheaterId = movietheaterId;
-	}
-	public Integer getMovieId() {
-		return movieId;
-	}
-	public void setMovieId(Integer movieId) {
-		this.movieId = movieId;
-	}
+
 	
 	public Date getDate() {
 		return date;
@@ -50,18 +50,20 @@ public class Seance {
 		if(this == obj) return true;
 		if(!(obj instanceof Seance)) return false;
 		
-		Seance s = (Seance) obj;
+		Seance seance = (Seance) obj;
 		
-		return id.equals(s.id) && movietheaterId.equals(s.movietheaterId) && movieId.equals(s.movieId) 
-				&& date.equals(s.date) && time.equals(s.time);
+		return id.equals(seance.id) 
+				&& movietheater.equals(seance.movietheater)
+				&& movie.equals(seance.movie)
+				&& date.equals(seance.date) && time.equals(seance.time);
 	}
 	@Override
 	public int hashCode() {
 		
 		Integer code = 17;
         code = 31 * code + id;
-        code = 31 * code + movietheaterId.hashCode();
-        code = 31 * code + movieId.hashCode();
+        code = 31 * code + movietheater.hashCode();
+        code = 31 * code + movie.hashCode();
         code = 31 * code + date.hashCode();
         code = 31 * code + time.hashCode();
         
@@ -70,7 +72,7 @@ public class Seance {
 	@Override
 	public String toString() {
 		
-		return "Seance [id= " + id + "]" + " movie theater " + movietheaterId + " movie " + movieId +
+		return "Seance [id= " + id + "]" + " movie theater " + movietheater.getName() + " movie " + movie.getTitle() +
 				" seance date " + date + " seance time " + time;
 	}
 	

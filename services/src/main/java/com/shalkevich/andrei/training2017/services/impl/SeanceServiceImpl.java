@@ -9,9 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
-import com.shalkevich.andrei.training2017.dao.impl.db.filter.SeanceWithAllDataFilter;
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.SeanceFilter;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
-import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 import com.shalkevich.andrei.training2017.services.ISeanceService;
 
 @Service
@@ -23,9 +22,16 @@ public class SeanceServiceImpl implements ISeanceService{
 	public ISeanceDao seanceDao;
 	
 	@Override
+	public List<Seance> getAll() {
+		LOGGER.debug("Throw unsupported operation exception for get all seances method for seance");
+		
+		throw new UnsupportedOperationException("Unsupported operation exception for get all seances method for seance");
+	}
+
+	@Override
 	public Seance get(Integer id) {
 		
-	LOGGER.info("Get seance with {id} = " + id);
+	LOGGER.debug("Get seance with id = {}", id);
 		
 	return seanceDao.get(id);
 	}
@@ -35,13 +41,14 @@ public class SeanceServiceImpl implements ISeanceService{
 		
 		if(seance.getId() == null)
 		{
-			LOGGER.info("Insert new seance with movietheater_id={}, "
-					+ "movie_id={}, date={}, time={}",
-					seance.getMovietheaterId(), seance.getMovieId(),  seance.getDate(), seance.getTime());
+			LOGGER.debug("Insert new seance with movietheater id ={},movie id={}, date= {}, time= {}",
+					seance.getMovieTheater().getId(), seance.getMovie().getId(),  seance.getDate(), seance.getTime());
 			seanceDao.insert(seance);
 		}
 		else
 			seanceDao.update(seance);
+		LOGGER.debug("Update seance with movietheater id ={},movie id={}, date= {}, time= {}",
+				seance.getMovieTheater().getId(), seance.getMovie().getId(),  seance.getDate(), seance.getTime());
 		
 	}
 
@@ -51,7 +58,7 @@ public class SeanceServiceImpl implements ISeanceService{
 		for (Seance seance : seanceArray) {
 			save(seance);
 		}
-		LOGGER.info("Save new seances from array");
+		LOGGER.debug("Save new seances from array");
 	}
 
 	@Override
@@ -59,20 +66,17 @@ public class SeanceServiceImpl implements ISeanceService{
 		
 		seanceDao.delete(id);
 		
-		LOGGER.info("Delete seance with id= "+id);
+		LOGGER.debug("Delete seance with id= {}",id);
 		
 	}
 
 	@Override
-	public List<SeanceWithAllData> search(SeanceWithAllDataFilter filter) {
+	public List<Seance> search(SeanceFilter filter) {
 		
+		LOGGER.debug("Search seance with all data by filter");
 		
-		LOGGER.info("Search seance with all data by filter");
-		/*if(filter.isEmpty())
-			System.out.println("Please add criteries fo search");*/ // сделать в веб-слое
+		List<Seance> list = seanceDao.search(filter);
 		
-		List<SeanceWithAllData> list = seanceDao.search(filter);
 		return list;
 	}
-
 }

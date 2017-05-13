@@ -3,6 +3,7 @@ package com.shalkevich.andrei.training2017.services.impl;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,13 +13,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
-import com.shalkevich.andrei.training2017.dao.impl.db.filter.TicketWithAllDataFilter;
-import com.shalkevich.andrei.training2017.datamodel.Customer;
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.BookingFilter;
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.TicketFilter;
+import com.shalkevich.andrei.training2017.datamodel.Booking;
+import com.shalkevich.andrei.training2017.datamodel.Seance;
 import com.shalkevich.andrei.training2017.datamodel.Ticket;
-import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 import com.shalkevich.andrei.training2017.datamodel.customData.Status;
-import com.shalkevich.andrei.training2017.datamodel.customData.TicketCostSum;
 import com.shalkevich.andrei.training2017.datamodel.customData.TicketWithAllData;
+import com.shalkevich.andrei.training2017.services.IBookingService;
+import com.shalkevich.andrei.training2017.services.ISeanceService;
 import com.shalkevich.andrei.training2017.services.ITicketService;
 
 @Service
@@ -29,150 +32,182 @@ public class TicketServiceImpl implements ITicketService{
 	@Inject
 	ITicketDao ticketDao;
 	
+	@Inject
+	ISeanceService seanceService;
 	
-
-	/*@Override
-	public TicketWithAllData BookingATicket(TicketWithAllData t, Customer c) {
-		
-		//TicketWithAllData ticketAll = ticketDao.getById(ticketId); // получаем полный билет со всеми данными
-		Ticket ticketOnly =  t.getTicket(); // выделяем поле просто билет
-		if(ticketOnly.getCustomerId() == null)
-		ticketOnly.setCustomerId(c.getId()); // инициализируем поле ustomerId
-		if(ticketOnly.getStatus() == Status.valueOf("free"))
-			ticketOnly.setStatus(Status.valueOf("processing"));
-		
-		ticketDao.update(ticketOnly); // накосячил
-		//save(ticket);
-		
-		return t;
-	}*/
+	@Inject
+	IBookingService bookingService;
 	
-	
-	
-	/*@Override
-	public Ticket PurchasingATicket(Ticket ticket) { // покупка билета
+	private Boolean isValidTimeForTicketReturn(Seance seance) // надо использовать calendar
+	{
 		
-		LOGGER.info("Purchasing ticket with status={} and customerId={}", ticket.getStatus().name(), 
-				ticket.getCustomerId());
+		Calendar seanceDateCal = Calendar.getInstance();
+		seanceDateCal.setTime(seance.getDate());
 		
-		if(ticket.getCustomerId() != null && ticket.getStatus() == Status.processing)
-		{
-			ticket.setStatus(Status.booked);
-			ticket.setPurchaseDate(new Timestamp(new java.util.Date().getTime()));
-			ticketDao.update(ticket);
-		}
-		//ticketDao.update(ticket);
-		return ticket;
-	}
-
-	@Override
-	public Ticket ExemptionOfATicket(Ticket ticket) {
+		Calendar seanceTimeCal = Calendar.getInstance();
+		seanceTimeCal.setTime(seance.getTime());
 		
-		LOGGER.info("Exemptioning ticket with status={} and customerId={}", ticket.getStatus().name(), 
-				ticket.getCustomerId());
+		seanceDateCal.set(Calendar.HOUR_OF_DAY, seanceTimeCal.get(Calendar.HOUR_OF_DAY));
+		seanceDateCal.set(Calendar.MINUTE, seanceTimeCal.get(Calendar.MINUTE));
+		seanceDateCal.set(Calendar.SECOND, seanceTimeCal.get(Calendar.SECOND));
+		seanceDateCal.set(Calendar.MILLISECOND, seanceTimeCal.get(Calendar.MILLISECOND));
 		
-		if(ticket.getStatus() == Status.processing)
-		{
-			ticket.setStatus(Status.free);
-			ticket.setCustomerId(null);
-			ticketDao.update(ticket);
-		}
-		return ticket;
-		
-	}
-
-	@Override
-	public Ticket BookingATicket(Ticket ticket, Customer c) {
-		
-		LOGGER.info("Booking ticket with status={} by customerId={}", ticket.getStatus().name(), 
-				ticket.getCustomerId());
-		
-		if(ticket.getCustomerId() == null)
-		ticket.setCustomerId(c.getId());
-		
-		if(ticket.getStatus() == Status.free)
-			ticket.setStatus(Status.processing);
-		
-		ticketDao.update(ticket);
-		
-		return ticket;
-
-	}
-	*/
-	
-
-	@Override
-	public List<TicketWithAllData> search(Integer seanceId, Status status) {
-		
-		List<TicketWithAllData> list;
-		if(status == null)
-			list = ticketDao.getBySeance(seanceId);
+		long seanceMillis = seanceDateCal.getTimeInMillis(); //getTime();
+		long millisIn20min = 20*60*1000; // 20 min
+		long currTimeMillis = new java.util.Date().getTime();
+		if(seanceMillis - currTimeMillis < millisIn20min)
+			return true;
 		else
-			list = ticketDao.getBySeanceAndStatus(seanceId, status);
-		return list;
+			return false;
 	}
-
-
-
+	
 	@Override
-	public void ChangeStatusOfATicketWithAllData(Integer ticketId, Status status) { // может не void?? представить себе как в веб это будет
-		TicketWithAllData ticketWithAllData = ticketDao.getByTicketId(ticketId);
-		Ticket ticket = ticketWithAllData.getTicket();
-		ticket.setStatus(status);
-		ticketDao.update(ticket);
-		//return ;
+	public List<Ticket> search(TicketFilter filter) {
+		
+		LOGGER.debug("Search ticket with all data by seance id  and  status id");
+		
+		List<Ticket> ticketList = ticketDao.searchByFilter(filter);
+		
+		return ticketList;
 	}
-
-
-
-	/*@Override
-	public BigDecimal getTicketsCostSum(TicketWithAllDataFilter filter) { // продумать это
+	
+	
+	@Override
+	public BigDecimal getTicketCostSum(List<Ticket> ticketList) {
 		
-		LOGGER.debug("Get summary cost of ticket searched by parameters");
+		BigDecimal costSum = new BigDecimal(0);
 		
-		BigDecimal costSum = null;
-		if(filter.isEmpty())
-			LOGGER.debug("You must specify parameters of filter"); // как правильно уведомить юзера об этом
-		else
-		{
-		List<TicketWithAllData> list = ticketDao.search(filter);
-		for(TicketWithAllData t: list)
-		{
-			costSum = costSum.add(t.getTicket().getCost());
-		}
-		
-		}
+		for(Ticket ticket: ticketList)
+			costSum = costSum.add(ticket.getCost());
 		
 		return costSum;
-	}*/
-	
-	
+	}
+
+
 
 	@Override
-	public TicketWithAllData getByTicketId(Integer ticketId) {
+	public void changeStatusOfATicket(Integer ticketId, Status status) { // может не void?? представить себе как в веб это будет
+		Ticket ticket = ticketDao.get(ticketId);
+		ticket.setStatus(status);
+		ticketDao.update(ticket);
+	}
+	
+	@Override
+	public List<Ticket> getAll() {
 		
-		return ticketDao.getByTicketId(ticketId);
+		UnsupportedOperationException e = new UnsupportedOperationException("Unsupported operation exception for get all tickets");
+		
+		LOGGER.debug(e.getMessage());
+		
+		throw e;
 	}
 
-
-
-	/*@Override
-	public List<TicketWithAllData> search(TicketWithAllDataFilter filter) {
+	//--------------------------------------
+	
+	@Override
+	public Ticket buyOutTicket(Integer bookingId) { // покупка заказанного билета
 		
-		LOGGER.info("Search ticket with all data by filter with customerId ={}, senceId = {}, "
-				+ "status={}, dateFrom ={}, dateTo ={}", filter.getCustomerId(), filter.getSeanceId(),
-				 filter.getStatus(), filter.getDateFrom(), filter.getDateTo());
-		if(filter.isEmpty())
-			System.out.println("Please add criteries fo search"); // сделать в веб-слое
+		LOGGER.debug("Buyout booked ticket in booking id = {}", bookingId);
 		
-		List<TicketWithAllData> list = ticketDao.search(filter);
-		return list;
+		Booking booking = bookingService.get(bookingId);
+		Integer ticketId = null;
+		
+		if(booking != null)
+		{
+			ticketId = booking.getTicket().getId();
+			buyingATicket(ticketId);
+			return ticketDao.get(ticketId);
+		}
+		else
+			return null; // или лучше NullPointer or BadRequest in web?
 	}
-*/
+
+	
+	@Override
+	public Ticket returningBookedTicketOnSale(Integer ticketId)
+	// возврат кассиром невыкупленного билета в продажу менее чем за 20 мин до начала сеанса
+	{
+		LOGGER.debug("Return booked unbought by user ticket on sale with ticket id = {}", ticketId);
+		
+		Ticket ticket = ticketDao.get(ticketId);
+		Seance seance = seanceService.get(ticket.getSeance().getId());
+		
+		if(isValidTimeForTicketReturn(seance))
+		{
+
+			Booking bookingOfTicket = bookingService.findByTicketId(ticketId);
+			if(bookingOfTicket != null)
+				bookingService.delete(bookingOfTicket.getId()); // кассир удаляет заказ
+			
+			return ticketDao.get(ticketId);
+		}
+		else
+		{
+			UnsupportedOperationException e = new UnsupportedOperationException("You can't delete booking of ticket because it is not time");
+			LOGGER.info(e.getMessage());
+			throw e;
+		}
+	}
+
+	
+	@Override
+	public Ticket buyingATicket(Integer ticketId) throws UnsupportedOperationException // покупка билета без брони
+	{
+		LOGGER.debug("Live bying ticket with ticket id = {}", ticketId);
+		
+		Ticket ticket = ticketDao.get(ticketId);
+		if(!ticket.getStatus().equals(Status.busy))
+		{
+		changeStatusOfATicket(ticketId, Status.busy);	
+		return ticketDao.get(ticketId);
+		}	
+		else
+			throw new UnsupportedOperationException("You can't buy already bought ticket");
+
+	}
+
+	@Override
+	public Ticket returningMoneyForATicket(Integer ticketId) throws UnsupportedOperationException
+	// возврат билета в кассе не менее чем за 20 мин до начала сеанса
+	{
+		//!!!!!!!! надо кассиру удалять заказ если человек возвращает билет купленный через бронь, 
+		// т.к. у юзера должны оставаться только актуальные заказы
+		
+		LOGGER.debug("Live returning ticket with ticket id = {}", ticketId);
+		
+		Ticket ticket = ticketDao.get(ticketId);
+		Seance seance = seanceService.get(ticketDao.get(ticketId).getSeance().getId());
+		
+		if(isValidTimeForTicketReturn(seance))
+		{
+			
+			Exception e = new UnsupportedOperationException("You can't excempt ticket less then 20 min before beginning seance");
+			LOGGER.debug(e.getMessage());
+			throw (UnsupportedOperationException)e;
+		}
+		else if(ticket.getStatus().equals(Status.busy))
+		{
+
+			Booking bookingOfTicket = bookingService.findByTicketId(ticketId);
+			if(bookingOfTicket != null)
+				bookingService.delete(bookingOfTicket.getId());
+		else
+			changeStatusOfATicket(ticketId, Status.free);
+			
+		return ticketDao.get(ticketId);
+		}
+		else
+		{
+			Exception e = new UnsupportedOperationException("You can't excempt ticket with no busy status");
+			LOGGER.debug(e.getMessage());
+			throw (UnsupportedOperationException)e;
+		}
+	}
+
 	@Override
 	public Ticket get(Integer id) {
 		
-		LOGGER.info("Get ticket with id = " + id);
+		LOGGER.debug("Get ticket with id = {}", id);
 		return ticketDao.get(id);
 	}
 
@@ -181,19 +216,19 @@ public class TicketServiceImpl implements ITicketService{
 		
 		if(ticket.getId() == null)
 		{
-			LOGGER.info("insert new Ticket");
+			LOGGER.debug("Insert new ticket");
 			ticketDao.insert(ticket);
 		}
 		else
-			ticketDao.update(ticket);
-			
+			LOGGER.debug("Update ticket with id = {}", ticket.getId());
+			ticketDao.update(ticket);	
 		
 	}
 
 	@Override
 	public void saveMultiple(Ticket... ticketArray) {
 		
-		LOGGER.info("Save new tickets from array");
+		LOGGER.debug("Save new tickets from array");
 		
 		for(Ticket ticket:ticketArray)
 		save(ticket);
@@ -201,20 +236,10 @@ public class TicketServiceImpl implements ITicketService{
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(Integer id) { // не можем удалить билет, на который ссылается booking
 		
-		LOGGER.info("Delete ticket by id = " + id);
+		LOGGER.info("Delete ticket by id = {}", id);
 		
 		ticketDao.delete(id);
 	}
-
-	@Override
-	public void deleteAll(Integer seanceId) {
-		
-		LOGGER.info("Delete all tickets of seance with id = " + seanceId);
-		
-		ticketDao.deleteAll(seanceId);
-		
-	}
-
 }

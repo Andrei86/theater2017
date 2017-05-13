@@ -1,6 +1,6 @@
 package com.shalkevich.andrei.training2017.webapp.models;
 
-public class MovieModel { // как жанры прикрутить?
+public class MovieModel {
 	
 	private String title;
 	

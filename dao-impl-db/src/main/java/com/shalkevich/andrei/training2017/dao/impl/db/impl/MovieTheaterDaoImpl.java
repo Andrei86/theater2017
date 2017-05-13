@@ -17,45 +17,70 @@ import org.springframework.stereotype.Repository;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
-import com.shalkevich.andrei.training2017.datamodel.customData.Status;
 
 @Repository
 public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements IMovieTheaterDao{
 
+	//есть findAll, getById, delete
+	
+	final String FIND_ALL_BY_CITY = "SELECT * FROM movietheater WHERE city = ? ";
+	final String FIND_BY_NAME = "SELECT * FROM movietheater WHERE name = ? ";
+	final String FIND_ALL_ACTIVE_BY_CITY = "SELECT * FROM movietheater WHERE is_active = true AND city = ? "; // user
+	final String INSERT_MT = "INSERT INTO movietheater (name, city, address, is_active) VALUES(?, ?, ?, ?)";
+	final String UPDATE_MT = "UPDATE movietheater SET name = ?, city= ?, address = ?, is_active = ? WHERE id = ?";
+	
 	@Inject
 	private JdbcTemplate jdbcTemplate;
 	
-	@Override
-	public List<MovieTheater> getAllByCity(String city) {  // for admin
-		List<MovieTheater> list = jdbcTemplate.query("select * from movietheater where city = ? "
-				, new Object[] {city} ,
-				new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
-		return list;
-	}
-
+	
 	
 	@Override
-	public List<MovieTheater> getAllActiveByCity(String city) { // for user gjrf 
+	public MovieTheater getByName(String name) {
+		try
+		{
+		MovieTheater movieTheater = jdbcTemplate.queryForObject(FIND_BY_NAME, new Object[] {name} ,
+				new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
+		return movieTheater;
+		}
+			catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public List<MovieTheater> getAllByCity(String city) 
+	{  // for admin
+		try
+		{
+		List<MovieTheater> list = jdbcTemplate.query(FIND_ALL_BY_CITY, new Object[] {city} ,
+				new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
+		return list;
+		}
+			catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public List<MovieTheater> getAllActiveByCity(String city) { // for user
 		
-		List<MovieTheater> list = jdbcTemplate.query("select * from movietheater where is_active = true and city = ?"
-			, new Object[] {city} , new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
+		List<MovieTheater> list = jdbcTemplate.query(FIND_ALL_ACTIVE_BY_CITY, new Object[] {city} , 
+				new BeanPropertyRowMapper<MovieTheater>(MovieTheater.class));
 		
 		return list;
 	}
 
 
 	@Override
-	public MovieTheater insert(MovieTheater entity) throws NullPointerException
+	public MovieTheater insert(MovieTheater entity)
 	{
-
-		final String INSERT_SQL = "insert into movietheater (name, city, address, is_active) values(?, ?, ?, ?)";
 		
-		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
+		KeyHolder keyHolder = new GeneratedKeyHolder();
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException { 
-	                PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
+	                PreparedStatement ps = connection.prepareStatement(INSERT_MT, new String[] { "id" });
 	                ps.setString(1, entity.getName());
 	                ps.setString(2, entity.getCity());
 	                ps.setString(3, entity.getAddress());
@@ -71,19 +96,18 @@ public class MovieTheaterDaoImpl extends GenericDaoImpl<MovieTheater> implements
 	}
 
 	@Override
-	public void update(MovieTheater entity) throws NullPointerException
+	public void update(MovieTheater entity)
 	{
-		
-		final String UPDATE_SQL = "update movietheater set name = ?, city= ?, address = ?, is_active = ? where id = " + entity.getId();
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);//, new String[] { "id" });
+	                PreparedStatement ps = connection.prepareStatement(UPDATE_MT);
 	                ps.setString(1, entity.getName());
 	                ps.setString(2, entity.getCity());
 	                ps.setString(3, entity.getAddress());
 	                ps.setBoolean(4, entity.getIsActive());
+	                ps.setInt(5, entity.getId());
 	                return ps;
 	            }
 	        });

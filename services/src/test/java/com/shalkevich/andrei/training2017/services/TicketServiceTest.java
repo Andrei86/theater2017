@@ -3,6 +3,7 @@ package com.shalkevich.andrei.training2017.services;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import org.springframework.util.Assert;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.filter.MovieFilter;
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.TicketFilter;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
@@ -28,196 +30,241 @@ public class TicketServiceTest extends AbstractTest{
 	private static final Logger LOGGER = LoggerFactory.getLogger(TicketServiceTest.class);
 	
 	@Inject
-	ITicketService tService;
+	ITicketService ticketService;
 	
 	@Inject
-	ISeanceService sService;
+	ISeanceService seanceService;
 	
 	@Inject
-	IMovieTheaterService mtService;
+	IMovieTheaterService theaterService;
 	
 	@Inject
-	IMovieService mService;
+	IBookingService bookingService;
 	
-	public static Ticket t1, t2;
+	@Inject
+	IMovieService movieService;
 	
-	public static Seance s1;
+	@Inject
+	IGenreService genreService;
 	
-	public static MovieTheater mt1;
-	
-	public static Movie m1;
-	
-	@BeforeClass
-	public static void CreateEntities()
-	{
-		LOGGER.info("Create entities Ticket BeforeClass");
-		
-		m1 = new Movie();
-		m1.setTitle("MovieForTest1");
-		m1.setAgeBracket("test1+");
-		m1.setDuration(300);
-		m1.setDescription("bla bla test1");
-		
-		mt1 = new MovieTheater();
-		mt1.setName("Cinema1");
-		mt1.setCity("City");
-		mt1.setAddress("ul. 1, 1");
-		mt1.setIsActive(true);
-		
-		s1 = new Seance();
-		s1.setDate(Date.valueOf("2090-04-02"));
-		s1.setTime(Time.valueOf("18:00:00"));
-
-	}
+	@Inject
+	ICustomerService customerService;
 	
 	@Before
 	public void IdToNull()
 	{
-		LOGGER.info("Set id of movies to null before every @Test");
+		LOGGER.debug("Set id of entities to null and save to DB before every @Test");
 		
-		m1.setId(null);
-		mt1.setId(null);
-		s1.setId(null);
+		movie1.setId(null);
+		theater1.setId(null);
+		seance1.setId(null);
+		ticket1.setId(null);
+		ticket2.setId(null);
+		genre1.setId(null);
+		customer1.setId(null);
+		booking1.setId(null);
 		
-		mService.save(m1);
-		mtService.save(mt1);
+		genreService.save(genre1);
 		
-		s1.setMovieId(m1.getId());
-		s1.setMovietheaterId(mt1.getId());
+		movieService.insertMovieWithGenres(movie1, genre1.getName());
+		theaterService.save(theater1);
+		
+		seance1.setMovie(movie1);
+		seance1.setMovieTheater(theater1);
 
-		sService.save(s1);
+		seanceService.save(seance1);
 		
-		t1 = new Ticket();
-		t1.setSeanceId(s1.getId());
-		t1.setCost(new BigDecimal("5.50"));
-		t1.setRow(1);
-		t1.setPlace(1);
-		t1.setStatus(Status.valueOf("free"));
-				
-		t2 = new Ticket();	
-		t2.setSeanceId(s1.getId());
-		t2.setCost(new BigDecimal("5.50"));
-		t2.setRow(2);
-		t2.setPlace(2);
-		t2.setStatus(Status.valueOf("busy"));
-		tService.save(t1);
-		tService.save(t2);
+		ticket1.setSeance(seance1);
+		ticket2.setSeance(seance1);
+		
+		ticketService.save(ticket1);
+		ticketService.save(ticket2);
+		
+		customerService.save(customer1);
 		
 	}
 	
 	@Test
-	public void TicketWithAllDataSearchTest()
+	public void ticketSearchTest()
 	{	
-		LOGGER.info("Search test for ticketWithAllData");
 		
-		 tService.search(s1.getId(), Status.free);
+		TicketFilter filter = new TicketFilter();
+		filter.setSeanceId(seance1.getId());
+		filter.setStatus(ticket1.getStatus());
 		
-		List<TicketWithAllData> list = tService.search(s1.getId(), Status.free);
+		LOGGER.debug("Search test for tickets by filter with status = {} and seance id = {}",ticket1.getStatus(), seance1.getId());
 		
-		Assert.isTrue(list.size() == 1, "size must be 1");
+		List<Ticket> list = ticketService.search(filter);
+		
+		Assert.isTrue(list.size() == 2, "size of list must be 2");
 
 	}
 	
 	@Test
-	public void ChangeStatusOfATicketWithAllDataTest()
+	public void getTicketCostSumTest()
+	{
+		LOGGER.debug("Sum cost test for tickets ticket1 id = {} and ticket2 id = {}",ticket1.getId(), ticket2.getId());
+		
+		List<Ticket> list = new ArrayList<>();
+		list.add(ticket1);
+		list.add(ticket2);
+		
+		BigDecimal sumOfTickets = ticketService.getTicketCostSum(list);
+		
+		Assert.isTrue(sumOfTickets.compareTo(new BigDecimal("20.0")) == 0, "Ticket's cost must be right");
+	}
+	
+	@Test
+	public void changeStatusOfATicketTest()
 	{
 		
-		LOGGER.info("Change status of a ticket with all data test");
+		LOGGER.debug("Change status of a ticket test");
 		
-		tService.ChangeStatusOfATicketWithAllData(t1.getId(), Status.booking);
+		ticketService.changeStatusOfATicket(ticket1.getId(), Status.booked);
 		
-		Ticket ticketFromDB = tService.get(t1.getId());
+		Ticket ticketFromDB = ticketService.get(ticket1.getId());
+		
+		Assert.isTrue(ticketFromDB.getStatus().equals(Status.booked), "Status of ticket from DB"
+				+ "must be equal to status of parameter");
+	}
 	
+	@Test(expected = UnsupportedOperationException.class)
+	public void getAllTicketTest()
+	{
+		LOGGER.debug("Unsupported get all method for tickets test");
 		
-		Assert.isTrue(ticketFromDB.getStatus().equals(Status.booking), "Status of ticket from DB"
-				+ "must be equal status of parameter");
+		ticketService.getAll();
 	}
 	
 	@Test
-	public void TicketWithAllDataGetByTicketIdTest() // глупый тест
-	{	
-		LOGGER.info("Read ticket with all data by ticket id test");
+	public void buyOutTicketTest()
+	{
+		ticketService.changeStatusOfATicket(ticket1.getId(), Status.free);
 		
-		TicketWithAllData ticketWithAllData = tService.getByTicketId(t1.getId());
-		
-		Assert.isTrue(ticketWithAllData.getTicket().equals(t1), "objects must be equal");
+		booking1.setCustomer(customer1);
+		booking1.setTicket(ticket1);
 
+		bookingService.save(booking1);
+		
+		ticketService.buyOutTicket(booking1.getId());
+		
+		Ticket boughtTicketFromDB = ticketService.get(booking1.getTicket().getId());
+		
+		Assert.isTrue(boughtTicketFromDB.getStatus().equals(Status.busy), "status of bought ticket must be busy");
+		
+		LOGGER.debug("Buyout booked ticket in booking id = {}", booking1.getId());
 	}
 	
-	@Test
-	public void createTicketTest()
-	{	
-		LOGGER.info("Create test for ticket");
-		
-		Integer savedTicketId = t1.getId();
-		
-		Ticket ticketFromDB = tService.get(savedTicketId);
-		
-		Assert.isTrue(ticketFromDB.equals(t1), "objects must be equal");
-
-	}
 	
-	@Test
-	public void updateTicketTest()
+	@Test(expected = UnsupportedOperationException.class)
+	public void returningBookedTicketOnSaleTest()
 	{
 		
-		LOGGER.info("Update test for ticket");
+		ticketService.changeStatusOfATicket(ticket1.getId(), Status.free);
 		
-		Ticket updatedTicket = tService.get(t1.getId());
-		
-		updatedTicket.setSeanceId(s1.getId());
-		updatedTicket.setCost(new BigDecimal("6.70"));
-		updatedTicket.setRow(1);
-		updatedTicket.setPlace(1);
-		updatedTicket.setStatus(Status.valueOf("booking"));
-		tService.save(updatedTicket);
-		
-		Assert.isTrue(updatedTicket.equals(tService.get(updatedTicket.getId())), "objects must be equal");
-	}
-	@Test
-	public void deleteTest()
-	{	
-		LOGGER.info("Delete test for ticket");
-		
-		Integer ticketFromDBId = t1.getId();
-		
-		tService.delete(ticketFromDBId);
-		
-		Ticket ticketFromDB = tService.get(ticketFromDBId);
-		
-		Assert.isNull(ticketFromDB, "returned after deleting object must be null");
-		
-	}
-	
-	@Test
-	public void saveMultipleTest()
-	{
-		LOGGER.info("Save multiple test for tickets");
-		
-		Ticket t3 = tService.get(t1.getId());
-		t3.setPlace(100);
-		Ticket t4 = tService.get(t2.getId());
-		t4.setPlace(99);
-		
-		tService.saveMultiple(t3, t4);
-		
-		Assert.isTrue(tService.get(t3.getId()).equals(t3), "objects must be equal");
-		Assert.isTrue(tService.get(t4.getId()).equals(t4), "objects must be equal");
-	
-	}
+		booking1.setCustomer(customer1);
+		booking1.setTicket(ticket1);
 
+		bookingService.save(booking1);
+			
+		LOGGER.debug("Returning booked ticket with id = {} on sale test", booking1.getTicket().getId());
+		
+		ticketService.returningBookedTicketOnSale(booking1.getTicket().getId());
+		
+	}
+	
 	@Test
-	public void deleteAllBySeanceIdTest()
-	{	
-		LOGGER.info("Delete all tickets by seance id test");
+	public void buyingATicketTest()
+	{
 		
-		tService.deleteAll(s1.getId());
+		ticketService.changeStatusOfATicket(ticket1.getId(), Status.free);
 		
-		List<TicketWithAllData> list = tService.search(s1.getId(), null);
+		LOGGER.debug("Buying a ticket with id = {} in cashbox test", ticket1.getId());
 		
-		System.out.println(list.size());
+		ticketService.buyingATicket(ticket1.getId());
 		
-		Assert.isTrue(list.size() == 0, "There is no returned tickets after all deleting by seance id");
+		Assert.isTrue(ticketService.get(ticket1.getId()).getStatus().equals(Status.busy), "Status of bought ticket must be busy");
+		
+	}
+	
+	@Test
+	public void returningMoneyForATicketTest()
+	{
+		
+		ticketService.changeStatusOfATicket(ticket1.getId(), Status.free);
+		
+		booking1.setCustomer(customer1);
+		booking1.setTicket(ticket1);
+		
+		LOGGER.debug("Buying a ticket with id = {} in cashbox test", ticket1.getId());
+
+		bookingService.save(booking1);
+		
+		ticketService.buyingATicket(ticket1.getId());
+		
+		ticketService.returningMoneyForATicket(ticket1.getId());
+		
+		Assert.isNull(bookingService.get(booking1.getId()), "after returning money for bought out booked ticket booking must be null");
+		
+		Assert.isTrue(ticketService.get(ticket1.getId()).getStatus().equals(Status.free), "status of returned on saleticket must be free");
+	}
+	
+	@Test
+	public void readTicketTest()
+	{
+		LOGGER.debug("Read a ticket with id = {} test", ticket1.getId());
+		
+		Integer ticketFromDBId = ticket1.getId();
+		
+		Ticket ticketFromDB = ticketService.get(ticketFromDBId);
+		
+		Assert.isTrue(ticketFromDB.equals(ticket1));
+	}
+	
+	@Test
+	public void saveTicketTest()
+	{
+		
+		LOGGER.debug("Save a ticket with id = {} test", ticket1.getId());
+		
+		Integer ticketFromDBId = ticket1.getId();
+		
+		Ticket ticketFromDB = ticketService.get(ticketFromDBId);
+		
+		Assert.notNull(ticketFromDB, "ticket must be saved");
+	}
+	
+	@Test
+	public void saveMultipleTicketTest()
+	{
+		LOGGER.debug("Save multiple ticket test");
+		
+		ticketService.delete(ticket1.getId());
+		ticketService.delete(ticket2.getId());
+		
+		ticket1.setId(null);
+		ticket2.setId(null);
+		
+		ticketService.saveMultiple(ticket1, ticket2);
+		
+		Ticket ticketFromDB1 = ticketService.get(ticket1.getId());
+		Ticket ticketFromDB2 = ticketService.get(ticket2.getId());
+		
+		Assert.notNull(ticketFromDB1, "ticket1 must be saved");
+		Assert.notNull(ticketFromDB2, "ticket2 must be saved");
+		
+	}
+	
+	@Test
+	public void deleteTicketTest()
+	{
+		LOGGER.debug("Delete ticket test");
+		
+		Integer ticketFromDBId = ticket1.getId();
+		
+		ticketService.delete(ticketFromDBId);
+		
+		Assert.isNull(ticketService.get(ticketFromDBId), "ticket must be deleted");
 		
 	}
 }

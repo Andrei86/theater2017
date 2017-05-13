@@ -6,12 +6,12 @@ public interface IGenericDao<T> {
 	
 	T get(Integer id);
 	
-	//T insert(T entity);
-	
-	//void update(T entity);
-	
 	void delete(Integer id);
 	
-	List<T> getAll();// не реализовывать для сеанса и ввобще не надо такого метода а serch с пагинацией
+	T insert(T entity);
+	
+	void update(T entity);
+	
+	List<T> getAll();
 
 }

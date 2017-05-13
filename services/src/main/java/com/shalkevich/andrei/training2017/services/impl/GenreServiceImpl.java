@@ -22,11 +22,27 @@ public class GenreServiceImpl implements IGenreService{
 	IGenreDao genreDao;
 	
 	@Override
+	public Genre getGenreByName(String name) {
+		
+		LOGGER.debug("Get genre with name = {}", name);
+		
+		return genreDao.getByName(name);
+	}
+
+	@Override
 	public Genre get(Integer id) {
 
-		LOGGER.info("Get genre with {id} = " + id);
+		LOGGER.debug("Get genre with id = {}", id);
 		
 		return genreDao.get(id);
+	}
+
+	@Override
+	public List<Genre> getAll() {
+		
+		LOGGER.debug("Get all genre test");
+		
+		return genreDao.getAll();
 	}
 
 	@Override
@@ -36,7 +52,8 @@ public class GenreServiceImpl implements IGenreService{
 		{
 			
 			genreDao.insert(genre);
-			LOGGER.info("Insert new genre with id={}, name={}, ", genre.getId(), genre.getName());
+			
+			LOGGER.debug("Insert new genre with id={}, name={}, ", genre.getId(), genre.getName());
 		}
 		else
 			
@@ -52,7 +69,7 @@ public class GenreServiceImpl implements IGenreService{
 			save(genre);
 		}
 		
-		LOGGER.info("Save new movies from array");
+		LOGGER.debug("Save new genres from array");
 		
 	}
 
@@ -61,18 +78,8 @@ public class GenreServiceImpl implements IGenreService{
 		
 		genreDao.delete(id);
 
-		LOGGER.info("Delete genre with id= "+id);
+		LOGGER.debug("Delete genre with id= "+id);
 		
-	}
-
-	@Override
-	public List<Genre> readGenresOfMovie(Integer id) {
-		
-		LOGGER.info("Read genres of movie with id= "+id);
-		
-		List<Genre> list = genreDao.getGenresOfMovie(id);
-		
-		return list;
 	}
 	
 }

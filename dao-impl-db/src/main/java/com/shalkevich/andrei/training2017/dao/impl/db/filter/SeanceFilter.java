@@ -2,7 +2,7 @@ package com.shalkevich.andrei.training2017.dao.impl.db.filter;
 
 import java.sql.Date;
 
-public class SeanceWithAllDataFilter { // могут быть вопросы
+public class SeanceFilter { // могут быть вопросы
 	
 	private String city;
 	
@@ -50,8 +50,7 @@ public class SeanceWithAllDataFilter { // могут быть вопросы
 		this.movieTitle = movieTitle;
 	}
 	
-	public String cityFilterResult() // пока говнокод, потому что надо использовать stringBuilder
-										//чтобы не плодить strings
+	public String cityFilterResult()
 	{
 		
 			return (city!=null) ? " AND city = '" + city + "'": "";
@@ -60,7 +59,7 @@ public class SeanceWithAllDataFilter { // могут быть вопросы
 	public String movieTheaterFilterResult()
 	{
 		
-			return (movieTheaterName!=null) ? " AND name = '" + movieTheaterName + "'": "";
+			return (movieTheaterName!=null) ? " AND name = '" + movieTheaterName.replaceAll("_", " ") + "'": "";
 	}
 	
 	public String dateFilterResult()
@@ -72,6 +71,6 @@ public class SeanceWithAllDataFilter { // могут быть вопросы
 	public String movieFilterResult()
 	{
 		
-			return (movieTitle!=null) ? " AND title = '" + movieTitle +"'": "";
+			return (movieTitle!=null) ? " AND title = '" + movieTitle.replaceAll("_", " ") +"'": "";
 	}
 }

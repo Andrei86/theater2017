@@ -8,7 +8,7 @@ public class MovieTheaterModel {
 	
 	private String address;
 	
-	private Boolean isActive;
+	private Boolean isActive; // нужен ли тут?
 	
 	
 

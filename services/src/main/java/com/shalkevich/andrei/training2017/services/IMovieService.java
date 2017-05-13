@@ -13,6 +13,12 @@ public interface IMovieService extends IGenericService<Movie>{ // сделал �
 	
 	List<Movie> search(MovieFilter filter);
 	
-	List<Movie> getAll();
+	@Transactional
+	void insertMovieWithGenres(Movie movie, String... genreName); // вставляем фильм
+	
+	@Transactional
+	void updateMovie(Movie movie); // обновляем фильм
+	
+	Movie getByTitle(String title);
     
 }

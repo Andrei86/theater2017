@@ -30,61 +30,97 @@ public class MovieTheatersController {
 	@RequestMapping(method = RequestMethod.GET)
 	 public ResponseEntity<?> getAll(@RequestParam(required = false) String city) {
 		
-		List<MovieTheater> allMovieTheaters;
-		allMovieTheaters = theaterService.getAll(city);
-		// пропустили ошибки!!
+			List<MovieTheater> allMovieTheaters;
+			List<MovieTheaterModel> convertedTheaters = new ArrayList<>();
 		
-		List<MovieTheaterModel> convertedTheaters = new ArrayList<>();
-        for (MovieTheater theater : allMovieTheaters) {
-            convertedTheaters.add(entity2model(theater));
-        }
+			if(city == null)
+				allMovieTheaters = theaterService.getAll();
+			else
+				allMovieTheaters = theaterService.getAllByCity(city);
+			
+			if(allMovieTheaters.size() == 0)
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			else
+			{
+			for (MovieTheater theater : allMovieTheaters) 
+				convertedTheaters.add(entity2model(theater));
 
         return new ResponseEntity<List<MovieTheaterModel>>(convertedTheaters, HttpStatus.OK);
+			}
 		
-	}
+		}
 	
-	 @RequestMapping(value = "/{id}", method = RequestMethod.GET) // 
+	 @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	    public ResponseEntity<?> getById(@PathVariable(value = "id") Integer theaterIdParam) {
 		 try
 		 {
-	        MovieTheater theater = theaterService.get(theaterIdParam);
+	        MovieTheater theater = theaterService.get((Integer)theaterIdParam);
 	        MovieTheaterModel theaterModel = entity2model(theater);
 	        return new ResponseEntity<MovieTheaterModel>(theaterModel, HttpStatus.OK);
 		 }
 		 catch (NullPointerException e)
 		 {
-			 String msg = "There is no object with such id. Please, insert correct id.";
-			 return new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST);
+			 String msg = "There is no movie theater with such id.";
+			 return new ResponseEntity<String>(msg, HttpStatus.NO_CONTENT);
 		 }
 		 
 	    }
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+/*	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteTheater(@PathVariable(value = "id") Integer theaterIdParam) {
         theaterService.delete(theaterIdParam);
         return new ResponseEntity<IdModel>(HttpStatus.OK);
-    }
+    
+    // НЕ ПОДДЕРЖИВАЕТСЯ
+    
+    }*/
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createTheater(@RequestBody MovieTheaterModel theaterModel)
 	{
+		try
+		{
 		MovieTheater theater = model2entity(theaterModel);
 		theaterService.save(theater);
-		return new ResponseEntity<IdModel>(new IdModel(theater.getId()) ,HttpStatus.OK);
+		return new ResponseEntity<IdModel>(new IdModel(theater.getId()) ,HttpStatus.CREATED);
+		}
+		catch (NullPointerException e)
+		{
+			String msg = "You must fill all fields for movie theater creating";
+			return new ResponseEntity<>(msg ,HttpStatus.BAD_REQUEST);
+		}
 	}
 	 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)// обновляем кинотеатр
 	public ResponseEntity<?> updateTheater(@PathVariable(value = "id") Integer theaterIdParam,
 	 @RequestBody MovieTheaterModel theaterModel)
 	{
-		MovieTheater theater = theaterService.get(theaterIdParam);
-		theater.setName(theaterModel.getName());
-		theater.setCity(theaterModel.getCity());
-		theater.setAddress(theaterModel.getAddress());
-		theater.setIsActive(theaterModel.getIsActive());
-		theaterService.save(theater); // неправильно обезопашивать update d
+		if(theaterService.get(theaterIdParam) == null)
+		{
+			String msg = "You must fill id of existing movie theater for updating";
+			return new ResponseEntity<String>(msg, HttpStatus.NOT_FOUND);
+		}
+		else
+		{
+			try
+				{
+					MovieTheater theater = theaterService.get(theaterIdParam);
+				/*	theater.setName(theaterModel.getName());
+					theater.setCity(theaterModel.getCity());
+					theater.setAddress(theaterModel.getAddress());*/
+					
+					theater.setIsActive(theaterModel.getIsActive());
+					theaterService.save(theater); // неправильно обезопашивать update d
 		
-		return new ResponseEntity<IdModel>(HttpStatus.OK);
+					return new ResponseEntity<IdModel>(HttpStatus.OK);
+				}
+					
+			catch (NullPointerException e)
+				{
+					String msg = "You must fill active status for updating";
+					return new ResponseEntity<String>(msg ,HttpStatus.BAD_REQUEST);
+				}
+		}
 	}
 	
 	private MovieTheaterModel entity2model(MovieTheater theater) {

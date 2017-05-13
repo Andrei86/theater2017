@@ -16,14 +16,12 @@ public class GenreServiceTest extends AbstractTest{
 	private static final Logger LOGGER = LoggerFactory.getLogger(GenreServiceTest.class);
 	
 	@Inject
-	IGenreService gService;
+	IGenreService genreService;
 	
 	@Inject
-	IMovieService mService;
+	IMovieService movieService;
 	
-	public static Genre g1, g2;
-	
-	@BeforeClass
+	/*@BeforeClass
 	public static void CreateGenreObj()
 	{
 		LOGGER.info("Create entities Genre BeforeClass");
@@ -33,55 +31,55 @@ public class GenreServiceTest extends AbstractTest{
 		
 		g2 = new Genre();
 		g2.setName("Name2");
-	}
+	}*/
 	
 	@Before
 	public void idToNull()
 	{
 		LOGGER.info("Set id of created genres to null");
-		g1.setId(null);
-		g2.setId(null);
+		genre1.setId(null);
+		genre2.setId(null);
 		
-		gService.save(g1);
+		genreService.save(genre1);
 	}
 	@Test
 	public void createTest()
 	{
-		LOGGER.info("Create test for Genre");
+		LOGGER.debug("Create test for Genre");
 		
-		Integer savedGenreId = g1.getId();
+		Integer savedGenreId = genre1.getId();
 		
-		Genre genreFromDB = gService.get(savedGenreId);
+		Genre genreFromDB = genreService.get(savedGenreId);
 		
-		Assert.isTrue(genreFromDB.equals(g1), "objects must be equal");
+		Assert.isTrue(genreFromDB.equals(genre1), "objects must be equal");
 
 	}
 	
 	@Test
 	public void updateTest()
 	{
-		LOGGER.info("Update test for Genre");
+		LOGGER.debug("Update test for Genre");
 		
-		Genre updatedGenre = gService.get(g1.getId());
+		Genre updatedGenre = genreService.get(genre1.getId());
 		
 		updatedGenre.setName("newTest");
 		
-		gService.save(updatedGenre);
+		genreService.save(updatedGenre);
 		
-		Assert.isTrue(updatedGenre.equals(gService.get(updatedGenre.getId())), "objects must be equal");
+		Assert.isTrue(updatedGenre.equals(genreService.get(updatedGenre.getId())), "objects must be equal");
 
 	}
 	
 	@Test
 	public void readTest()
 	{
-		LOGGER.info("Update test for Genre");
+		LOGGER.debug("Read test for Genre");
 		
-		Integer genreFromDBId = g1.getId();
+		Integer genreFromDBId = genre1.getId();
 		
-		Genre genreFromDB = gService.get(genreFromDBId);
+		Genre genreFromDB = genreService.get(genreFromDBId);
 		
-		Assert.isTrue(genreFromDB.equals(g1), "objects must be equal");
+		Assert.isTrue(genreFromDB.equals(genre1), "objects must be equal");
 
 	}
 	
@@ -89,13 +87,13 @@ public class GenreServiceTest extends AbstractTest{
 	public void deleteTest()
 	{
 
-		LOGGER.info("Delete test for Genre");
+		LOGGER.debug("Delete test for Genre");
 		
-		Integer genreFromDBId = g1.getId();
+		Integer genreFromDBId = genre1.getId();
 		
-		gService.delete(genreFromDBId);
+		genreService.delete(genreFromDBId);
 		
-		Genre genreFromDB = gService.get(genreFromDBId);
+		Genre genreFromDB = genreService.get(genreFromDBId);
 		
 		Assert.isNull(genreFromDB, "returned after deleting object must be null");
 		
@@ -104,24 +102,25 @@ public class GenreServiceTest extends AbstractTest{
 	@Test
 	public void saveMultipleTest()
 	{
-		LOGGER.info("Save multiple test for Genre");
+		LOGGER.debug("Save multiple test for Genre");
 		
-		gService.saveMultiple(g1, g2);
+		genreService.delete(genre1.getId());
+		genre1.setId(null);
 		
-		Assert.isTrue(gService.get(g1.getId()).equals(g1), "objects must be equal");
-		Assert.isTrue(gService.get(g2.getId()).equals(g2), "objects must be equal");
+		genreService.saveMultiple(genre1, genre2);
+		
+		Assert.isTrue(genreService.get(genre1.getId()).equals(genre1), "objects must be equal");
+		Assert.isTrue(genreService.get(genre2.getId()).equals(genre2), "objects must be equal");
 		
 	}
 	
-	/*@Test
-	public void readGenreOfMovieTest() // как его тестировать?
+	@Test
+	public void getGenreByNameTest()
 	{
-		Genre genre1 = new Genre();
-		genre1.setName("Test1");	
+		String name = genre1.getName();
 		
-		Genre genre2 = new Genre();
-		genre2.setName("Test2");
+		LOGGER.debug("Get Genre by name {} test", name);
 		
-	}*/
-
+		Assert.isTrue(genreService.getGenreByName(name) != null, "Getted object from DB by name must be not null");
+	}
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
-import com.shalkevich.andrei.training2017.datamodel.customData.Status;
 import com.shalkevich.andrei.training2017.services.IMovieTheaterService;
 
 @Service
@@ -22,14 +21,11 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 	public IMovieTheaterDao movieTheaterDao;
 	
 	@Override
-	public MovieTheater get(Integer id) throws NullPointerException
+	public MovieTheater get(Integer id)// throws NullPointerException
 	{
+	
+		LOGGER.debug("Get movietheater with {id} = " + id);
 		
-		/*if(id == null)
-		{
-			throw new NullPointerException("You must insert valid value");
-		}
-*/		LOGGER.info("Get movietheater with {id} = " + id);
 		return movieTheaterDao.get(id);
 		
 	}
@@ -42,12 +38,17 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 		{
 			
 			movieTheaterDao.insert(theater);
-			LOGGER.info("Insert new movietheater with theater.id={}, theater.name={}, "
-					+ "theater.city={}, theater.address={}, theater.isActive={}", theater.getId(),
+			
+			LOGGER.debug("Insert new movietheater with theater.name={}, "
+					+ "theater.city={}, theater.address={}, theater.isActive={}",
 					theater.getName(), theater.getCity(), theater.getAddress(), theater.getIsActive());
 		}
 		else
 			
+			LOGGER.debug("Update movietheater with theater.name={}, "
+					+ "theater.city={}, theater.address={}, theater.isActive={}",
+					theater.getName(), theater.getCity(), theater.getAddress(), theater.getIsActive());
+		
 			movieTheaterDao.update(theater);
 		
 	}
@@ -60,32 +61,50 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 			save(movieTheater);
 		}
 		
-		LOGGER.info("Save new movietheaters from array");
+		LOGGER.debug("Save new movietheaters from array");
 	}
 
 
 	@Override
-	public List<MovieTheater> getAll(String city) { // выкидывает ошибку неправильного города
+	public List<MovieTheater> getAllByCity(String city) {
 		
-		LOGGER.info("Get all movietheaters in city= " + city);
-		
-		//if user - usually user
-			//return movieTheaterDao.getAllActiveByCity(city);
-		//else
-		if(city == null)
-			return movieTheaterDao.getAll();
-		else
+		LOGGER.debug("Get all movietheaters in city= " + city);
+
 			return movieTheaterDao.getAllByCity(city);
+	}
+	
+	
+
+	@Override
+	public MovieTheater getByName(String name) {
+		LOGGER.debug("Get movie theater by name {}", name);
+		
+		return movieTheaterDao.getByName(name);
+	}
+
+	@Override
+	public List<MovieTheater> getAllActiveByCity(String city) { // нет в веб
+		
+		LOGGER.debug("Get all active movietheaters in city= " + city);
+
+		return movieTheaterDao.getAllActiveByCity(city);
 	}
 
 	@Override
 	public void delete(Integer id) {
 		
 		movieTheaterDao.delete(id);
-		LOGGER.info("Delete movietheater with id= "+id);
+		
+		LOGGER.debug("Delete movietheater with id= "+id);
 		
 	}
-	
-	
 
+	@Override
+	public List<MovieTheater> getAll(){
+		
+		LOGGER.debug("Get all movietheaters");
+		
+		return movieTheaterDao.getAll();
+	}
+	
 }

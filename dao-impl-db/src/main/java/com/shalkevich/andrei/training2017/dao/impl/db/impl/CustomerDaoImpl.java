@@ -3,7 +3,6 @@ package com.shalkevich.andrei.training2017.dao.impl.db.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -21,6 +20,14 @@ import com.shalkevich.andrei.training2017.datamodel.Customer;
 @Repository
 public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements ICustomerDao{
 
+	// есть get(Id), getAll(), delete()
+	
+	final String INSERT_CUSTOMER = "INSERT INTO customer (login, password, first_name, last_name, e_mail, role) "
+				+ " VALUES(?, ?, ?, ?, ?, ?)";
+	final String UPDATE_CUSTOMER = "UPDATE customer SET login = ?, password = ?, first_name = ?, last_name = ?, e_mail = ?, "
+				+ " role = ? WHERE id = ?";
+	final String FIND_BY_LOGIN = "SELECT * FROM customer WHERE login = ?";
+	
 	@Inject
 	JdbcTemplate jdbcTemplate;
 	
@@ -30,8 +37,9 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements ICustom
 		
 		try
 		{
-		return jdbcTemplate.queryForObject("select * from customer where login = ?", new Object[]{login}, 
-				new BeanPropertyRowMapper<Customer>(Customer.class));
+			
+		return jdbcTemplate.queryForObject(FIND_BY_LOGIN, new Object[]{login}, new BeanPropertyRowMapper<Customer>(Customer.class));
+		
 		}
 		catch(EmptyResultDataAccessException e)
 		{
@@ -41,15 +49,13 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements ICustom
 
 	@Override
 	public Customer insert(Customer entity) {
-		final String INSERT_SQL = "insert into customer (login, password, first_name, last_name, e_mail, role) "
-				+ "values(?, ?, ?, ?, ?, ?)";
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
+	                PreparedStatement ps = connection.prepareStatement(INSERT_CUSTOMER, new String[] { "id" });
 	                ps.setString(1, entity.getLogin());
 	                ps.setString(2, entity.getPassword());
 	                ps.setString(3, entity.getFirstName());
@@ -68,29 +74,21 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements ICustom
 	@Override
 	public void update(Customer entity) {
 		
-		final String UPDATE_SQL = "update customer set login = ?, first_name = ?, last_name = ?, e_mail = ?"
-				+ "where id = " + entity.getId();
-		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);
+	                PreparedStatement ps = connection.prepareStatement(UPDATE_CUSTOMER);
 	                ps.setString(1, entity.getLogin());
-	                ps.setString(2, entity.getFirstName()); // пароль не обновляем
-	                ps.setString(3, entity.getLastName());
-	                ps.setString(4, entity.geteMail());
+	                ps.setString(2, entity.getPassword());
+	                ps.setString(3, entity.getFirstName());// пароль не обновляем
+	                ps.setString(4, entity.getLastName());
+	                ps.setString(5, entity.geteMail());
+	                ps.setString(6, entity.getRole().name());
+	                ps.setInt(7, entity.getId());
 	                return ps;
 	            }
 	        });
 		
 	}
 
-	@Override
-	public List<Customer> getAll() {
-
-		List<Customer> list = jdbcTemplate.query("select * from customer", new BeanPropertyRowMapper<Customer>(Customer.class));
-		return list;
-	}
-
-	
 }

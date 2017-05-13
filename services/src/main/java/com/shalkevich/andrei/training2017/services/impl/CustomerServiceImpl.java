@@ -20,11 +20,10 @@ public class CustomerServiceImpl implements ICustomerService{
 	@Inject
 	ICustomerDao customerDao;
 	
-	
-	
 	@Override
 	public List<Customer> getAll() {
-		LOGGER.info("Get all customers");
+		
+		LOGGER.debug("Get all customers");
 		
 		return customerDao.getAll();
 	}
@@ -32,18 +31,25 @@ public class CustomerServiceImpl implements ICustomerService{
 	@Override
 	public Customer getByLogin(String login) {
 		
-		LOGGER.info("Get customer by login = " + login);
-		Customer c = customerDao.getByLogin(login);
+		LOGGER.debug("Get customer by login = {}",login);
 		
-		return c;
+		Customer customer = customerDao.getByLogin(login);
+		
+		return customer;
 	}
 
 	@Override
 	public Customer get(Integer id) {
 
-		LOGGER.info("Get customer with {id} = " + id);
-		
+		LOGGER.debug("Get customer with id = {}", id);
+		try
+		{
 		return customerDao.get(id);
+		
+		} catch (NullPointerException e)
+		{
+			throw new NullPointerException();
+		}
 	}
 
 	@Override
@@ -54,7 +60,7 @@ public class CustomerServiceImpl implements ICustomerService{
 			
 			customerDao.insert(customer);
 			
-			LOGGER.info("Insert new customer with id={}, login={}, firstName={}, lastName={}, eMail={}", 
+			LOGGER.debug("Insert new customer with id={}, login={}, firstName={}, lastName={}, eMail={}", 
 			customer.getId(), customer.getLogin(), customer.getFirstName(), customer.getLastName(), 
 			customer.geteMail());
 		}
@@ -68,7 +74,8 @@ public class CustomerServiceImpl implements ICustomerService{
 	public void saveMultiple(Customer... obj) 
 	{
 		
-		LOGGER.info("UnsupportedOperationException");
+		LOGGER.debug("UnsupportedOperationException for save multiple for Customer");
+		
 		throw new UnsupportedOperationException();
 		
 	}
@@ -78,7 +85,7 @@ public class CustomerServiceImpl implements ICustomerService{
 		
 		customerDao.delete(id);
 
-		LOGGER.info("Delete customer with id= "+id);
+		LOGGER.info("Delete customer with id= {}", id);
 		
 	}
 

@@ -1,6 +1,5 @@
 package com.shalkevich.andrei.training2017.datamodel.customData;
 
-import com.shalkevich.andrei.training2017.datamodel.Customer;
 import com.shalkevich.andrei.training2017.datamodel.Movie;
 import com.shalkevich.andrei.training2017.datamodel.MovieTheater;
 import com.shalkevich.andrei.training2017.datamodel.Seance;

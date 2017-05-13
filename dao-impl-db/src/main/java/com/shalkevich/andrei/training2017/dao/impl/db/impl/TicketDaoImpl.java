@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -14,11 +15,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
-import com.shalkevich.andrei.training2017.dao.impl.db.filter.TicketWithAllDataFilter;
-import com.shalkevich.andrei.training2017.dao.impl.db.mapper.TicketWithAllDataMapper;
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.TicketFilter;
+import com.shalkevich.andrei.training2017.dao.impl.db.mapper.TicketMapper;
 import com.shalkevich.andrei.training2017.datamodel.Ticket;
-import com.shalkevich.andrei.training2017.datamodel.customData.Status;
-import com.shalkevich.andrei.training2017.datamodel.customData.TicketWithAllData;
 
 @Repository
 public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
@@ -26,9 +25,37 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 	@Inject
 	JdbcTemplate jdbcTemplate;
 	
-	/*НАДО ВСЕ-ТАКИ ФИЛЬТР НАПИСАТЬ НА TicketWithAllData ПОТОМУ ЧТО МНОГО ГОВНОКОДА!!*/
+	final String FIND_FULL_TICKET_BY_ID = " SELECT t.id as ticket_id, t.seance_id, s.movietheater_id, s.movie_id, s.date, s.time, mt.name, mt.city, mt.address, mt.is_active, " 
+			+ " m.title, m.age_bracket, m.duration, m.description, t.cost, t.row, t.place, t.status FROM ticket t "
+			+ " INNER JOIN seance s ON t.seance_id = s.id "
+			+ " INNER JOIN movietheater mt ON mt.id = s.movietheater_id "
+			+ " INNER JOIN movie m ON m.id = s.movie_id WHERE mt.is_active = true AND t.id = ? "; // в активном кинотеатре
+	
+	final String FIND_ALL_FULL_TICKET = " SELECT t.id as ticket_id, t.seance_id, s.movietheater_id, s.movie_id, s.date, s.time, mt.name, mt.city, mt.address, mt.is_active, " 
+			+ " m.title, m.age_bracket, m.duration, m.description, t.cost, t.row, t.place, t.status FROM ticket t "
+			+ " INNER JOIN seance s ON t.seance_id = s.id "
+			+ " INNER JOIN movietheater mt ON mt.id = s.movietheater_id "
+			+ " INNER JOIN movie m ON m.id = s.movie_id WHERE mt.is_active = true ";
+	
+	final String INSERT_TICKET = "INSERT INTO ticket (seance_id, cost, row, place, status) values(?, ?, ?, ?, ?)";
+
+	final String UPDATE_TICKET = "UPDATE ticket set seance_id = ?, cost = ?, row = ?, place = ?, status = ? WHERE id = ?";
 	
 	@Override
+	public Ticket get(Integer ticketId) {
+
+		try
+		{
+			return jdbcTemplate.queryForObject(FIND_FULL_TICKET_BY_ID, new Object[]{ticketId}, new TicketMapper());
+		}
+		catch (EmptyResultDataAccessException e)
+		{
+			return null;
+		}
+		
+	}
+	
+/*	@Override
 	public TicketWithAllData getByTicketId(Integer ticketId) {
 		
 		return jdbcTemplate.queryForObject(" select * from ticket t join seance s on t.seance_id = s.id "
@@ -44,8 +71,6 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 				+ "join movietheater m_t on m_t.id = s.movietheater_id "
 				+ "join movie m on s.movie_id = m.id where t.seance_id = " + seanceId + " AND t.status = '" + status.name() + "'";
 		
-		System.out.println(sqlBySeanceAndStatus);
-		
 		return jdbcTemplate.query(sqlBySeanceAndStatus, new TicketWithAllDataMapper());
 	}
 
@@ -57,7 +82,7 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 				+ "join movie m on s.movie_id = m.id where t.seance_id = " + seanceId;
 		
 		return jdbcTemplate.query(sqlBySeance, new TicketWithAllDataMapper());
-	}
+	}*/
 
 	/*@Override
 	public List<TicketWithAllData> search(TicketWithAllDataFilter filter) { // нужно бросить исключение если фильтр равен null
@@ -90,24 +115,29 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 	}*/
 
 	@Override
-	public void deleteAll(Integer seanceId) {
+	public List<Ticket> searchByFilter(TicketFilter filter) {
 		
-		jdbcTemplate.update("delete from ticket where seance_id=" + seanceId);
-		
+		String sqlForTicketFilter = FIND_ALL_FULL_TICKET + filter.seanceIdFilterResult() + filter.statusFilterResult();
+		try
+		{
+			return jdbcTemplate.query(sqlForTicketFilter, new TicketMapper());
+		}
+		catch (EmptyResultDataAccessException e)
+		{
+			return null;
+		}
 	}
 
 	@Override
 	public Ticket insert(Ticket entity) {
-			final String INSERT_SQL = "insert into ticket (seance_id, cost, row, place, status)"
-					+ " values(?, ?, ?, ?, ?)";
 		
-		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
+		KeyHolder keyHolder = new GeneratedKeyHolder();
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
-	                ps.setInt(1, entity.getSeanceId());
+	                PreparedStatement ps = connection.prepareStatement(INSERT_TICKET, new String[] { "id" });
+	                ps.setObject(1, entity.getSeance().getId());
 	                ps.setBigDecimal(2, entity.getCost());
 	                ps.setInt(3, entity.getRow());
 	                ps.setInt(4, entity.getPlace());
@@ -125,20 +155,17 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements ITicketDao{
 
 	@Override
 	public void update(Ticket entity) {
-		
-		final String UPDATE_SQL = "update ticket set seance_id = ?, cost = ?, row = ?, place = ?, "
-				+ "status = ? where id =" + entity.getId();
-
 	
 	 jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);
-                ps.setInt(1, entity.getSeanceId());
+                PreparedStatement ps = connection.prepareStatement(UPDATE_TICKET);
+                ps.setObject(1, entity.getSeance().getId());
                 ps.setBigDecimal(2, entity.getCost());
                 ps.setInt(3, entity.getRow());
                 ps.setInt(4, entity.getPlace());
                 ps.setString(5, entity.getStatus().name());
+                ps.setInt(6, entity.getId());
                 return ps;
             }
         });

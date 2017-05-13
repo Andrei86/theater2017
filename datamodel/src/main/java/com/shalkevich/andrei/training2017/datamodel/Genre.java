@@ -1,10 +1,11 @@
 package com.shalkevich.andrei.training2017.datamodel;
 
+
 public class Genre {
 	
 	private Integer id;
 	private String name;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -24,9 +25,9 @@ public class Genre {
 		if(this == obj) return true;
 		if(!(obj instanceof Genre)) return false;
 		
-		Genre g = (Genre) obj;
+		Genre genre = (Genre) obj;
 		
-		return id.equals(g.id) && name.equals(g.name);
+		return id.equals(genre.id) && name.equals(genre.name);
 
 	}
 	@Override
@@ -41,7 +42,7 @@ public class Genre {
 	@Override
 	public String toString() {
 		
-		return /* "Genre [id=" + id + "]" + " name " + */ name;
+		return  "Genre [id=" + id + "]" + " name " + name;
 	}
 	
 	

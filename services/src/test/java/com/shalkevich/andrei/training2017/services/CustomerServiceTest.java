@@ -3,25 +3,22 @@ package com.shalkevich.andrei.training2017.services;
 import javax.inject.Inject;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 import com.shalkevich.andrei.training2017.datamodel.Customer;
-import com.shalkevich.andrei.training2017.datamodel.customData.Role;
 
 public class CustomerServiceTest extends AbstractTest{
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceTest.class);
 	
 	@Inject
-	ICustomerService cService;
+	ICustomerService customerService;
+
 	
-	public static Customer c1, c2;
-	
-	@BeforeClass
+/*	@BeforeClass
 	public static void createEntities()
 	{
 		LOGGER.info("Create Customer entities BeforeClass");
@@ -42,94 +39,93 @@ public class CustomerServiceTest extends AbstractTest{
 		c2.seteMail("@mail2");
 		c2.setRole(Role.valueOf("user"));
 			
-	}
+	}*/
 	
 	@Before
 	public void idToNull()
 	{
 		
-		LOGGER.info("Set id to null and save Customer entity @Before");
+		LOGGER.debug("Set id to null and save Customer entity @Before");
 		
-		c1.setId(null);
-		c2.setId(null);
+		customer1.setId(null);
 		
-		cService.save(c1);
+		customerService.save(customer1);
 	}
 	
 	@Test
 	public void getByLoginTest()
 	{
 		
-		LOGGER.info("Get customer by login test");
+		LOGGER.debug("Get customer by login test");
 		
-		Customer customerFromDB = cService.getByLogin(c1.getLogin());
+		Customer customerFromDB = customerService.getByLogin(customer1.getLogin());
 		
-		Assert.isTrue(customerFromDB.equals(c1), "objects must be equal");
+		Assert.isTrue(customerFromDB.equals(customer1), "customer must be equal");
 
 	}
 	
 	@Test
 	public void createTest()
 	{
-		LOGGER.info("Create customer test");
+		LOGGER.debug("Create customer test");
 		
-		Integer savedCustomerId = c1.getId();
+		Integer savedCustomerId = customer1.getId();
 		
-		Customer customerFromDB = cService.get(savedCustomerId);
+		Customer customerFromDB = customerService.get(savedCustomerId);
 		
-		Assert.isTrue(customerFromDB.equals(c1), "objects must be equal");
+		Assert.isTrue(customerFromDB.equals(customer1), "objects must be equal");
 
 	}
 	
 	@Test
 	public void updateTest()
 	{
-		LOGGER.info("Update customer test");
-		Customer updatedCustomer = cService.get(c1.getId());
+		LOGGER.debug("Update customer test");
+		Customer updatedCustomer = customerService.get(customer1.getId());
 		
 		updatedCustomer.setLogin("LoginTestUpd");
 		updatedCustomer.setFirstName("fNameTestUpd");
 		updatedCustomer.setLastName("lNameTestUpd");
 		updatedCustomer.seteMail("@mailUpd");
 		
-		cService.save(updatedCustomer);
+		customerService.save(updatedCustomer);
 		
-		Assert.isTrue(updatedCustomer.equals(cService.get(updatedCustomer.getId())), "objects must be equal");
+		Assert.isTrue(updatedCustomer.equals(customerService.get(updatedCustomer.getId())), "objects must be equal");
 		
 	}
 	
 	@Test
 	public void readTest()
 	{
-		LOGGER.info("Read customer test");
+		LOGGER.debug("Read customer test");
 		
-		Integer customerFromDBId = c1.getId();
-		Customer customerFromDB = cService.get(customerFromDBId);
-		Assert.isTrue(customerFromDB.equals(c1), "objects must be equal");
+		Integer customerFromDBId = customer1.getId();
+		Customer customerFromDB = customerService.get(customerFromDBId);
+		Assert.isTrue(customerFromDB.equals(customer1), "objects must be equal");
 
 	}
 	
 	@Test
 	public void deleteTest()
 	{
-		LOGGER.info("Delete customer test");
+		LOGGER.debug("Delete customer test");
 		
-		Integer customerFromDBId = c1.getId();
+		Integer customerFromDBId = customer1.getId();
 		
-		cService.delete(customerFromDBId);
+		customerService.delete(customerFromDBId);
 		
-		Customer customerFromDB = cService.get(customerFromDBId);
+		Customer customerFromDB = customerService.get(customerFromDBId);
 		
 		
-		Assert.isNull(customerFromDB, "returned after deleting object must be null");
+		Assert.isNull(customerFromDB, "returned after deleting customer must be null");
 		
 	}
 	
 	@Test(expected = UnsupportedOperationException.class)
-    public void testUnsupportedMethod() {
-		LOGGER.info("Unsupported save Multiple test for customer");
+    public void customerSaveMultipleTest() {
+		LOGGER.debug("Unsupported save multiple test for customer");
 		
-        cService.saveMultiple(c1, c2);
+        customerService.saveMultiple(customer1);
     }
 
 }

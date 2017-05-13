@@ -1,15 +1,17 @@
-package com.shalkevich.andrei.training2017.datamodel.customData;
-
-import java.util.List;
-
-import com.shalkevich.andrei.training2017.datamodel.Genre;
-import com.shalkevich.andrei.training2017.datamodel.Movie;
+package com.shalkevich.andrei.training2017.datamodel;
 
 public class MovieGenre {
 
+	private Integer id;
 	private Movie movie;
 	private Genre genre;
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public Genre getGenre() {
 		return genre;
 	}

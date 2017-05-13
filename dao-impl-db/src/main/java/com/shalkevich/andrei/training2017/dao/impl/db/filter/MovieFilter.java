@@ -6,18 +6,18 @@ public class MovieFilter {
 	
 	private String city;
 	
-	private Date date;
+	private String title;
 	
-	/*private Integer soon; // ЕСЛИ БУДЕТ ВРЕМЯ количество дней на протяжении которых искать интерес фильм
-	
-	public Integer getSoon() {
-		return soon;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setSoon(Integer soon) {
-		this.soon = soon;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-*/
+
+	private Date date;
+
 	public String getCity() {
 		return city;
 	}
@@ -28,9 +28,8 @@ public class MovieFilter {
 
 	public Boolean isEmpty()
 	{
-		return city == null && date == null;
+		return title == null && city == null && date == null;
 	}
-
 
 	public Date getDate() {
 		return date;
@@ -40,13 +39,19 @@ public class MovieFilter {
 		this.date = date;
 	}
 
-	public String cityFilterResult() // говнокод
+	public String titleFilterResult()
+	{
+		
+		return (title!=null) ? " AND m.title = '" + title + "'" : "";
+	
+	}
+	
+	public String cityFilterResult()
 	{
 		
 		return (city!=null) ? " AND m_t.city = '" + city + "'" : "";
-			//+ " AND s.date = ' " + new Date(new java.util.Date().getTime()) + "'" : "";
-	}
 	
+	}
 	
 	public String dateFilterResult()
 	{		

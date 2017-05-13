@@ -1,7 +1,6 @@
 package com.shalkevich.andrei.training2017.dao.impl.db.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -17,10 +15,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
-import com.shalkevich.andrei.training2017.dao.impl.db.filter.SeanceWithAllDataFilter;
-import com.shalkevich.andrei.training2017.dao.impl.db.mapper.SeanceWithAllDataMapper;
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.SeanceFilter;
+import com.shalkevich.andrei.training2017.dao.impl.db.mapper.SeanceMapper;
 import com.shalkevich.andrei.training2017.datamodel.Seance;
-import com.shalkevich.andrei.training2017.datamodel.customData.SeanceWithAllData;
 
 @Repository
 public class SeanceDaoImpl extends GenericDaoImpl<Seance> implements ISeanceDao{
@@ -28,27 +25,61 @@ public class SeanceDaoImpl extends GenericDaoImpl<Seance> implements ISeanceDao{
 	@Inject
 	public JdbcTemplate jdbcTemplate;
 	
+	final String GET_ALL_FULL_SEANCE = " SELECT s.id as seance_id, s.movietheater_id, s.movie_id, s.date, s.time, mt.name, mt.city, mt.address, mt.is_active, m.title, m.age_bracket, m.duration, m.description FROM seance s "
+			+ " INNER JOIN movietheater mt ON s.movietheater_id = mt.id "
+			+ " INNER JOIN movie m ON s.movie_id = m.id WHERE mt.is_active = true ";
 	
-/*
-	@Override
-	public List<Seance> getAll() { // запретить это метод для сеансов!!
-		// TODO Auto-generated method stub
-		return super.getAll();
+	final String FIND_FULL_SEANCE_BY_ID = " SELECT s.id as seance_id, s.movietheater_id, s.movie_id, s.date, s.time, mt.name, mt.city, mt.address, mt.is_active, m.title, m.age_bracket, m.duration, m.description FROM seance s "
+			+ " INNER JOIN movietheater mt ON s.movietheater_id = mt.id "
+			+ " INNER JOIN movie m ON s.movie_id = m.id WHERE mt.is_active = true AND s.id = ?"; // for user and cashier
+	
+	final String INSERT_SEANCE = "INSERT INTO seance (movietheater_id, movie_id, date, time) values(?, ?, ?, ?)";
+	
+	final String UPDATE_SEANCE = "UPDATE seance set movietheater_id = ?, movie_id = ?, date = ?, time = ? WHERE id = ?";
+
+	final String GET_FULL_SEANCE_BY_ID = " SELECT s.id as seance_id, s.movietheater_id, s.movie_id, s.date, s.time, mt.name, mt.city, mt.address, mt.is_active, m.title, m.age_bracket, m.duration, m.description FROM seance s "
+			+ " INNER JOIN movietheater mt ON s.movietheater_id = mt.id "
+			+ " INNER JOIN movie m ON s.movie_id = m.id WHERE s.id = ?";
+	// как админу находить сеансы в неактивном кинотеатре - это ему и не надо т.к. на неактивыне кинотеатры не будут
+	// генериться ни сеансы ни билеты!!
+	
+	/*@Override
+	public List<Seance> getAllSeance() {
+		try
+		{
+		return jdbcTemplate.query(GET_ALL_SEANCE, new SeanceMapper());
+		}
+		catch (EmptyResultDataAccessException e)
+		{
+			return null;
+		}
 	}*/
+	
+	/*@Override
+	public Seance getSeanceById(Integer id) {
+		try
+		{
+		return jdbcTemplate.queryForObject(FIND_SEANCE_BY_ID, new Object[]{ id }, new SeanceMapper());
+		}
+		catch (EmptyResultDataAccessException e)
+		{
+			return null;
+		}
+	}*/
+	
+	
 
 	@Override
 	public Seance insert(Seance entity) {
-		
-		final String INSERT_SQL = "insert into seance (movietheater_id, movie_id, date, time) values(?, ?, ?, ?)";
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder(); // для поддержки serial id
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
-	                ps.setInt(1, entity.getMovietheaterId());
-	                ps.setInt(2, entity.getMovieId());
+	                PreparedStatement ps = connection.prepareStatement(INSERT_SEANCE, new String[] { "id" });
+	                ps.setObject(1, entity.getMovieTheater().getId() );
+	                ps.setObject(2, entity.getMovie().getId());
 	                ps.setDate(3, entity.getDate());
 	                ps.setTime(4, entity.getTime());
 	                return ps;
@@ -61,79 +92,45 @@ public class SeanceDaoImpl extends GenericDaoImpl<Seance> implements ISeanceDao{
 	}
 
 	@Override
+	public Seance get(Integer id) {
+		try
+		{
+		return jdbcTemplate.queryForObject(GET_FULL_SEANCE_BY_ID, new Object[]{id}, new SeanceMapper());
+		
+		}catch (EmptyResultDataAccessException e)
+		{
+			return null;
+		}
+		
+	}
+
+	@Override
 	public void update(Seance entity) {
-		
-		final String UPDATE_SQL = "update seance set movietheater_id = ?, movie_id = ?, date = ?, time = ? where id = " + entity.getId();
-		
-		//KeyHolder keyHolder = new GeneratedKeyHolder();
 		
 		 jdbcTemplate.update(new PreparedStatementCreator() {
 	            @Override
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);//, new String[] { "id" });
-	                ps.setInt(1, entity.getMovietheaterId());
-	                ps.setInt(2, entity.getMovieId());
+	                PreparedStatement ps = connection.prepareStatement(UPDATE_SEANCE);//, new String[] { "id" });
+	                ps.setObject(1, entity.getMovieTheater().getId());
+	                ps.setObject(2, entity.getMovie().getId());
 	                ps.setDate(3, entity.getDate());
 	                ps.setTime(4, entity.getTime());
+	                ps.setInt(5, entity.getId());
 	                return ps;
 	            }
 	        });
 		
 	}
 
-	/*@Override
-	public List<SeanceWithAllData> getByTheaterAndDate(Integer theaterId, Date date) {
-		
-		List<SeanceWithAllData> list = jdbcTemplate.query(
-				
-				"select * from seance s join movietheater m_t on s.movie_theater_id = m_t.id "
-				+ "join movie m on s.movie_id = m.id where m_t.id = ? and s.date = ? and m_t.is_active = true"
-				, new Object[]{theaterId,date}, 
-				new SeanceWithAllDataMapper());
-	
-		return list;
-	}*/
-
-	/*@Override
-	public List<SeanceWithAllData> getByMovieCityDate(Integer id, String city, Date date) {
-		
-		try
-		{
-	
-			List<SeanceWithAllData> list = jdbcTemplate.query("select * from seance s join movietheater m_t on s.movietheater_id = m_t.id "
-					+ "join movie m on s.movie_id = m.id where m.id = ? and"
-					+ " m_t.city = ? and s.date = ? and m_t.is_active = true", new Object[]{id, city, date}, 
-				new SeanceWithAllDataMapper());
-		
-		return list;
-		
-		}
-		catch (EmptyResultDataAccessException e) {
-			
-			return null;
-		}
-	}*/
-
 	@Override
-	public List<SeanceWithAllData> search(SeanceWithAllDataFilter filter) {
+	public List<Seance> search(SeanceFilter filter) {
 		
-		String sql = "select * from seance s join movietheater m_t on s.movietheater_id = m_t.id "
-				+ "join movie m on s.movie_id = m.id where m_t.is_active = true ";
-		
-		if(filter.getCity()!=null)
-		sql += filter.cityFilterResult() + filter.movieTheaterFilterResult() + 
+		String sqlForSeanceFilter = GET_ALL_FULL_SEANCE;
+
+		sqlForSeanceFilter += filter.cityFilterResult() + filter.movieTheaterFilterResult() + 
 				filter.dateFilterResult() + filter.movieFilterResult();
 		
-		if(filter.getMovieTheater()!=null)
-			sql += filter.movieTheaterFilterResult();
-		
-		if(filter.getDate()!=null)
-			sql += filter.dateFilterResult();
-		
-		if(filter.getMovieTitle()!=null)
-			sql += filter.movieFilterResult();
-		
-		List<SeanceWithAllData> list = jdbcTemplate.query(sql, new SeanceWithAllDataMapper());
+		List<Seance> list = jdbcTemplate.query(sqlForSeanceFilter, new SeanceMapper());
 		
 		return list;
 	

@@ -1,14 +1,36 @@
 package com.shalkevich.andrei.training2017.webapp.models;
 
+import com.shalkevich.andrei.training2017.datamodel.customData.Role;
+
 public class CustomerModel {
 	
 	private String login;
+	
+	private String password;
 	
 	private String firstName;
 	
 	private String lastName;
 	
 	private String eMail;
+	
+	private Role role;
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
 	public String getLogin() {
 		return login;

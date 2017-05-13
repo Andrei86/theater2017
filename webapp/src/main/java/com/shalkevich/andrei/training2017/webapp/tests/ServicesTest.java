@@ -1,25 +1,25 @@
 package com.shalkevich.andrei.training2017.webapp.tests;
 
+import java.sql.Time;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.shalkevich.andrei.training2017.dao.impl.db.IBookingDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.IGenreDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.IMovieDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.IMovieGenreDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.IMovieTheaterDao;
+import com.shalkevich.andrei.training2017.dao.impl.db.ISeanceDao;
 import com.shalkevich.andrei.training2017.dao.impl.db.ITicketDao;
-import com.shalkevich.andrei.training2017.dao.impl.db.filter.SeanceWithAllDataFilter;
-import com.shalkevich.andrei.training2017.dao.impl.db.filter.TicketWithAllDataFilter;
-import com.shalkevich.andrei.training2017.datamodel.Customer;
-import com.shalkevich.andrei.training2017.datamodel.Seance;
-import com.shalkevich.andrei.training2017.datamodel.Ticket;
-import com.shalkevich.andrei.training2017.datamodel.customData.Status;
-import com.shalkevich.andrei.training2017.datamodel.customData.TicketWithAllData;
+import com.shalkevich.andrei.training2017.dao.impl.db.filter.BookingFilter;
+import com.shalkevich.andrei.training2017.datamodel.Booking;
+import com.shalkevich.andrei.training2017.datamodel.Movie;
+import com.shalkevich.andrei.training2017.services.IBookingService;
 import com.shalkevich.andrei.training2017.services.ICustomerService;
-import com.shalkevich.andrei.training2017.services.ISeanceService;
-import com.shalkevich.andrei.training2017.services.ITicketService;
+import com.shalkevich.andrei.training2017.services.IGenreService;
+import com.shalkevich.andrei.training2017.services.IMovieService;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
+
 
 
 public class ServicesTest {
@@ -28,89 +28,93 @@ public class ServicesTest {
 		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("web-context.xml");
 		
-		BigDecimal bd = new BigDecimal("6.70");
+		/*BigDecimal bd = new BigDecimal("6.70");
 		
-		System.out.println(bd);
+		System.out.println(bd);*/
 		
 		//IMovieTheaterService daoTheater = context.getBean(IMovieTheaterService.class);
 		
-		//ICustomerService service = context.getBean(ICustomerService.class);
-		//ISeanceService service = context.getBean(ISeanceService.class);
-		ITicketService service = context.getBean(ITicketService.class);
-		//ITicketDao dao = context.getBean(ITicketDao.class);
-		//IMovieDao dao = context.getBean(IMovieDao.class);
-		//String [] arr = context.getBeanDefinitionNames();
-		//ISeanceDao dao = context.getBean(ISeanceDao.class);
+		ICustomerService cService = context.getBean(ICustomerService.class);
+		//ISeanceService seanceServ = context.getBean(ISeanceService.class);
+		ITicketDao ticketDao = context.getBean(ITicketDao.class);
+		IBookingService bService = context.getBean(IBookingService.class);
+		IBookingDao bDao = context.getBean(IBookingDao.class);
+		ISeanceDao seanceDao = context.getBean(ISeanceDao.class);
 		
-		//SeanceWithAllDataFilter f = new SeanceWithAllDataFilter();
+		IMovieTheaterDao mtDao = context.getBean(IMovieTheaterDao.class);
 		
-		Ticket t1 = new Ticket();
-		t1.setSeanceId(1);
-		t1.setCost(new BigDecimal("5.56"));
-		t1.setRow(1);
-		t1.setPlace(1);
-		t1.setStatus(Status.valueOf("free"));
+		IMovieDao movieDao = context.getBean(IMovieDao.class);
 		
-		service.save(t1);
+		IMovieGenreDao mgDao = context.getBean(IMovieGenreDao.class);
 		
-		/*t1.setCost(new BigDecimal(5.7));
+		IGenreDao gDao = context.getBean(IGenreDao.class);
 		
-		service.save(t1);*/
+		IMovieService movieService = context.getBean(IMovieService.class);
 		
-		System.out.println(service.get(123));
+		IGenreService genreService = context.getBean(IGenreService.class);
 		
-		//f.setMovieTitle("Gladiator");
-		//MovieTheater t = new MovieTheater();
+		//System.out.println(bService.searchBookingByCustomerAndDates(4, Date.valueOf("2017-03-05"), Date.valueOf("2017-03-06")));
+		//System.out.println(seanceDao.getSeanceById(250));
 		
-		/*t.setName("New");
-		t.setCity("City");
-		t.setAddress("Address");
-		t.setIsActive(true)*/;
+	/*	Genre genre = new Genre();
+		genre.setName("catastrophe");
 		
+		genreService.save(genre);*/
 		
-		//f.setDate(Date.valueOf("2017-04-01"));
-		//Boolean  isActive = true;
-		//service.get(345);
+		/*Movie movie = new Movie();
+		movie.setTitle("Titanik");
+		movie.setAgeBracket("16+");
+		movie.setDuration(124);
+		movie.setDescription("sdwgrgegrg");*/
 		
-		 //System.out.println(dao.getByDateAndCitySoon("Grodno", Date.valueOf("2017-03-30"), Date.valueOf("2017-04-01")));
+		Booking booking = new Booking();
+		booking.setCustomer(cService.get(4));
+		booking.setTicket(ticketDao.get(11));
+		
+		movieService.delete(1);
+		
+		//bDao.insert(booking);
+		
+		//System.out.println(bDao.get(44));
+		
+		//BookingFilter f = new BookingFilter();
+		//f.setCustomerId(4);
+		//f.setDateFrom(java.sql.Date.valueOf("2017-03-05"));
+		//f.setDateTo(java.sql.Date.valueOf("2017-03-05"));
+		//System.out.println(bService.search(f));
+		
+		//movieService.insertMovieWithGenres(movie); // 
+		
+		//movieService.delete(336);
+		
 		//MovieFilter f = new MovieFilter();
-		//f.setCity("Minsk");
 		
-		/*SeanceWithAllDataFilter f = new SeanceWithAllDataFilter();
-		f.setDate(Date.valueOf("2017-04-01"));
-		f.setCity("swewf");
-		//f.setDate(date);("Gladiator");
-*/		
-		//System.out.println(Timestamp.valueOf("2017-03-12 18:00:00"));
+		//System.out.println(movieDao.search(f));
 		
-		//service.saveMultiple(null, null);
+		/*movieDao.insert(movie);
 		
-		//TicketWithAllDataFilter filt = new TicketWithAllDataFilter();
+		Genre g = gDao.get(4);
 		
-		//filt.setCustomerId(2);
-		//System.out.println(t);
-		//Ticket t = service.get(8);
-		//Customer c = new Customer();
-		//c.setId(3);
-		/*t.setStatus(Status.valueOf("processing"));*/
-		//System.out.println(service.search(f));
+		MovieGenre mg = new MovieGenre();
+		mg.setMovie(movie);
+		mg.setGenre(g);
 		
-	/*	Seance s = new Seance();
-		s.setMovieTheaterId(1);
-		s.setMovieId(1);
+		mgDao.insert(mg);*/
+	/*	SeanceFilter f = new SeanceFilter();
+		f.setCity("Grodno1");
+		System.out.println(seanceDao.search(f));*/
+
+		//System.out.println(mgDao.getGenreByMovieId(1));
 		
-		service1.save(s);
-		System.out.println(s)*/;
-		
-		
-		/*Ticket t = service.get(8);
-		t.setStatus(Status.valueOf("free"));
-		service.save(t);*/
-		/*Ticket t = dao.get(8);
-		t.setCustomerId(1);*/
-		//t.setStatus(Status.valueOf("processing"));
-		
-		//dao.update(t);
+		/*Seance s = seanceDao.getSeanceById(1);
+		s.setTime(Time.valueOf("17:00:00"));
+		seanceDao.update(s);*/
+		/*Seance s = new Seance();
+		s.setMovie(movieDao.get(1));
+		s.setMovieTheater(mtDao.get(1));
+		s.setDate(Date.valueOf("2017-04-06"));
+		s.setTime(Time.valueOf("21:00:00"));
+		seanceDao.insert(s);*/
 		
 	}
 
