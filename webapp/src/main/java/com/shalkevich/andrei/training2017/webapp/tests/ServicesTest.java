@@ -71,7 +71,9 @@ public class ServicesTest {
 		booking.setCustomer(cService.get(4));
 		booking.setTicket(ticketDao.get(11));
 		
-		movieService.delete(1);
+		//movieService.delete(1);
+		
+		System.out.println(genreService.getAll());
 		
 		//bDao.insert(booking);
 		

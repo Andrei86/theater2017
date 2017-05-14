@@ -1,7 +1,0 @@
-14:04:38.574 [qtp25548982-18] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 117
-14:04:49.874 [qtp25548982-20] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 117
-14:04:52.888 [qtp25548982-16] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 117
-14:04:53.799 [qtp25548982-17] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 117
-14:11:52.325 [qtp25548982-17] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 118
-14:13:36.832 [qtp25548982-18] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 119
-14:19:59.639 [qtp25548982-18] INFO  com.shalkevich.andrei.training2017.services.impl.CustomerServiceImpl - Delete customer with id= 120

@@ -26,8 +26,6 @@ public class GenresController {
 	@Inject
 	IGenreService genreService;
 	
-	List<GenreModel> genreModelList = new ArrayList<>();
-	
 	@RequestMapping(value = "/{id}" , method = RequestMethod.GET)
 	 public ResponseEntity<?> getById(@PathVariable (value = "id") Integer genreIdParam) {
 		try
@@ -44,6 +42,8 @@ public class GenresController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	 public ResponseEntity<?> getByName(@RequestParam (required = false) String name) {
+		
+		List<GenreModel> genreModelList = new ArrayList<>();
 		try
 		{
 			if(name != null)
@@ -55,6 +55,8 @@ public class GenresController {
 			else
 			{
 				List<Genre> genreList = genreService.getAll();
+				
+				System.out.println(genreList.size());
 		
 				for(Genre genre : genreList)
 					genreModelList.add(entity2model(genre));

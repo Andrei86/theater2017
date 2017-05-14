@@ -90,7 +90,7 @@ public class BookingsController {
 
 	}
 		
-/*	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer bookingIdParam) {
 		try {
 			Booking booking = bookingService.get(bookingIdParam);
@@ -102,7 +102,7 @@ public class BookingsController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
-	}*/
+	}
 		
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createCustomer(@RequestBody BookingModel bookingModel) {

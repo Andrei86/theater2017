@@ -111,7 +111,28 @@ public class TicketsController {
 		}
 	}
 	
-	    @RequestMapping(value = "/{id}", method = RequestMethod.PUT) // когда кассир продает через кассу
+	@RequestMapping(value = "/multi", method = RequestMethod.POST)
+	public ResponseEntity<?> createTickets(@RequestBody TicketModel... ticketModels) {
+		try {
+			List<Ticket> ticketList = new ArrayList<>();
+			List<IdModel> idModelList = new ArrayList<>();
+			
+			for(TicketModel modelOfTicket : ticketModels)
+			{
+			Ticket ticket = model2entity(modelOfTicket);
+			ticketService.save(ticket);
+			ticketList.add(ticket);
+			idModelList.add(new IdModel(ticket.getId()));
+			}
+			
+			return new ResponseEntity<List<IdModel>>(idModelList, HttpStatus.CREATED);
+		} catch (NullPointerException e) {
+			String msg = "You must fill by correct values all fields for ticket creating";
+			return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	/*    @RequestMapping(value = "/{id}", method = RequestMethod.PUT) // не будет этого метода
     public ResponseEntity<?> updateTicket(@RequestBody TicketModel ticketModel,
             @PathVariable(value = "id") Integer ticketIdParam) {
         
@@ -121,8 +142,85 @@ public class TicketsController {
 
         ticketService.save(ticket);
         return new ResponseEntity<IdModel>(HttpStatus.OK);
-    }
+    }*/
 	
+	@RequestMapping(value = "/buy/{id}", method = RequestMethod.PUT) // покупка без брони
+    public ResponseEntity<?> buyTicket(@PathVariable(value = "id") Integer ticketIdParam) {
+   
+		TicketModel ticketModel = null;
+        Ticket ticket = ticketService.buyingATicket(ticketIdParam);
+        
+        ticketModel = entity2model(ticket);
+        
+        return new ResponseEntity<TicketModel>(ticketModel ,HttpStatus.OK);
+	    
+	}
+	
+	@RequestMapping(value = "/returnmoney/{id}", method = RequestMethod.PUT) // покупка без брони
+	public ResponseEntity<?> returnMoneyForTicket(@PathVariable(value = "id") Integer ticketIdParam) {
+
+		Ticket ticket = null;
+		TicketModel ticketModel = null;
+		try
+		{
+		ticket = ticketService.returningMoneyForATicket(ticketIdParam);
+		}
+		catch(UnsupportedOperationException e)
+		{
+			String msg = "You can't return ticket less than 20 minutes before seance start.";
+			return new ResponseEntity<String>(msg, HttpStatus.LOCKED);
+		}
+		ticketModel = entity2model(ticket);
+
+		return new ResponseEntity<TicketModel>(ticketModel, HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value = "/buyout/{id}", method = RequestMethod.PUT) // покупка забронированного
+    public ResponseEntity<?> buyOutBookedTicket(@PathVariable(value = "id") Integer bookingIdParam) {
+   
+		TicketModel ticketModel = null;
+		Ticket ticket = null;
+		
+		try
+		{
+        ticket = ticketService.buyOutTicket(bookingIdParam);
+		}catch(NullPointerException e)
+		{
+			String msg = "You must insert id of existing booking";
+			return new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST);
+		}
+        
+        ticketModel = entity2model(ticket);
+        
+        return new ResponseEntity<TicketModel>(ticketModel ,HttpStatus.OK);
+	    
+	}
+	
+	@RequestMapping(value = "/returntosale/{id}", method = RequestMethod.PUT) // возврат забронированного в продажу
+	public ResponseEntity<?> returnBookedTicketToSale(@PathVariable(value = "id") Integer ticketIdParam) {
+
+		Ticket ticket = null;
+		TicketModel ticketModel = null;
+		try
+		{
+		ticket = ticketService.returningBookedTicketOnSale(ticketIdParam);
+		}
+		catch(UnsupportedOperationException e)
+		{
+			String msg = "You can't return booked ticket more than 20 minutes before seance start.";
+			return new ResponseEntity<String>(msg, HttpStatus.LOCKED);
+		}catch(NullPointerException e)
+		{
+			String msg = "You must insert valid ticket id";
+			return new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST);
+		}
+		
+		ticketModel = entity2model(ticket);
+
+		return new ResponseEntity<TicketModel>(ticketModel, HttpStatus.OK);
+
+	}
 	private TicketModel entity2model(Ticket ticket) {
 
 		TicketModel ticketModel = new TicketModel();
@@ -131,7 +229,8 @@ public class TicketsController {
 		MovieTheater movieTheater = seance.getMovieTheater();
 		Movie movie = seance.getMovie();
 
-		ticketModel.setSeanceId(ticket.getSeance().getId());
+		ticketModel.setId(ticket.getId());
+		ticketModel.setSeance(ticket.getSeance().getId());
 		ticketModel.setMovieTheater(movieTheater.getName());
 		ticketModel.setMovie(movie.getTitle());
 		ticketModel.setDate(seance.getDate().toString());
@@ -147,18 +246,14 @@ public class TicketsController {
 	private Ticket model2entity(TicketModel ticketModel) {
 		Ticket ticket = new Ticket();
 
-		/*
-		 * Seance seance = seanceService.get(ticket.getId()); MovieTheater
-		 * movieTheater = seance.getMovieTheater(); String name = movieTheater.
-		 */
-
-		Seance seance = seanceService.get(ticketModel.getSeanceId());
+		Seance seance = seanceService.get(ticketModel.getSeance());
 
 		ticket.setSeance(seance);
 		ticket.setCost(ticketModel.getCost());
 		ticket.setRow(ticketModel.getRow());
 		ticket.setPlace(ticketModel.getPlace());
-		ticket.setStatus(Status.valueOf(ticketModel.getStatus()));
+		//ticket.setStatus(Status.valueOf(ticketModel.getStatus()));
+		ticket.setStatus(Status.free);
 
 		return ticket;
 	}

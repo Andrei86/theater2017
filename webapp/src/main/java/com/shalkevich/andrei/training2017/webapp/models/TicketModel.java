@@ -6,7 +6,8 @@ import java.sql.Time;
 
 public class TicketModel {
 	
-	private Integer seanceId;
+	private Integer id;
+	private Integer seance;
 	private String movieTheater;
 	private String movie;
 	private String date;
@@ -16,11 +17,18 @@ public class TicketModel {
 	private Integer place;
 	private String status;
 	
-	public Integer getSeanceId() {
-		return seanceId;
+
+	public Integer getId() {
+		return id;
 	}
-	public void setSeanceId(Integer seanceId) {
-		this.seanceId = seanceId;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getSeance() {
+		return seance;
+	}
+	public void setSeance(Integer seance) {
+		this.seance = seance;
 	}
 	public String getMovieTheater() {
 		return movieTheater;
