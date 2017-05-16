@@ -76,7 +76,8 @@ public class MovieTheaterServiceImpl implements IMovieTheaterService{
 	
 
 	@Override
-	public MovieTheater getByName(String name) {
+	public MovieTheater getByName(String name)
+	{
 		LOGGER.debug("Get movie theater by name {}", name);
 		
 		return movieTheaterDao.getByName(name);

@@ -4,6 +4,8 @@ import com.shalkevich.andrei.training2017.datamodel.customData.Role;
 
 public class CustomerModel {
 	
+	private Integer id;
+	
 	private String login;
 	
 	private String password;
@@ -16,6 +18,16 @@ public class CustomerModel {
 	
 	private Role role;
 	
+	
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getPassword() {
 		return password;
 	}

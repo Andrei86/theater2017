@@ -146,6 +146,8 @@ public class BookingDaoImpl extends GenericDaoImpl<Booking> implements IBookingD
 			return null;
 		}
 	}
+	
+	
 
 	/*@Override
 	public List<Booking> getByCustomerIdAndDates(Integer customerId, Date dateFrom, Date dateTo) { // сделать в service

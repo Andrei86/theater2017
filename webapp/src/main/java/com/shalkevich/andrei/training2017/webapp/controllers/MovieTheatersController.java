@@ -110,7 +110,7 @@ public class MovieTheatersController {
 					theater.setAddress(theaterModel.getAddress());*/
 					
 					theater.setIsActive(theaterModel.getIsActive());
-					theaterService.save(theater); // неправильно обезопашивать update d
+					theaterService.save(theater);
 		
 					return new ResponseEntity<IdModel>(HttpStatus.OK);
 				}
@@ -125,6 +125,8 @@ public class MovieTheatersController {
 	
 	private MovieTheaterModel entity2model(MovieTheater theater) {
 		MovieTheaterModel theaterModel = new MovieTheaterModel();
+		
+		theaterModel.setId(theater.getId());
         theaterModel.setName(theater.getName());
         theaterModel.setCity(theater.getCity());
         theaterModel.setAddress(theater.getAddress());

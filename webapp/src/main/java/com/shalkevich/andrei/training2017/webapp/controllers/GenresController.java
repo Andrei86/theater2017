@@ -112,12 +112,15 @@ public class GenresController {
 
 	private GenreModel entity2model(Genre genre) {
 		GenreModel genreModel = new GenreModel();
+		
+		genreModel.setId(genre.getId());
 		genreModel.setName(genre.getName());
 		return genreModel;
    }
    
 	private Genre model2entity(GenreModel genreModel) {
 		Genre genre = new Genre();
+		
 		genre.setName(genreModel.getName());
 		return genre;
    }

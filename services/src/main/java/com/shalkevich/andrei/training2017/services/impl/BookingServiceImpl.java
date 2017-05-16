@@ -71,7 +71,7 @@ public class BookingServiceImpl implements IBookingService{
 
 	
 	@Override
-	public Booking findByTicketId(Integer ticketId) throws NullPointerException
+	public Booking findByTicketId(Integer ticketId) //
 	{
 		
 		LOGGER.debug("Find booking by ticket id = {}", ticketId);
@@ -79,9 +79,10 @@ public class BookingServiceImpl implements IBookingService{
 		return bookingDao.getByTicketId(ticketId);
 	}
 
+	
 
 	@Override
-	public List<Booking> findByCustomerId(Integer customerId) {
+	public List<Booking> findByCustomerId(Integer customerId) { // 
 		
 		LOGGER.debug("Find booking by customer id = {}", customerId);
 		
@@ -169,24 +170,24 @@ public class BookingServiceImpl implements IBookingService{
 	}
 
 	@Override
-	public void saveMultiple(Booking... bookingArray) //throws UnsupportedOperationException
+	public void saveMultiple(Booking... bookingArray)
 	{
+		LOGGER.debug("Save multiple for bookings");
 		
-		UnsupportedOperationException e = new UnsupportedOperationException("Unsupported operation exception for save multiple for bookings");
-		
-		LOGGER.debug(e.getMessage());
-		
-		throw e;
+		for(Booking booking : bookingArray)
+			save(booking);
 	}
 	
 	@Override
 	public List<Booking> getAll() {
 		
-		UnsupportedOperationException e = new UnsupportedOperationException("Unsupported operation exception for get all bookings");
+		/*UnsupportedOperationException e = new UnsupportedOperationException("Unsupported operation exception for get all bookings");
 		
 		LOGGER.debug(e.getMessage());
 		
-		throw e;
+		throw e;*/
+		
+		return bookingDao.getAll();
 	}
 
 	@Override

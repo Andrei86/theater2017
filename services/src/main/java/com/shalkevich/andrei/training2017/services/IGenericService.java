@@ -13,7 +13,7 @@ public interface IGenericService<T> {
     void save(T entity);
 
     @Transactional
-    void saveMultiple(T ... obj); // не должен работать для юзера, т.к. никто не может сохранить пачку юзеров
+    void saveMultiple(T ... obj);
 
     @Transactional
     void delete(Integer id);

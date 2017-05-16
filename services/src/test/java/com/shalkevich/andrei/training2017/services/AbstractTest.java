@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 import javax.inject.Inject;
-
+import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -29,6 +29,7 @@ import com.shalkevich.andrei.training2017.datamodel.customData.Status;
 @Transactional
 public class AbstractTest { // чтобы не дублировать в каждом тесте
 	
+	
 	public static MovieTheater theater1, theater2;
 	
 	public static Movie movie1, movie2;
@@ -45,9 +46,11 @@ public class AbstractTest { // чтобы не дублировать в каж�
 	
 	public static Booking booking1, booking2;
 	
-	@BeforeClass
-	public static void createEntities()
-	{
+	//@BeforeClass
+	/*public static void createEntities()
+	{*/
+	
+	static{
 		genre1 = new Genre();
 		genre1.setName("Genre1");
 		
@@ -112,4 +115,7 @@ public class AbstractTest { // чтобы не дублировать в каж�
 		booking2 = new Booking();
 	}
 
+	@Test
+	public void Test()
+	{}
 }

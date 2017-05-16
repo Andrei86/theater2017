@@ -2,6 +2,8 @@ package com.shalkevich.andrei.training2017.webapp.models;
 
 public class MovieTheaterModel {
 	
+	private Integer id;
+	
 	private String name;
 	
 	private String city;
@@ -9,8 +11,14 @@ public class MovieTheaterModel {
 	private String address;
 	
 	private Boolean isActive; // нужен ли тут?
-	
-	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Boolean getIsActive() {
 		return isActive;

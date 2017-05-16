@@ -25,7 +25,7 @@ public interface IBookingService extends IGenericService<Booking> {
 	// Новый добавленный фильтр
 	
 	//List<Booking> search(BookingFilter filter); // удалить
-	
+
 	Booking findByTicketId(Integer ticketId);// для кассира sql
 	
 	List<Booking> findByCustomerId(Integer customerId);// для юзера

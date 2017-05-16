@@ -45,6 +45,9 @@ public class BookingsController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getByParameters(@RequestParam(required = false) Integer customer, Integer ticket,
+			
+			
+			
 			Date dateFrom, Date dateTo) {
 		try {
 			List<Booking> bookingList = null;
@@ -65,13 +68,13 @@ public class BookingsController {
 					bookingList = bookingService.findByCustomerId(customer);
 
 			} else
-				bookingService.getAll();
+				bookingList = bookingService.getAll();
 
 			if (booking != null) {
 				bookingModel = entity2model(booking);
 				return new ResponseEntity<BookingModel>(bookingModel, HttpStatus.OK);
 
-			} else if (!bookingList.isEmpty()) {
+			} else if (bookingList.size() != 0) {
 				for (Booking b : bookingList)
 					bookingModelList.add(entity2model(b));
 
@@ -81,8 +84,8 @@ public class BookingsController {
 
 		} catch (UnsupportedOperationException e) {
 
-			String msg = "You must insert parameters for booking search like ticket, customer, dateFrom, dateTo";
-			return new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST);
+			//String msg = "You must insert parameters for booking search like ticket, customer, dateFrom, dateTo";
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		} catch (NullPointerException e) {
 
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -105,13 +108,38 @@ public class BookingsController {
 	}
 		
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> createCustomer(@RequestBody BookingModel bookingModel) {
+	public ResponseEntity<?> createBooking(@RequestBody BookingModel bookingModel) {
 		try {
 			Booking booking = model2entity(bookingModel);
 			bookingService.save(booking);
 			return new ResponseEntity<IdModel>(new IdModel(booking.getId()), HttpStatus.CREATED);
 		} catch (NullPointerException e) {
 			String msg = "You must fill all fields for booking creating";
+			return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+		}
+		catch (UnsupportedOperationException e) {
+			//String msg = "You must fill all fields for booking creating";
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(value = "/multi", method = RequestMethod.POST)
+	public ResponseEntity<?> createBooking(@RequestBody BookingModel... bookingModels) {
+		try {
+			List<Booking> bookingList = new ArrayList<>();
+			List<IdModel> idModelList = new ArrayList<>();
+			
+			for(BookingModel modelOfBooking : bookingModels)
+			{
+			Booking booking = model2entity(modelOfBooking);
+			bookingService.save(booking);
+			bookingList.add(booking);
+			idModelList.add(new IdModel(booking.getId()));
+			}
+			
+			return new ResponseEntity<List<IdModel>>(idModelList, HttpStatus.CREATED);
+		} catch (NullPointerException e) {
+			String msg = "You must fill by correct values all fields for booking creating";
 			return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -121,6 +149,7 @@ public class BookingsController {
 	private BookingModel entity2model(Booking booking) {
 		BookingModel bookingModel = new BookingModel();
 
+		bookingModel.setId(booking.getId());
 		bookingModel.setLogin(booking.getCustomer().getLogin());
 		bookingModel.setTicketId(booking.getTicket().getId());
 		bookingModel.setBookingDate(booking.getBookingDate().toString().substring(0, 16));

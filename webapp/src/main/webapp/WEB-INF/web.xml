@@ -19,18 +19,8 @@
 	
 	<filter>
 		<filter-name>myFilter</filter-name>
-		<filter-class>com.shalkevich.andrei.training2017.webapp.filters.GenreFilter</filter-class>
+		<filter-class>com.shalkevich.andrei.training2017.webapp.filters.MyFilter</filter-class>
 	</filter>
-	
-	<!-- <filter>
-		<filter-name>genreFilter</filter-name>
-		<filter-class>com.shalkevich.andrei.training2017.webapp.filters.GenreFilter</filter-class>
-	</filter> -->
-	
-	<!-- <filter>
-		<filter-name>movieFilter</filter-name>
-		<filter-class>com.shalkevich.andrei.training2017.webapp.filters.MovieFilter</filter-class>
-	</filter> -->
 	
 	<servlet>
 	
@@ -63,11 +53,6 @@
 		<filter-name>myFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	<!-- <filter-mapping>
-		<filter-name>movieFilter</filter-name>
-		<url-pattern>/movies</url-pattern>
-	</filter-mapping> -->
 
 	
 </web-app>

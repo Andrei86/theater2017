@@ -33,13 +33,13 @@ public class MovieGenreServiceTest extends AbstractTest{
 		movie1.setId(null);
 		genre1.setId(null);
 		
-		movieService.save(movie1);
 		genreService.save(genre1);
+		movieService.insertMovieWithGenres(movie1, genre1.getName());
 		
-		movieGenre.setGenre(genre1);
+	/*	movieGenre.setGenre(genre1);
 		movieGenre.setMovie(movie1);
 		
-		movieGenreService.save(movieGenre);
+		movieGenreService.save(movieGenre);*/
 	}
 	
 	@Test

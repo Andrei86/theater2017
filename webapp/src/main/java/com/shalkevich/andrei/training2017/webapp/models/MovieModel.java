@@ -2,6 +2,8 @@ package com.shalkevich.andrei.training2017.webapp.models;
 
 public class MovieModel {
 	
+	private Integer id;
+	
 	private String title;
 	
 	private String ageBracket;
@@ -9,6 +11,14 @@ public class MovieModel {
 	private Integer duration;
 	
 	private String description;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getTitle() {
 		return title;

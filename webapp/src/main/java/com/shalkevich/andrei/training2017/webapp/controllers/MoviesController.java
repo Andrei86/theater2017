@@ -132,7 +132,7 @@ public class MoviesController {
 		}
 	}
 	 
-	/*@RequestMapping(value = "/{id}", method = RequestMethod.PUT) // не нужен этот метод
+/*	@RequestMapping(value = "/{id}", method = RequestMethod.PUT) // не нужен этот метод
 	public ResponseEntity<?> updateMovie(@PathVariable(value = "id") Integer movieIdParam,
 	 @RequestBody MovieModel movieModel)
 	{
@@ -150,6 +150,8 @@ public class MoviesController {
 	
 	private MovieModel entity2model(Movie movie) { // рефакторить
 		MovieModel movieModel = new MovieModel();
+		
+		movieModel.setId(movie.getId());
 		movieModel.setTitle(movie.getTitle());
 		movieModel.setAgeBracket(movie.getAgeBracket());
 		movieModel.setDuration(movie.getDuration());

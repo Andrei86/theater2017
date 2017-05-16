@@ -246,7 +246,7 @@ public class TicketsController {
 	private Ticket model2entity(TicketModel ticketModel) {
 		Ticket ticket = new Ticket();
 
-		Seance seance = seanceService.get(ticketModel.getSeance());
+		Seance seance = seanceService.get(ticketModel.getSeance()); // id сеанса
 
 		ticket.setSeance(seance);
 		ticket.setCost(ticketModel.getCost());

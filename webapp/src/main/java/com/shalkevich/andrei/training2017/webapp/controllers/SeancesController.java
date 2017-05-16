@@ -81,9 +81,10 @@ public class SeancesController {
 		 
 	    }
 	
-/*	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createSeance(@RequestBody SeanceModel seanceModel)
 	{
+		
 		try
 		{
 		Seance seance = model2entity(seanceModel);
@@ -95,7 +96,7 @@ public class SeancesController {
 			String msg = "You must fill by correct values all fields for seance creating";
 			return new ResponseEntity<>(msg ,HttpStatus.BAD_REQUEST);
 		}
-	}*/
+	}
 	
 	
 	private SeanceModel entity2model(Seance seance) {
@@ -116,7 +117,7 @@ public class SeancesController {
     	seance.setMovieTheater(theaterService.getByName(seanceModel.getMovieTheater()));
     	seance.setMovie(movieService.getByTitle(seanceModel.getMovie()));
     	seance.setDate(Date.valueOf(seanceModel.getDate()));
-    	seance.setTime(Time.valueOf(seanceModel.getTime()));
+    	seance.setTime(Time.valueOf(seanceModel.getTime()+ ":00"));
     	
         return seance;
     }

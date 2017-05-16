@@ -120,6 +120,8 @@ public class CustomersController {
 	
 	private CustomerModel entity2model(Customer customer) {
 		CustomerModel customerModel = new CustomerModel();
+		
+		customerModel.setId(customer.getId());
         customerModel.setLogin(customer.getLogin());
         customerModel.setPassword(customer.getPassword());
         customerModel.setFirstName(customer.getFirstName());

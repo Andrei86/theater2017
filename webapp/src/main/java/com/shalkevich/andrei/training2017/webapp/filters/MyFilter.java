@@ -24,7 +24,7 @@ import com.shalkevich.andrei.training2017.services.ICustomerService;
 import com.shalkevich.andrei.training2017.services.IGenreService;
 import com.shalkevich.andrei.training2017.services.IMovieService;
 
-public class GenreFilter implements Filter{
+public class MyFilter implements Filter{
 	
 	private ICustomerService customerService;
 	
@@ -75,7 +75,7 @@ public class GenreFilter implements Filter{
 	        		chain.doFilter(request, response);
 	        	else if(getUserRole(username).equals("user"))
 	        	{
-	        		if(req.getMethod().toUpperCase().equals("GET"))
+	        		/*if(req.getMethod().toUpperCase().equals("GET")) // неправильно
 	        		{
 	        			if(req.getRequestURI().equals("/bookings") || !req.getRequestURI().matches("customer=" + userId))
 	        			res.sendError(403);
@@ -83,13 +83,13 @@ public class GenreFilter implements Filter{
 	        			res.sendError(403);
 	        			else
 	        				chain.doFilter(request, response);		
-	        		}
+	        		}*/
 	        		if(req.getMethod().toUpperCase().equals("POST") && req.getRequestURI().equals("/bookings"))
 	        		chain.doFilter(request, response);
 	        		if(req.getMethod().toUpperCase().equals("DELETE") && req.getRequestURI().matches("/bookings"))
 	        		chain.doFilter(request, response);
-	        		if((req.getMethod().toUpperCase().equals("PUT") && req.getRequestURI().equals("/customers/" + userId)))
-	        		chain.doFilter(request, response);
+	        		/*if((req.getMethod().toUpperCase().equals("PUT") && req.getRequestURI().equals("/customers/" + userId)))
+	        		chain.doFilter(request, response);*/
 	        	}
 	        	else
 	        		res.sendError(403);
@@ -112,7 +112,7 @@ public class GenreFilter implements Filter{
 			return false;
 		
 		if (req.getMethod().toUpperCase().equals("GET")) {
-			if(req.getRequestURI().matches("/bookings") || req.getRequestURI().matches("/customers"))
+			if(req.getRequestURI().matches("/bookings")) // || req.getRequestURI().matches("/customers"))
 				return true;
 			else
 			return false;

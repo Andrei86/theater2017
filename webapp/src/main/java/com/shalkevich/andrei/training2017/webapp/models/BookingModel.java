@@ -3,11 +3,23 @@ package com.shalkevich.andrei.training2017.webapp.models;
 
 public class BookingModel {
 	
+	private Integer id;
+	
 	private String login;
 	
 	private Integer ticketId;
 	
 	private String bookingDate;
+	
+	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getLogin() {
 		return login;
